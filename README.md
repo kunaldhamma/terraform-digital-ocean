@@ -4,8 +4,6 @@
 - This is a work in progress and not complete -
 ```
 
-
-
 ## Disclaimer
 * Opinions expressed here are solely my own and do not express the views or opinions of JPMorgan Chase.
 * Any third-party trademarks are the intellectual property of their respective owners and any mention herein is for referential purposes only. 
@@ -45,6 +43,10 @@ terraform apply \
   -var "ssh_fingerprint=${DO_SSH_FINGERPRINT}"
 ```
 
+## Get the IP of `digital-ocean-droplet`
+* `doctl compute droplet list | awk 'FNR == 2 {print $3}'`
+
+
 ## View state of infrastructure
 
 `terraform show terraform.tfstate`
@@ -60,6 +62,10 @@ terraform plan -destroy -out=terraform.tfplan \
   ```
 
 `terraform apply terraform.tfplan`
+
+```diff
+- This step does not delete the Load Balancers that are provisioned as part of the tutorial -
+```
 
 *End of Section*
 
