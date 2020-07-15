@@ -43,7 +43,7 @@ terraform apply \
   -var "ssh_fingerprint=${DO_SSH_FINGERPRINT}"
 ```
 
-## Get the IP of `digital-ocean-droplet`
+## Get the IP of digital-ocean-droplet
 * `doctl compute droplet list | awk 'FNR == 2 {print $3}'`
 
 
