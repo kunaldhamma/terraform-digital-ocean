@@ -1,5 +1,7 @@
 # Terraform to support the Tutorial on Microservices, Observability and Chaos on Digital Ocean 
 
+![image](https://user-images.githubusercontent.com/18049790/87522892-c6cfa300-c6b8-11ea-8d9b-fcabac5fd4b9.png)
+
 ```diff
 - This is a work in progress and not complete -
 ```
