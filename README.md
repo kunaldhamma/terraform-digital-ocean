@@ -71,25 +71,29 @@ terraform plan -destroy -out=terraform.tfplan \
 
 ## Preparing the Jump Host and Cluster
 
+
+### jump-host-prep.sh
 On `digital-ocean-droplet`
 ```
 cd ~/ && rm -R ~/prep
 cd ~/ && mkdir prep && cd prep
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/jump-host-prep.sh
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/cluster-prep.sh
 chmod +x jump-host-prep.sh
 sh jump-host-prep.sh
 ```
 
-Update this line 'doctl auth init --access-token "xxx"' in `cluster-prep.sh` with your own Access Token.
+### cluster-prep.sh
 
 ```
+cd prep
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/cluster-prep.sh
 chmod +x cluster-prep.sh
+```
+
+Update this line 'doctl auth init --access-token "xxx"' in `cluster-prep.sh` with your own Access Token.
+```
 sh cluster-prep.sh
 ```
-
-
-
 
 *End of Section*
 
