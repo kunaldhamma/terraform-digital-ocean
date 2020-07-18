@@ -69,5 +69,25 @@ terraform plan -destroy -out=terraform.tfplan \
 - This step does not delete the Load Balancers that are provisioned as part of the tutorial -
 ```
 
+## Preparing the Jump Host and Cluster
+
+On `digital-ocean-droplet`
+```
+cd ~/ && rm -R ~/prep
+cd ~/ && mkdir prep && cd prep
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/jump-host-prep.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/cluster-prep.sh
+chmod +x jump-host-prep.sh
+chmod +x cluster-prep.sh
+sh jump-host-prep.sh
+```
+
+Update this line 'doctl auth init --access-token "xxx"' in `cluster-prep.sh` with your own Access Token.
+
+
+
+
+
+
 *End of Section*
 
