@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # doctl
-doctl auth init --access-token "92be07eeeb8854eb01ee52fdc9f931aeb8fa4d3b1a8a7ff4546e460eddc972df"
+doctl auth init --access-token "xxx"
 doctl kubernetes cluster kubeconfig save digital-ocean-cluster
 
 kubectl config use-context do-sgp1-digital-ocean-cluster
