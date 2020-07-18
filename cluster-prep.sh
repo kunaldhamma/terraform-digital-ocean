@@ -34,6 +34,10 @@ wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/
 helm repo remove gremlin
 helm repo add gremlin https://helm.gremlin.com
 
+# Octant
+DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
+export $DROPLET_ADDR
+
 
 # Update .bashrc
 cd ~
@@ -43,13 +47,13 @@ echo "alias k='kubectl'" >> ~/.bashrc
 echo "alias kga='kubectl get all'" >> ~/.bashrc
 echo "KUBE_PS1_SYMBOL_ENABLE=false" >>~/.bashrc
 echo "source /opt/kube-ps1/kube-ps1.sh" >>~/.bashrc
+echo "export DROPLET_ADDR=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
 echo "export OCTANT_LISTENER_ADDR=0.0.0.0:8900" >> ~/.bashrc
+. ~/.bashrc
 
-echo "Octant is here: " 
-doctl compute droplet list | awk 'FNR == 2 {print $3}'
-echo "Port 8900"
+echo "The URL for Octant is: http://$DROPLET_ADDR:8900"
 
 echo "Online Boutique is here: "
 kubectl -n ns-contour get service contour-release | awk 'FNR == 2 {print $4}
