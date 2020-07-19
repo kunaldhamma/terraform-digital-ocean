@@ -40,7 +40,7 @@ cd ~/ && rm -R ~/octant
 cd ~/ && mkdir octant && cd octant
 curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.14.0/octant_0.14.0_Linux-64bit.tar.gz
 tar -xvf octant_0.14.0_Linux-64bit.tar.gz
-sudo mv ./octant_0.114.0_Linux-64bit/octant /usr/local/bin/octant
+sudo mv ./octant_0.14.0_Linux-64bit/octant /usr/local/bin/octant
 
 # Locust
 pip3 install locust
