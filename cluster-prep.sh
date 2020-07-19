@@ -36,8 +36,7 @@ helm repo add gremlin https://helm.gremlin.com
 
 # Octant
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
-export $DROPLET_ADDR
-
+export DROPLET_ADDR
 
 # Update .bashrc
 cd ~
