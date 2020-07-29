@@ -76,11 +76,16 @@ terraform plan -destroy -out=terraform.tfplan \
 On `digital-ocean-droplet`
 ```
 cd ~/ && rm -R ~/prep
+clear
 cd ~/ && mkdir prep && cd prep
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/jump-host-prep.sh
 chmod +x jump-host-prep.sh
 sh jump-host-prep.sh
 ```
+
+The virtual machine will reboot at the end of this script.
+
+Wait for the virtual machine to be available before continuing 
 
 ### cluster-prep.sh
 
@@ -100,6 +105,7 @@ sh cluster-prep.sh
 Run this to download a clean-up.sh script
 ```
 cd ~/ && rm -R ~/clean-up
+clear
 cd ~/ && mkdir clean-up && cd clean-up
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/clean-up.sh
 chmod +x clean-up.sh
