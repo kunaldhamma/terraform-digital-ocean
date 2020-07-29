@@ -95,5 +95,16 @@ Update this line 'doctl auth init --access-token "xxx"' in `cluster-prep.sh` wit
 sh cluster-prep.sh
 ```
 
+## Clean Up Everything
+
+Run this to download a clean-up.sh script
+```
+cd ~/ && rm -R ~/clean-up
+cd ~/ && mkdir clean-up && cd clean-up
+wget https://raw.githubusercontent.com//jamesbuckett/microservices-metrics-chaos/master/clean-up.sh
+chmod +x clean-up.sh
+sh clean-up.sh
+```
+
 *End of Section*
 
