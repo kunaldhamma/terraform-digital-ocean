@@ -40,7 +40,7 @@ export DROPLET_ADDR
 
 # Update .bashrc
 cd ~
-echo "source <(kubectl completion bash)" >>~/.bashrc
+# echo "source <(kubectl completion bash)" >>~/.bashrc
 echo "alias cls='clear'" >> ~/.bashrc
 echo "alias k='kubectl'" >> ~/.bashrc
 echo "alias kga='kubectl get all'" >> ~/.bashrc
