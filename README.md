@@ -37,6 +37,10 @@ Change into the directory.
 
 `terraform init`
 
+`terraform 0.13upgrade .`
+
+`terraform init`
+
 ## Build the Infrastructure
 
 ```
