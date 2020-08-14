@@ -17,6 +17,16 @@ Follow the steps on this [website](https://www.digitalocean.com/community/tutori
 * Step 1 — Configuring your Environment
 * Step 2 — Installing Terraform
 
+Install current version of Terraform
+```
+cd ~/ && rm -R ~/terraform
+cd ~/ && mkdir terraform && cd terraform
+curl -O https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_amd64.zip
+unzip terraform_0.13.0_linux_amd64.zip
+sudo mv ./terraform /usr/local/bin/terraform
+```
+
+
 At the end of Step 2 continue here:
 
 Clone this repository.
