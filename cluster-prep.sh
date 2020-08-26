@@ -55,8 +55,8 @@ echo "export OCTANT_LISTENER_ADDR=0.0.0.0:8900" >> ~/.bashrc
 clear
 printf "%s\n"  "The URL for Octant is: http://$DROPLET_ADDR:8900"
 
-printf "%s\n" "Online Boutique is here: "
-kubectl -n ns-contour get service contour-release | awk 'FNR == 2 {print $4}'
+#printf "%s\n" "Online Boutique is here: "
+#kubectl -n ns-contour get service contour-release | awk 'FNR == 2 {print $4}'
 
 
 printf "%s\n" "Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '"
@@ -74,7 +74,7 @@ printf "%s\n" "Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '"
 
 # DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 # export $DROPLET_ADDR
-# octant & 
+octant & 
 
 #echo "PS1='[\u@\h \w $(kube_ps1)]\$ '" >>~/.bashrc
 
