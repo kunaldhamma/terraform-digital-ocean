@@ -33,6 +33,12 @@ Clone this repository.
 
 Change into the directory.
 
+Check the version of Kubernetes
+* `doctl kubernetes options versions`
+* Check this version against `version = "1.18.3-do.0"`
+* Ensure they are the same 
+* If not edit `microservices-metrics-chaos.tf` with the updated version.
+
 ## Initialize Terraform
 
 `terraform init`
