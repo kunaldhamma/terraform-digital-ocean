@@ -38,6 +38,10 @@ helm repo add gremlin https://helm.gremlin.com
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
+# Online Boutique
+BOUTIQUE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
+export BOUTIQUE_LB
+
 # Update .bashrc
 cd ~
 # echo "source <(kubectl completion bash)" >>~/.bashrc
@@ -46,6 +50,7 @@ echo "alias k='kubectl'" >> ~/.bashrc
 echo "alias kga='kubectl get all'" >> ~/.bashrc
 echo "KUBE_PS1_SYMBOL_ENABLE=false" >>~/.bashrc
 echo "source /opt/kube-ps1/kube-ps1.sh" >>~/.bashrc
+echo "export BOUTIQUE_LB=$BOUTIQUE_LB" >> ~/.bashrc
 echo "export DROPLET_ADDR=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
