@@ -11,15 +11,15 @@ kubectl create namespace ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 
 # Contour
-kubectl create namespace ns-contour
-helm upgrade --install contour-release stable/contour --namespace ns-contour --set service.loadBalancerType=LoadBalancer
+# kubectl create namespace ns-contour
+# helm upgrade --install contour-release stable/contour --namespace ns-contour --set service.loadBalancerType=LoadBalancer
 
 # Loki
-kubectl create ns ns-loki
-helm repo remove loki
-helm repo add loki https://grafana.github.io/loki/charts
-helm repo update
-helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-docker-desktop/master/values.yaml" -n ns-loki
+# kubectl create ns ns-loki
+# helm repo remove loki
+# helm repo add loki https://grafana.github.io/loki/charts
+# helm repo update
+# helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-docker-desktop/master/values.yaml" -n ns-loki
 
 # Online Boutique
 kubectl create namespace ns-microservices-demo
@@ -52,12 +52,15 @@ echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
 echo "export OCTANT_LISTENER_ADDR=0.0.0.0:8900" >> ~/.bashrc
 . ~/.bashrc
 
-clear
-printf "%s\n"  "The URL for Octant is: http://$DROPLET_ADDR:8900"
+/etc/motd
 
-#printf "%s\n" "Online Boutique is here: "
-#kubectl -n ns-contour get service contour-release | awk 'FNR == 2 {print $4}'
-
+echo "Reference commands to the various URLs in this tutorial" >> /etc/motd
+echo "****************************************************" >> /etc/motd
+echo "* Online Boutique is here: echo $BOUTIQUE_LB       *" >> /etc/motd
+echo "* Octant is here: echo $DROPLET_ADDR:8900          *" >> /etc/motd
+echo "* Grafana is here: echo $GRAFANA_LB                *" >> /etc/motd
+echo "* Locust is here: echo $DROPLET_ADDR:8089          *" >> /etc/motd
+echo "****************************************************"  >> /etc/motd
 
 printf "%s\n" "Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '"
 
