@@ -17,3 +17,7 @@ echo "* Start in another shell : octant &                                       
 echo "* Start in another shell: locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" & *" >> /etc/motd
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                     *" >> /etc/motd
 echo "*************************************************************************************" >> /etc/motd
+
+reboot
+
+#End of Script

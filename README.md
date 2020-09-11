@@ -120,6 +120,22 @@ Update this line 'doctl auth init --access-token "xxx"' in `cluster-prep.sh` wit
 sh cluster-prep.sh
 ```
 
+The virtual machine will reboot at the end of this script.
+
+Wait for the virtual machine to be available before continuing 
+
+### online-boutique.sh
+
+```
+cd prep
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/online-boutique.sh
+chmod +x online-boutique.sh
+```
+
+```
+sh online-boutique.sh
+```
+
 ## Clean Up Everything
 
 Run this to download a clean-up.sh script
