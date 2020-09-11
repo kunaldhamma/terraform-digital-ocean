@@ -1,3 +1,5 @@
+sleep 3m
+
 # Online Boutique
 BOUTIQUE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
 export BOUTIQUE_LB

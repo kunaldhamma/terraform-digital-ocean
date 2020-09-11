@@ -130,9 +130,6 @@ Wait for the virtual machine to be available before continuing
 cd prep
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/online-boutique.sh
 chmod +x online-boutique.sh
-```
-
-```
 sh online-boutique.sh
 ```
 
