@@ -55,10 +55,8 @@ echo "export DROPLET_ADDR=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
 echo "export OCTANT_LISTENER_ADDR=0.0.0.0:8900" >> ~/.bashrc
-. ~/.bashrc
 
-/etc/motd
-
+# Update Message of the Day
 echo "Reference commands to the various URLs in this tutorial" >> /etc/motd
 echo "****************************************************" >> /etc/motd
 echo "* Online Boutique is here: echo $BOUTIQUE_LB       *" >> /etc/motd
@@ -69,21 +67,6 @@ echo "****************************************************"  >> /etc/motd
 
 printf "%s\n" "Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '"
 
-# Start Locust
-
-#FRONTEND_ADDR=$(kubectl -n ns-contour get service contour-release | awk 'FNR == 2 {print $4}')
-#export $FRONTEND_ADDR
-#~/locust/locust --host="http://${FRONTEND_ADDR}" -u "${USERS:-10}" &
-# echo "Locust is here: "
-# doctl compute droplet list | awk 'FNR == 2 {print $3}'
-# echo "Port 8089"
-
-# Start Octant 
-
-# DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
-# export $DROPLET_ADDR
-octant & 
-
-#echo "PS1='[\u@\h \w $(kube_ps1)]\$ '" >>~/.bashrc
+reboot
 
 #End of Script
