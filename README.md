@@ -116,6 +116,9 @@ chmod +x cluster-prep.sh
 ```
 
 Update this line 'doctl auth init --access-token "xxx"' in `cluster-prep.sh` with your own Access Token.
+
+`vi cluster-prep.sh`
+
 ```
 sh cluster-prep.sh
 ```
