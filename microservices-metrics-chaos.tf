@@ -30,7 +30,10 @@ resource "digitalocean_kubernetes_cluster" "digital-ocean-cluster" {
   name    = "digital-ocean-cluster"
   region  = "sgp1"
   # Grab the latest version slug from `doctl kubernetes options versions`
-  version = "1.18.3-do.0"
+  # Latest
+  # version = "1.18.3-do.0"
+  # Stable
+  version = "1.17.11-do.0"
 
   node_pool {
     name       = "digital-ocean-pool"
