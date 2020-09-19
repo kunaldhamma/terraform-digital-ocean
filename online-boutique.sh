@@ -16,13 +16,12 @@ echo "* Octant is here: echo $DROPLET_ADDR:8900                                 
 echo "* Grafana is here: echo $GRAFANA_LB                                                          *" >> /etc/motd
 echo "* Locust is here: echo $DROPLET_ADDR:8089                                                    *" >> /etc/motd
 echo "* Start in another shell : octant &                                                          *" >> /etc/motd
-echo "* Start in another shell: ~/locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" & *" >> /etc/motd
+echo "* Start in another shell: ./locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" & *" >> /etc/motd
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
-octant & 
-
-~/locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" &
+#octant & 
+#~/locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" &
 
 reboot
 
