@@ -38,9 +38,12 @@ helm repo add gremlin https://helm.gremlin.com
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
-# Online Boutique
-# BOUTIQUE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
-# export BOUTIQUE_LB
+# VPA and Goldilocks
+helm repo remove fairwinds-stable
+helm repo add fairwinds-stable https://charts.fairwinds.com/stable
+helm install vpa-release fairwinds-stable/vpa --namespace ns-vpa --create-namespace
+helm install goldilocks-release --namespace ns-goldilocks fairwinds-stable/goldilocks --set dashboard.service.type=LoadBalancer --create-namespace
+kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
 
 # Update .bashrc
 cd ~
