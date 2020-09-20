@@ -4,7 +4,7 @@ sleep 3m
 BOUTIQUE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
 export BOUTIQUE_LB
 
-# Online Boutique
+# Goldilocks
 GOLDILOCKS_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
 export GOLDILOCKS_LB
 
