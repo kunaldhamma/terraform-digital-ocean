@@ -38,12 +38,19 @@ helm repo add gremlin https://helm.gremlin.com
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
-# VPA and Goldilocks
+# [VPA and Goldilocks](https://learnk8s.io/setting-cpu-memory-limits-requests)
 helm repo remove fairwinds-stable
 helm repo add fairwinds-stable https://charts.fairwinds.com/stable
 helm install vpa-release fairwinds-stable/vpa --namespace ns-vpa --create-namespace
 helm install goldilocks-release --namespace ns-goldilocks fairwinds-stable/goldilocks --set dashboard.service.type=LoadBalancer --create-namespace
+kubectl label namespace default goldilocks.fairwinds.com/enabled=true
+kubectl label namespace kube-node-lease goldilocks.fairwinds.com/enabled=true
+kubectl label namespace kube-public goldilocks.fairwinds.com/enabled=true
+kubectl label namespace kube-system goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-metrics-server goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
 
 # Update .bashrc
 cd ~
@@ -53,7 +60,6 @@ echo "alias k='kubectl'" >> ~/.bashrc
 echo "alias kga='kubectl get all'" >> ~/.bashrc
 echo "KUBE_PS1_SYMBOL_ENABLE=false" >>~/.bashrc
 echo "source /opt/kube-ps1/kube-ps1.sh" >>~/.bashrc
-# echo "export BOUTIQUE_LB=$BOUTIQUE_LB" >> ~/.bashrc
 echo "export DROPLET_ADDR=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
