@@ -1,0 +1,8 @@
+[Unit]
+Description=Locust
+
+[Service]
+ExecStart=/root/prep/startup-locust.sh start
+
+[Install]
+WantedBy=multi-user.target

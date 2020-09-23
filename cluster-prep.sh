@@ -29,6 +29,12 @@ kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jam
 cd ~/ && rm -R ~/locust
 cd ~/ && mkdir locust && cd locust
 wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locustfile.py
+cd prep
+wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/startup-locust.sh
+chmod +x startup-locust.sh
+cd /etc/systemd/system
+wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locust.service
+systemctl enable locust.service
 
 # Gremlin
 helm repo remove gremlin

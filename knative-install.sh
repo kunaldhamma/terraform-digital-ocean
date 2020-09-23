@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Knative Installation
 
 helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.5.4/charts/

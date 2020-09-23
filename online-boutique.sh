@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sleep 3m
 
 # Online Boutique
@@ -22,15 +24,14 @@ echo "* Octant is here:  $DROPLET_ADDR:8900                                     
 echo "* Locust is here: $DROPLET_ADDR:8089                                                         *" >> /etc/motd
 echo "* Goldilocks is here: $GOLDILOCKS_LB                                                         *" >> /etc/motd
 echo "* Start in another shell : octant &                                                          *" >> /etc/motd
-echo "* Start in another shell: ./locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" &                *" >> /etc/motd
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
 touch /etc/rc.local 
-sudo chmod a+x /etc/rc.local
+chmod a+x /etc/rc.local
 echo "#!/bin/bash" >> /etc/rc.local 
 echo "octant &" >> /etc/rc.local
-echo "~/locust/locust --host="http://${BOUTIQUE_LB}" -u '${USERS:-10}' &" >> /etc/rc.local 
+echo "/locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" &" >> /etc/rc.local 
 
 reboot
 
