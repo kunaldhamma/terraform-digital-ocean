@@ -26,8 +26,11 @@ echo "* Start in another shell: ./locust/locust --host="http://${BOUTIQUE_LB}" -
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
-#octant & 
-#~/locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" &
+touch /etc/rc.local 
+sudo chmod a+x /etc/rc.local
+echo "#!/bin/bash" >> /etc/rc.local 
+echo "octant &" >> /etc/rc.local
+echo "~/locust/locust --host="http://${BOUTIQUE_LB}" -u '${USERS:-10}' &" >> /etc/rc.local 
 
 reboot
 
