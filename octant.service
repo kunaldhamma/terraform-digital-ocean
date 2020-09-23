@@ -1,0 +1,11 @@
+[Unit]
+Description=octant
+
+[Service]
+WorkingDirectory=/usr/local/bin/
+ExecStart=/usr/local/bin/octant
+Type=simple
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

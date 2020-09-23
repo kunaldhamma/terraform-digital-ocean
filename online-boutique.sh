@@ -27,11 +27,17 @@ echo "* Start in another shell : octant &                                       
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
-touch /etc/rc.local 
-chmod a+x /etc/rc.local
-echo "#!/bin/bash" >> /etc/rc.local 
-echo "octant &" >> /etc/rc.local
-echo "/locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" &" >> /etc/rc.local 
+# Locust
+cd ~/ && rm -R ~/locust
+cd ~/ && mkdir locust && cd locust
+wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locustfile.py
+cd prep
+wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/startup-locust.sh
+chmod +x startup-locust.sh
+cd /etc/systemd/system
+wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locust.service
+chmod 755 locust.service
+systemctl enable locust.service
 
 reboot
 
