@@ -15,15 +15,16 @@ echo "export GOLDILOCKS_LB=$GOLDILOCKS_LB" >> ~/.bashrc
 
 # Update Message of the Day
 echo "Reference commands to the various URLs in this tutorial" >> /etc/motd
-echo ********************************************************************************************** >> /etc/motd
-echo * Online Boutique is here: 139.59.194.152                                                    * >> /etc/motd
-echo * Octant is here:  139.59.251.92:8900                                                        * >> /etc/motd
-echo * Grafana is here:                                                                           * >> /etc/motd
-echo * Locust is here: 139.59.251.92:8089                                                         * >> /etc/motd
-echo * Goldilocks is here: 159.89.209.188                                                         * >> /etc/motd
-echo * Start in another shell : octant &                                                          * >> /etc/motd
-echo * Start in another shell: ./locust/locust --host=http://139.59.194.152 -u 10 &               * >> /etc/motd
-echo ********************************************************************************************* >> /etc/motd
+echo "**********************************************************************************************" >> /etc/motd
+echo "* Online Boutique is here: $BOUTIQUE_LB                                                     *" >> /etc/motd
+echo "* Octant is here:  $DROPLET_ADDR:8900                                                        *" >> /etc/motd
+# echo "* Grafana is here: $GRAFANA_LB                                                               *" >> /etc/motd
+echo "* Locust is here: $DROPLET_ADDR:8089                                                         *" >> /etc/motd
+echo "* Goldilocks is here: $GOLDILOCKS_LB                                                         *" >> /etc/motd
+echo "* Start in another shell : octant &                                                          *" >> /etc/motd
+echo "* Start in another shell: ./locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" &                *" >> /etc/motd
+#echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
+echo "**********************************************************************************************" >> /etc/motd
 
 #octant & 
 #~/locust/locust --host="http://${BOUTIQUE_LB}" -u "${USERS:-10}" &
