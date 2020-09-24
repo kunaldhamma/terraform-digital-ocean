@@ -40,11 +40,11 @@ chmod +x startup-locust.sh
 # systemctl enable locust.service
 
 # Octant
-cd /etc/systemd/system
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/octant.service
-chmod 755 octant.service
-echo Environment="OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> octant.service
-systemctl enable octant.service
+#cd /etc/systemd/system
+#wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/octant.service
+#chmod 755 octant.service
+#echo Environment="OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> octant.service
+#systemctl enable octant.service
 
 reboot
 
