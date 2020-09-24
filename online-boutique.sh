@@ -23,7 +23,6 @@ echo "* Octant is here:  $DROPLET_ADDR:8900                                     
 # echo "* Grafana is here: $GRAFANA_LB                                                               *" >> /etc/motd
 echo "* Locust is here: $DROPLET_ADDR:8089                                                         *" >> /etc/motd
 echo "* Goldilocks is here: $GOLDILOCKS_LB                                                         *" >> /etc/motd
-echo "* Start in another shell : octant &                                                          *" >> /etc/motd
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
@@ -31,7 +30,7 @@ echo "**************************************************************************
 cd ~/ && rm -R ~/locust
 cd ~/ && mkdir locust && cd locust
 wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locustfile.py
-cd prep
+cd /root/prep
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/startup-locust.sh
 chmod +x startup-locust.sh
 cd /etc/systemd/system
