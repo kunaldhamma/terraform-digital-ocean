@@ -1,5 +1,5 @@
 [Unit]
-Description=octant
+Description=Octant
 
 [Service]
 WorkingDirectory=/usr/local/bin/

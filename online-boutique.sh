@@ -32,12 +32,18 @@ cd ~/ && rm -R ~/locust
 cd ~/ && mkdir locust && cd locust
 wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locustfile.py
 cd prep
-wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/startup-locust.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/startup-locust.sh
 chmod +x startup-locust.sh
 cd /etc/systemd/system
-wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locust.service
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/locust.service
 chmod 755 locust.service
 systemctl enable locust.service
+
+# Octant
+cd /etc/systemd/system
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/octant.service
+chmod 755 octant.service
+systemctl enable octant.service
 
 reboot
 

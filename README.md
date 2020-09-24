@@ -113,11 +113,10 @@ Wait for the virtual machine to be available before continuing
 cd prep
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/cluster-prep.sh
 chmod +x cluster-prep.sh
+vi cluster-prep.sh
 ```
 
 Update this line 'doctl auth init --access-token "xxx"' in `cluster-prep.sh` with your own Access Token.
-
-`vi cluster-prep.sh`
 
 ```
 sh cluster-prep.sh
@@ -131,6 +130,7 @@ Wait for the virtual machine to be available before continuing
 
 ```
 cd prep
+rm cluster-prep.sh
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/online-boutique.sh
 chmod +x online-boutique.sh
 sh online-boutique.sh
