@@ -1,8 +1,10 @@
 [Unit]
 Description=Octant
 
+[Install]
+WantedBy=multi-user.target
+
 [Service]
-Environment="OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR"
 Environment="KUBECONFIG=/root/.kube/config"
 Environment="OCTANT_LISTENER_ADDR=0.0.0.0:8900"
 Environment="OCTANT_DISABLE_OPEN_BROWSER=true"
@@ -10,6 +12,3 @@ WorkingDirectory=/usr/local/bin/
 ExecStart=/usr/local/bin/octant
 Type=simple
 Restart=on-failure
-
-[Install]
-WantedBy=multi-user.target

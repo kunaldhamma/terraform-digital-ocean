@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sleep 3m
+sleep 4m
 
 # Online Boutique
 BOUTIQUE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
@@ -22,6 +22,8 @@ echo "* Online Boutique is here: $BOUTIQUE_LB                                   
 echo "* Octant is here:  $DROPLET_ADDR:8900                                                        *" >> /etc/motd
 # echo "* Grafana is here: $GRAFANA_LB                                                               *" >> /etc/motd
 echo "* Locust is here: $DROPLET_ADDR:8089                                                         *" >> /etc/motd
+echo "* Locust values are Spawn:500 & URL: $BOUTIQUE_LB                              *" >> /etc/motd                      
+echo "* Start Locust: sh /root/locust/startup-locust.sh                                       *" >> /etc/motd      
 echo "* Goldilocks is here: $GOLDILOCKS_LB                                                         *" >> /etc/motd
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
@@ -32,15 +34,16 @@ cd ~/ && mkdir locust && cd locust
 wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locustfile.py
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/startup-locust.sh
 chmod +x startup-locust.sh
-cd /etc/systemd/system
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/locust.service
-chmod 755 locust.service
-systemctl enable locust.service
+# cd /etc/systemd/system
+# wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/locust.service
+# chmod 755 locust.service
+# systemctl enable locust.service
 
 # Octant
 cd /etc/systemd/system
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/octant.service
 chmod 755 octant.service
+echo Environment="OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> octant.service
 systemctl enable octant.service
 
 reboot
