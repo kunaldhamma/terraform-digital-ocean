@@ -26,11 +26,10 @@ echo "* Goldilocks is here: $GOLDILOCKS_LB                                      
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
-# Locust
+# Locust 
 cd ~/ && rm -R ~/locust
 cd ~/ && mkdir locust && cd locust
 wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locustfile.py
-cd /root/prep
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/startup-locust.sh
 chmod +x startup-locust.sh
 cd /etc/systemd/system

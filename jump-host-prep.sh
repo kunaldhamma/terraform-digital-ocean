@@ -45,9 +45,6 @@ sudo mv ./octant_0.15.0_Linux-64bit/octant /usr/local/bin/octant
 
 # Locust
 pip3 install locust
-cd ~/ && rm -R ~/locust
-cd ~/ && mkdir locust && cd locust
-wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locustfile.py
 
 reboot
 

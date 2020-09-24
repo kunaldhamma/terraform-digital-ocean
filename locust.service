@@ -2,7 +2,7 @@
 Description=Locust
 
 [Service]
-ExecStart=/root/prep/startup-locust.sh start
+ExecStart=/root/locust/startup-locust.sh start
 
 [Install]
 WantedBy=multi-user.target
