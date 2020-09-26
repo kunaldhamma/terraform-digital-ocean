@@ -18,13 +18,13 @@ echo "export GOLDILOCKS_LB=$GOLDILOCKS_LB" >> ~/.bashrc
 # Update Message of the Day
 echo "Reference commands to the various URLs in this tutorial" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
-echo "* Online Boutique is here: $BOUTIQUE_LB                                                     *" >> /etc/motd
-echo "* Octant is here:  $DROPLET_ADDR:8900                                                        *" >> /etc/motd
-# echo "* Grafana is here: $GRAFANA_LB                                                               *" >> /etc/motd
-echo "* Locust is here: $DROPLET_ADDR:8089                                                         *" >> /etc/motd
-echo "* Locust values are Spawn:500 & URL: $BOUTIQUE_LB                              *" >> /etc/motd                      
-echo "* Start Locust: sh /root/locust/startup-locust.sh                                       *" >> /etc/motd      
-echo "* Goldilocks is here: $GOLDILOCKS_LB                                                         *" >> /etc/motd
+echo "* Online Boutique is here: $BOUTIQUE_LB " >> /etc/motd
+echo "* Octant is here:  $DROPLET_ADDR:8900 " >> /etc/motd
+echo "* Goldilocks is here: $GOLDILOCKS_LB " >> /etc/motd
+# echo "* Grafana is here: $GRAFANA_LB  " >> /etc/motd
+echo "* Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
+echo "* Locust values are Spawn:500 & URL: $BOUTIQUE_LB " >> /etc/motd                      
+echo "* Start Locust & Octant in another shell : sh /root/locust/startup-locust.sh " >> /etc/motd      
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
