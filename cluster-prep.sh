@@ -45,7 +45,7 @@ kubectl create ns ns-loki
 helm repo remove loki
 helm repo add loki https://grafana.github.io/loki/charts
 helm repo update
-helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values.yaml" -n ns-loki
+helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/loki-values.yml" -n ns-loki
 
 # Chaos Mesh
 #[Chaos Mesh](https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier)
