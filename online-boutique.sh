@@ -10,10 +10,21 @@ export BOUTIQUE_LB
 GOLDILOCKS_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
 export GOLDILOCKS_LB
 
+# Loki
+LOKI_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
+export LOKI_LB
+
+# Chaos Mesh
+CHAOSMESH_LB=$(doctl compute load-balancer list | awk 'FNR == 5 {print $2}')
+export CHAOSMESH_LB
+
+
 # Update .bashrc
 cd ~
 echo "export BOUTIQUE_LB=$BOUTIQUE_LB" >> ~/.bashrc
 echo "export GOLDILOCKS_LB=$GOLDILOCKS_LB" >> ~/.bashrc
+echo "export LOKI_LB=$LOKI_LB" >> ~/.bashrc
+echo "export CHAOSMESH_LB=$CHAOSMESH_LB" >> ~/.bashrc
 
 # Update Message of the Day
 echo "Reference commands to the various URLs in this tutorial" >> /etc/motd
@@ -21,7 +32,8 @@ echo "**************************************************************************
 echo "* Online Boutique is here: $BOUTIQUE_LB " >> /etc/motd
 echo "* Octant is here:  $DROPLET_ADDR:8900 " >> /etc/motd
 echo "* Goldilocks is here: $GOLDILOCKS_LB " >> /etc/motd
-# echo "* Grafana is here: $GRAFANA_LB  " >> /etc/motd
+echo "* Loki is here: $GRAFANA_LB  " >> /etc/motd
+echo "* Chaos Mesh  is here: $CHAOSMESH_LB  " >> /etc/motd
 echo "* Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
 echo "* Locust values are Spawn:500 & URL: $BOUTIQUE_LB " >> /etc/motd                      
 echo "* Start Locust & Octant in another shell : sh /root/locust/startup-locust.sh " >> /etc/motd      

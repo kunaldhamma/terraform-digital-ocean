@@ -14,24 +14,9 @@ kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tool
 # kubectl create namespace ns-contour
 # helm upgrade --install contour-release stable/contour --namespace ns-contour --set service.loadBalancerType=LoadBalancer
 
-# Loki
-kubectl create ns ns-loki
-helm repo remove loki
-helm repo add loki https://grafana.github.io/loki/charts
-helm repo update
-helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-docker-desktop/master/values.yaml" -n ns-loki
-
 # Online Boutique
 kubectl create namespace ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
-
-# Chaos Mesh
-#[Chaos Mesh](https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier)
-helm repo remove chaos-mesh 
-helm repo add chaos-mesh https://charts.chaos-mesh.org
-curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
-kubectl create ns ns-chaos-mesh
-helm install chaos-mesh chaos-mesh/chaos-mesh --set dashboard.create=true --namespace=ns-chaos-mesh
 
 # Gremlin
 helm repo remove gremlin
@@ -54,6 +39,21 @@ kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-metrics-server goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
+
+# Loki
+kubectl create ns ns-loki
+helm repo remove loki
+helm repo add loki https://grafana.github.io/loki/charts
+helm repo update
+helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-docker-desktop/master/values.yaml" -n ns-loki
+
+# Chaos Mesh
+#[Chaos Mesh](https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier)
+helm repo remove chaos-mesh 
+helm repo add chaos-mesh https://charts.chaos-mesh.org
+curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
+kubectl create ns ns-chaos-mesh
+helm install chaos-mesh chaos-mesh/chaos-mesh --set dashboard.create=true --namespace=ns-chaos-mesh
 
 # Update .bashrc
 cd ~
