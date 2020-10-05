@@ -15,11 +15,11 @@ kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tool
 # helm upgrade --install contour-release stable/contour --namespace ns-contour --set service.loadBalancerType=LoadBalancer
 
 # Loki
-# kubectl create ns ns-loki
-# helm repo remove loki
-# helm repo add loki https://grafana.github.io/loki/charts
-# helm repo update
-# helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-docker-desktop/master/values.yaml" -n ns-loki
+kubectl create ns ns-loki
+helm repo remove loki
+helm repo add loki https://grafana.github.io/loki/charts
+helm repo update
+helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-docker-desktop/master/values.yaml" -n ns-loki
 
 # Online Boutique
 kubectl create namespace ns-microservices-demo
