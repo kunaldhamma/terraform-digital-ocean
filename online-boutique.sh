@@ -32,7 +32,7 @@ echo "**************************************************************************
 echo "* Online Boutique is here: $BOUTIQUE_LB " >> /etc/motd
 echo "* Octant is here:  $DROPLET_ADDR:8900 " >> /etc/motd
 echo "* Goldilocks is here: $GOLDILOCKS_LB " >> /etc/motd
-echo "* Loki is here: $GRAFANA_LB  " >> /etc/motd
+echo "* Loki is here: $LOKI_LB  " >> /etc/motd
 echo "* Chaos Mesh  is here: $CHAOSMESH_LB  " >> /etc/motd
 echo "* Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
 echo "* Locust values are Spawn:500 & URL: $BOUTIQUE_LB " >> /etc/motd                      
