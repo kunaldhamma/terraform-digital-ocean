@@ -33,7 +33,7 @@ resource "digitalocean_kubernetes_cluster" "digital-ocean-cluster" {
   # Latest
   # version = "1.18.3-do.0"
   # Stable
-  version = "1.17.11-do.0"
+  version = "1.17.11-do.1"
 
   node_pool {
     name       = "digital-ocean-pool"
