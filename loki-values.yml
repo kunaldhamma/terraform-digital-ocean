@@ -1,0 +1,29 @@
+loki:
+  enabled: true
+  image:
+    tag: 1.5.0
+
+promtail:
+  enabled: true
+
+fluent-bit:
+  enabled: false
+
+grafana:
+  enabled: true
+  # Deploy default dashboards. These are loaded using the sidecar
+  defaultDashboardsEnabled: true
+  sidecar:
+    datasources:
+      enabled: true
+  image:
+    tag: 7.0.0
+  service:
+    type: LoadBalancer
+
+prometheus:
+  enabled: true
+  alertmanager.persistentVolume.enabled: false
+  server.persistentVolume.enabled: false
+  image:
+    tag: 2.19.0
