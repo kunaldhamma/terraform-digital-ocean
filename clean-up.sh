@@ -28,6 +28,10 @@ doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compu
 
 doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
+doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
+
+doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
+
 printf "%s\n" "digital-ocean-loadbalancers deleted"
 
 printf "%s\n" "Done with clean up on Digital Ocean...."
