@@ -53,7 +53,7 @@ helm repo remove chaos-mesh
 helm repo add chaos-mesh https://charts.chaos-mesh.org
 curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
 kubectl create ns ns-chaos-mesh
-helm install chaos-mesh chaos-mesh/chaos-mesh --set dashboard.create=true --namespace=ns-chaos-mesh
+helm install chaos-mesh chaos-mesh/chaos-mesh --set dashboard.create=true --set service.type=LoadBalancer --namespace=ns-chaos-mesh
 
 # Update .bashrc
 cd ~
