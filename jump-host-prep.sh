@@ -39,9 +39,9 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 # Octant
 cd ~/ && rm -R ~/octant
 cd ~/ && mkdir octant && cd octant
-curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.16.0/octant_0.16.0_Linux-64bit.tar.gz
-tar -xvf octant_0.16.0_Linux-64bit.tar.gz
-sudo mv ./octant_0.16.0_Linux-64bit/octant /usr/local/bin/octant
+curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.16.1/octant_0.16.1_Linux-64bit.tar.gz
+tar -xvf octant_0.16.1_Linux-64bit.tar.gz
+sudo mv ./octant_0.16.1_Linux-64bit/octant /usr/local/bin/octant
 
 # Locust
 pip3 install locust
