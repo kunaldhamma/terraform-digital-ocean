@@ -89,10 +89,10 @@ terraform plan -destroy -out=terraform.tfplan \
 - This step does not delete the Load Balancers that are provisioned as part of the tutorial -
 ```
 
-## Preparing the Jump Host and Cluster
+## Preparing the Jump Host and Cluster ~11 minutes
 
 
-### jump-host-prep.sh
+### jump-host-prep.sh ~5 minutes
 On `digital-ocean-droplet`
 ```
 cd ~/ && rm -R ~/prep
@@ -107,7 +107,7 @@ The virtual machine will reboot at the end of this script.
 
 Wait for the virtual machine to be available before continuing 
 
-### cluster-prep.sh
+### cluster-prep.sh ~2 minutes
 
 ```
 cd prep
@@ -126,7 +126,7 @@ The virtual machine will reboot at the end of this script.
 
 Wait for the virtual machine to be available before continuing 
 
-### online-boutique.sh
+### online-boutique.sh ~4 minutes
 
 ```
 cd prep
