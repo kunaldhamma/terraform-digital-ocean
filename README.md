@@ -6,6 +6,8 @@
 - This is a work in progress and not complete -
 ```
 
+The Terraform takes 9 minutes and the post build tasks take 11 minutes for a total of 20 minutes time.
+
 ## Disclaimer
 * Opinions expressed here are solely my own and do not express the views or opinions of JPMorgan Chase.
 * Any third-party trademarks are the intellectual property of their respective owners and any mention herein is for referential purposes only. 
@@ -47,7 +49,7 @@ Check the version of Kubernetes
 
 `terraform init`
 
-## Build the Infrastructure
+## Build the Infrastructure ~9 minutes
 
 ```
 terraform plan \
