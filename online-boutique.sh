@@ -20,7 +20,7 @@ export LOKI_PWD
 CHAOSMESH_LB=$(doctl compute load-balancer list | awk 'FNR == 5 {print $2}')
 export CHAOSMESH_LB
 # Scale deployment.apps/frontend for Chaos Experiments 
-kubectl scale deployment.apps/frontend --replicas=3
+kubectl scale deployment.apps/frontend --replicas=3 -n ns-microservices-demo
 
 
 # Update .bashrc
