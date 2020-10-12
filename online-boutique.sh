@@ -38,7 +38,7 @@ echo "* Real-time Kubernetes Dashboard - Octant is here:  $DROPLET_ADDR:8900 " >
 echo "* Vertical Pod Autoscaler recommendations - Goldilocks is here: $GOLDILOCKS_LB " >> /etc/motd
 echo "* Distributed Log Aggregation - Loki is here: $LOKI_LB  " >> /etc/motd
 echo "* Loki User:  admin   Loki Password: $LOKI_PWD"
-echo "* Chaos Engineering Platfom - Chaos Mesh  is here: $CHAOSMESH_LB  " >> /etc/motd
+echo "* Chaos Engineering Platfom - Chaos Mesh  is here: $CHAOSMESH_LB:2333  " >> /etc/motd
 echo "* Load Testing Tool - Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
 echo "* Locust values are Spawn:500 & URL: $BOUTIQUE_LB " >> /etc/motd                      
 echo "* Start Locust & Octant in another shell : sh /root/locust/startup-locust.sh " >> /etc/motd      
