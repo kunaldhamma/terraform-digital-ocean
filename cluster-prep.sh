@@ -59,6 +59,16 @@ helm install chaos-mesh chaos-mesh/chaos-mesh --set dashboard.create=true --name
 sleep 30s
 kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 
+# GraphQL
+# https://github.com/onelittlenightmusic/kubernetes-graphql
+helm repo remove kubernetes-graphql  
+helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
+kubectl create ns ns-graphql  
+helm install kubernetes-graphql kubernetes-graphql/kubernetes-graphql --namespace=ns-graphql  
+# or with parameter
+helm install my-kubernetes-graphql kubernetes-graphql/kubernetes-graphql --set kubernetes-api-proxy.serviceAccount.clusterWide=true
+
+
 # Update .bashrc
 cd ~
 # echo "source <(kubectl completion bash)" >>~/.bashrc
