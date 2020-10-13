@@ -31,6 +31,7 @@ helm repo remove fairwinds-stable
 helm repo add fairwinds-stable https://charts.fairwinds.com/stable
 helm install vpa-release fairwinds-stable/vpa --namespace ns-vpa --create-namespace
 helm install goldilocks-release --namespace ns-goldilocks fairwinds-stable/goldilocks --create-namespace
+# NGINX testing LoadBalancer to ClusterIP
 # helm install goldilocks-release --namespace ns-goldilocks fairwinds-stable/goldilocks --set dashboard.service.type=LoadBalancer --create-namespace
 kubectl label namespace default goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-node-lease goldilocks.fairwinds.com/enabled=true
@@ -58,6 +59,7 @@ curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
 kubectl create ns ns-chaos-mesh
 helm install chaos-mesh-release chaos-mesh/chaos-mesh --set dashboard.create=true --namespace=ns-chaos-mesh
 sleep 30s
+# NGINX testing LoadBalancer to ClusterIP
 # kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 
 # GraphQL

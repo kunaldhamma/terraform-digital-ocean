@@ -19,6 +19,7 @@ grafana:
   image:
     tag: 7.0.0
   service:
+    # NGINX testing LoadBalancer to ClusterIP
     #type: LoadBalancer
     type: ClusterIP
 
