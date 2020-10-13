@@ -19,7 +19,8 @@ grafana:
   image:
     tag: 7.0.0
   service:
-    type: LoadBalancer
+    #type: LoadBalancer
+    type: ClusterIP
 
 prometheus:
   enabled: true
