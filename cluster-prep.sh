@@ -55,7 +55,7 @@ helm repo remove chaos-mesh
 helm repo add chaos-mesh https://charts.chaos-mesh.org
 curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
 kubectl create ns ns-chaos-mesh
-helm install chaos-mesh chaos-mesh/chaos-mesh --set dashboard.create=true --namespace=ns-chaos-mesh
+helm install chaos-mesh-release chaos-mesh/chaos-mesh --set dashboard.create=true --namespace=ns-chaos-mesh
 sleep 30s
 kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 
@@ -64,10 +64,12 @@ kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --na
 helm repo remove kubernetes-graphql  
 helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
 kubectl create ns ns-graphql  
-helm install kubernetes-graphql kubernetes-graphql/kubernetes-graphql --namespace=ns-graphql  
-# or with parameter
-helm install my-kubernetes-graphql kubernetes-graphql/kubernetes-graphql --set kubernetes-api-proxy.serviceAccount.clusterWide=true
+helm install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql --namespace=ns-graphql  
 
+# NGINX Ingress
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+kubectl create ns ns-nginx
+helm install nginx-release ingress-nginx/ingress-nginx --namespace=ns-nginx
 
 # Update .bashrc
 cd ~
