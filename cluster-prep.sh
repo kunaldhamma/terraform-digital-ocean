@@ -1,3 +1,6 @@
+# Author:  James Buckett
+# eMail: james.buckett@gmail.com
+
 #!/bin/bash
 
 # doctl
