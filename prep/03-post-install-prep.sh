@@ -35,6 +35,7 @@ cd ~
 echo "export BOUTIQUE_LB=$BOUTIQUE_LB" >> ~/.bashrc
 echo "export GOLDILOCKS_LB=$GOLDILOCKS_LB" >> ~/.bashrc
 echo "export LOKI_LB=$LOKI_LB" >> ~/.bashrc
+echo "export LOKI_PWD=$LOKI_PWD" >> ~/.bashrc
 echo "export CHAOSMESH_LB=$CHAOSMESH_LB" >> ~/.bashrc
 
 # Update Message of the Day
