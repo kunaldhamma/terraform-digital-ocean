@@ -121,6 +121,10 @@ echo "export OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
 echo "export OCTANT_LISTENER_ADDR=0.0.0.0:8900" >> ~/.bashrc
 
+clear
+echo "02-cluster-prep.sh complete...rebooting"
+sleep 5s
+
 # Reboot Jump Host
 reboot
 

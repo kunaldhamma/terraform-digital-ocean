@@ -53,6 +53,10 @@ sudo mv ./octant_0.16.1_Linux-64bit/octant /usr/local/bin/octant
 # Locust - Load Testing Tool
 pip3 install locust
 
+clear
+echo "01-jump-host-prep.sh complete...rebooting"
+sleep 5s
+
 # Reboot Jump Host
 reboot
 

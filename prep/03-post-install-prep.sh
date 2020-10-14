@@ -76,6 +76,10 @@ chmod +x startup-locust.sh
 # Clear browser history
 history -c
 
+clear
+echo "03-post-install-prep.sh complete...rebooting"
+sleep 5s
+
 # Reboot Jump Host
 reboot
 
