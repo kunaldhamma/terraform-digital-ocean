@@ -11,8 +11,11 @@ kubectl create namespace ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 
 # Contour
-# kubectl create namespace ns-contour
-# helm upgrade --install contour-release stable/contour --namespace ns-contour --set service.loadBalancerType=LoadBalancer
+# helm upgrade --install contour-release stable/contour --namespace ns-contour --set service.loadBalancerType=LoadBalancer --create-namespace
+
+# NGINX Ingress
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm install nginx-release ingress-nginx/ingress-nginx --namespace=ns-nginx --create-namespace
 
 # Online Boutique
 kubectl create namespace ns-microservices-demo
@@ -22,9 +25,27 @@ kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jam
 helm repo remove gremlin
 helm repo add gremlin https://helm.gremlin.com
 
-# Octant
-DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
-export DROPLET_ADDR
+# Loki
+helm repo remove loki
+helm repo add loki https://grafana.github.io/loki/charts
+helm repo update
+helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/loki-values.yml" -n ns-loki --create-namespace
+
+# Chaos Mesh
+#[Chaos Mesh](https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier)
+helm repo remove chaos-mesh 
+helm repo add chaos-mesh https://charts.chaos-mesh.org
+curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
+helm install chaos-mesh-release chaos-mesh/chaos-mesh --set dashboard.create=true --namespace=ns-chaos-mesh --create-namespace
+#sleep 30s
+# NGINX testing LoadBalancer to ClusterIP
+# kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
+
+# GraphQL
+# https://github.com/onelittlenightmusic/kubernetes-graphql
+helm repo remove kubernetes-graphql  
+helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
+helm install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql --namespace=ns-graphql  --create-namespace
 
 # [VPA and Goldilocks](https://learnk8s.io/setting-cpu-memory-limits-requests)
 helm repo remove fairwinds-stable
@@ -43,36 +64,12 @@ kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-metrics-server goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-nginx goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
 
-# Loki
-kubectl create ns ns-loki
-helm repo remove loki
-helm repo add loki https://grafana.github.io/loki/charts
-helm repo update
-helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/loki-values.yml" -n ns-loki
-
-# Chaos Mesh
-#[Chaos Mesh](https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier)
-helm repo remove chaos-mesh 
-helm repo add chaos-mesh https://charts.chaos-mesh.org
-curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
-kubectl create ns ns-chaos-mesh
-helm install chaos-mesh-release chaos-mesh/chaos-mesh --set dashboard.create=true --namespace=ns-chaos-mesh
-sleep 30s
-# NGINX testing LoadBalancer to ClusterIP
-# kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
-
-# GraphQL
-# https://github.com/onelittlenightmusic/kubernetes-graphql
-helm repo remove kubernetes-graphql  
-helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
-kubectl create ns ns-graphql  
-helm install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql --namespace=ns-graphql  
-
-# NGINX Ingress
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-kubectl create ns ns-nginx
-helm install nginx-release ingress-nginx/ingress-nginx --namespace=ns-nginx
+# Octant
+DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
+export DROPLET_ADDR
 
 # Update .bashrc
 cd ~

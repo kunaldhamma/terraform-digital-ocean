@@ -10,7 +10,20 @@ spec:
   - host: demo.jamesbuckett.com
     http:
       paths:
-      - backend:
-          serviceName: http-svc
+      - path: /frontend
+        backend:
+          serviceName: frontend
           servicePort: 80
-        path: /something(/|$)(.*)
+      - path: /service-2
+        backend:
+          serviceName: service-2
+          servicePort: 5000
+      - path: /service-2
+        backend:
+          serviceName: service-2
+          servicePort: 5000
+      - path: /service-2
+        backend:
+          serviceName: service-2
+          servicePort: 5000          
+
