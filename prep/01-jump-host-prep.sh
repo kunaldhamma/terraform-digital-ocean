@@ -4,6 +4,7 @@
 
 #!/bin/bash
 
+# Check that you are on jump host and not local host
 if [[ $HOSTNAME == 'digital-ocean-droplet' ]];
 then
 
