@@ -4,7 +4,7 @@
 
 #!/bin/bash
 
-Iif [$HOSTNAME == "digital-ocean-droplet"]; 
+if [$HOSTNAME == "digital-ocean-droplet"]; 
 then
 
 # Preparation of the Operating System
@@ -56,6 +56,7 @@ pip3 install locust
 reboot
 
 else
+    echo "You are not on the jump host : digital-ocean-droplet"
     exit
 fi
 
