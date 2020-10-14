@@ -40,13 +40,13 @@ echo "export CHAOSMESH_LB=$CHAOSMESH_LB" >> ~/.bashrc
 # Update Message of the Day
 echo "Reference URLs in this tutorial" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
-echo "* Real-time Kubernetes Dashboard - Octant is here:  $DROPLET_ADDR:8900.xip.io " >> /etc/motd
+echo "* Real-time Kubernetes Dashboard - Octant is here:  $DROPLET_ADDR:8900 " >> /etc/motd
 echo "* Sample Microservices Application - Online Boutique is here: $BOUTIQUE_LB.xip.io " >> /etc/motd
 echo "* Distributed Log Aggregation - Loki is here: $LOKI_LB.xip.io  " >> /etc/motd
 echo "* Loki User:  admin   Loki Password: $LOKI_PWD"
 echo "* Chaos Engineering Platfom - Chaos Mesh  is here: $CHAOSMESH_LB:2333.xip.io  " >> /etc/motd
 echo "* Vertical Pod Autoscaler recommendations - Goldilocks is here: $GOLDILOCKS_LB.xip.io " >> /etc/motd
-echo "* Load Testing Tool - Locust is here: $DROPLET_ADDR:8089.xip.io " >> /etc/motd
+echo "* Load Testing Tool - Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
 echo "* Locust values are Spawn:500 & URL: $BOUTIQUE_LB " >> /etc/motd                      
 echo "* Start Locust & Octant in another shell : sh /root/locust/startup-locust.sh " >> /etc/motd      
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd

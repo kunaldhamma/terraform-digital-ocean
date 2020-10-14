@@ -59,6 +59,8 @@ helm upgrade \
 --create-namespace
 # Cannot remember why i put this sleep in
 sleep 30s
+# Set Chaos Mesh to external LoadBalancer
+kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 
 # GraphQL - Convert Kubernetes API server into GraphQL API
 # https://github.com/onelittlenightmusic/kubernetes-graphql
@@ -83,7 +85,7 @@ helm upgrade \
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
 --set dashboard.service.type=LoadBalancer \
---namespace =ns-goldilocks \
+--namespace=ns-goldilocks \
 --create-namespace
 
 kubectl label namespace default goldilocks.fairwinds.com/enabled=true
