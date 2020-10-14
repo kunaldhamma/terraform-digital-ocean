@@ -101,7 +101,7 @@ terraform plan -destroy -out=terraform.tfplan \
 cd ~/ && rm -R ~/prep
 clear
 cd ~/ && mkdir prep && cd prep
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/01-jump-host-prep.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/01-jump-host-prep.sh
 chmod +x 01-jump-host-prep.sh
 sh 01-jump-host-prep.sh
 ```
@@ -114,7 +114,7 @@ sh 01-jump-host-prep.sh
 * On `digital-ocean-droplet` run the following:
 ```
 cd prep
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/02-cluster-prep.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/02-cluster-prep.sh
 chmod +x 02-cluster-prep.sh
 vi 02-cluster-prep.sh
 ```
@@ -134,7 +134,7 @@ sh 02-cluster-prep.sh
 ```
 cd prep
 rm cluster-prep.sh
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/03-post-install-prep.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/03-post-install-prep.sh
 chmod +x 03-post-install-prep.sh
 sh 03-post-install-prep.sh
 ```
@@ -161,7 +161,7 @@ Reference URLs in this tutorial
 cd ~/ && rm -R ~/clean-up
 clear
 cd ~/ && mkdir clean-up && cd clean-up
-wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/04-clean-up.sh
+wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/prep/04-clean-up.sh
 chmod +x 04-clean-up.sh
 sh 04-clean-up.sh
 ```

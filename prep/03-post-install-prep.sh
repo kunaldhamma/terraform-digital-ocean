@@ -53,18 +53,18 @@ echo "**************************************************************************
 cd ~/ && rm -R ~/locust
 cd ~/ && mkdir locust && cd locust
 wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locustfile.py
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/startup-locust.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/service/startup-locust.sh
 chmod +x startup-locust.sh
 
 # Locust Service - Not Working
 # cd /etc/systemd/system
-# wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/locust.service
+# wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/service/locust.service
 # chmod 755 locust.service
 # systemctl enable locust.service
 
 # Octant Service - Not working
 #cd /etc/systemd/system
-#wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/octant.service
+#wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/service/octant.service
 #chmod 755 octant.service
 #echo Environment="OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> octant.service
 #systemctl enable octant.service

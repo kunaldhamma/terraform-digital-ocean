@@ -39,7 +39,7 @@ helm repo remove loki
 helm repo add loki https://grafana.github.io/loki/charts
 helm repo update
 helm upgrade \
---install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/loki-values.yml" \
+--install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
 --namespace=ns-loki \
 --create-namespace
 
