@@ -73,6 +73,10 @@ chmod +x startup-locust.sh
 #echo Environment="OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> octant.service
 #systemctl enable octant.service
 
+# Clear browser history
+history -c
+
+# Reboot Jump Host
 reboot
 
 else
