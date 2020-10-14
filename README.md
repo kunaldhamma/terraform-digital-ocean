@@ -116,7 +116,7 @@ sh 01-jump-host-prep.sh
 cd prep
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/02-cluster-prep.sh
 chmod +x 02-cluster-prep.sh
-vi cluster-prep.sh
+vi 02-cluster-prep.sh
 ```
 
 Update this line 'doctl auth init --access-token "xxx"' in `02-cluster-prep.sh` with your own Access Token.

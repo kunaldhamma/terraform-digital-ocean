@@ -80,7 +80,6 @@ kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-metrics-server goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
-kubectl label namespace ns-nginx goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
 
 # Export the Public IP where Octant can be located
