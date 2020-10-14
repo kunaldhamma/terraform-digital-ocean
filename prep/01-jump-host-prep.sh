@@ -5,7 +5,7 @@
 #!/bin/bash
 
 # Check that you are on jump host and not local host
-if [[ "$HOSTNAME" = 'digital-ocean-droplet' ]]; then
+if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
 
 # Preparation of the Operating System
 sudo apt-get update
