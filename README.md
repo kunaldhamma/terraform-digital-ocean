@@ -94,60 +94,66 @@ terraform plan -destroy -out=terraform.tfplan \
 ## Preparing the Jump Host and Cluster ~11 minutes
 
 
-### jump-host-prep.sh ~5 minutes
-On `digital-ocean-droplet`
+### 01-jump-host-prep.sh ~5 minutes
+* This script prepares the jump host and installs some utilities
+* On `digital-ocean-droplet` run the following:
 ```
 cd ~/ && rm -R ~/prep
 clear
 cd ~/ && mkdir prep && cd prep
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/jump-host-prep.sh
-chmod +x jump-host-prep.sh
-sh jump-host-prep.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/01-jump-host-prep.sh
+chmod +x 01-jump-host-prep.sh
+sh 01-jump-host-prep.sh
 ```
 
-The virtual machine will reboot at the end of this script.
+* The virtual machine will reboot at the end of this script.
+* Wait for the virtual machine to be available before continuing 
 
-Wait for the virtual machine to be available before continuing 
-
-### cluster-prep.sh ~2 minutes
-
+### 02-cluster-prep.sh ~2 minutes
+* This script installs software onto the Kubernetes cluster
+* On `digital-ocean-droplet` run the following:
 ```
 cd prep
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/cluster-prep.sh
-chmod +x cluster-prep.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/02-cluster-prep.sh
+chmod +x 02-cluster-prep.sh
 vi cluster-prep.sh
 ```
 
-Update this line 'doctl auth init --access-token "xxx"' in `cluster-prep.sh` with your own Access Token.
+Update this line 'doctl auth init --access-token "xxx"' in `02-cluster-prep.sh` with your own Access Token.
 
 ```
-sh cluster-prep.sh
+sh 02-cluster-prep.sh
 ```
 
-The virtual machine will reboot at the end of this script.
+* The virtual machine will reboot at the end of this script.
+* Wait for the virtual machine to be available before continuing 
 
-Wait for the virtual machine to be available before continuing 
-
-### online-boutique.sh ~4 minutes
-
+### 03-post-install-prep.sh ~4 minutes
+* This script applies post install tasks to the jump host
+* On `digital-ocean-droplet` run the following:
 ```
 cd prep
 rm cluster-prep.sh
-wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/online-boutique.sh
-chmod +x online-boutique.sh
-sh online-boutique.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/03-post-install-prep.sh
+chmod +x 03-post-install-prep.sh
+sh 03-post-install-prep.sh
+```
+You should see a message of the day on `digital-ocean-droplet` with all links:
+```
+xxx
 ```
 
-## Clean Up Everything
 
-Run this to download a clean-up.sh script
+## Clean Up Everything - 04-clean-up.sh
+* This script deletes all assets on Digital Ocean
+* On `digital-ocean-droplet` run the following:
 ```
 cd ~/ && rm -R ~/clean-up
 clear
 cd ~/ && mkdir clean-up && cd clean-up
-wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/clean-up.sh
-chmod +x clean-up.sh
-sh clean-up.sh
+wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/04-clean-up.sh
+chmod +x 04-clean-up.sh
+sh 04-clean-up.sh
 ```
 
 *End of Section*
