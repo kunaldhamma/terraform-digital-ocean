@@ -4,6 +4,9 @@
 
 #!/bin/bash
 
+# Check that you are on jump host and not local host
+if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
+
 # doctl - DigitalOcean command-line client authorize access to the Kubernetes Cluster
 doctl auth init --access-token "xxx"
 doctl kubernetes cluster kubeconfig save digital-ocean-cluster
@@ -113,5 +116,10 @@ echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
 echo "export OCTANT_LISTENER_ADDR=0.0.0.0:8900" >> ~/.bashrc
 
 reboot
+
+else
+    echo "You are not on the jump host : digital-ocean-droplet"
+    exit
+fi
 
 #End of Script

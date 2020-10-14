@@ -103,7 +103,7 @@ clear
 cd ~/ && mkdir prep && cd prep
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/01-jump-host-prep.sh
 chmod +x 01-jump-host-prep.sh
-sh 01-jump-host-prep.sh
+./01-jump-host-prep.sh
 ```
 
 * The virtual machine will reboot at the end of this script.
@@ -122,7 +122,7 @@ vi 02-cluster-prep.sh
 Update this line 'doctl auth init --access-token "xxx"' in `02-cluster-prep.sh` with your own Access Token.
 
 ```
-sh 02-cluster-prep.sh
+./02-cluster-prep.sh
 ```
 
 * The virtual machine will reboot at the end of this script.
@@ -136,7 +136,7 @@ cd prep
 rm cluster-prep.sh
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/03-post-install-prep.sh
 chmod +x 03-post-install-prep.sh
-sh 03-post-install-prep.sh
+./03-post-install-prep.sh
 ```
 You should see a message of the day on `digital-ocean-droplet` with all links:
 ```

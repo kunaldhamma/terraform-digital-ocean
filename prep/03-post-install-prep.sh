@@ -4,6 +4,9 @@
 
 #!/bin/bash
 
+# Check that you are on jump host and not local host
+if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
+
 # Wait for the Load Balancers to  provision
 sleep 4m
 
@@ -70,5 +73,10 @@ chmod +x startup-locust.sh
 #systemctl enable octant.service
 
 reboot
+
+else
+    echo "You are not on the jump host : digital-ocean-droplet"
+    exit
+fi
 
 #End of Script
