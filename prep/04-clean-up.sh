@@ -28,12 +28,16 @@ printf "%s\n" "digital-ocean-droplet volume deleted"
 
 # Load Balancers
 
+# Online Boutique
 doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
+# Loki 
 doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
+# Chaos Mesh
 doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
+# Goldilocks
 doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
 printf "%s\n" "digital-ocean-loadbalancers deleted"

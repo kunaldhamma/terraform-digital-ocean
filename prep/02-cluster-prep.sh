@@ -30,6 +30,7 @@ kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tool
 #--create-namespace
 
 # Online Boutique - Sample Microservices Application
+# First External Load Balancer
 kubectl create namespace ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
 
@@ -38,6 +39,7 @@ helm repo remove gremlin
 helm repo add gremlin https://helm.gremlin.com
 
 # Loki -  Distributed Log Aggregation
+# Second External Load Balancer
 helm repo remove loki
 helm repo add loki https://grafana.github.io/loki/charts
 helm repo update
@@ -47,6 +49,7 @@ helm upgrade \
 --create-namespace
 
 # Chaos Mesh - Chaos Engineering Platfom
+# Third External Load Balancer
 #Link: https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier
 helm repo remove chaos-mesh 
 helm repo add chaos-mesh https://charts.chaos-mesh.org
@@ -73,6 +76,7 @@ helm upgrade \
 --create-namespace
 
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
+# Fourth External Load Balancer
 # Link: https://learnk8s.io/setting-cpu-memory-limits-requests
 helm repo remove fairwinds-stable
 helm repo add fairwinds-stable https://charts.fairwinds.com/stable
