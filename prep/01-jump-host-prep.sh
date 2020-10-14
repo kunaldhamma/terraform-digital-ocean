@@ -4,6 +4,9 @@
 
 #!/bin/bash
 
+Iif [$HOSTNAME == "digital-ocean-droplet"]; 
+then
+
 # Preparation of the Operating System
 sudo apt-get update
 sudo apt-get upgrade -y
@@ -51,5 +54,9 @@ sudo mv ./octant_0.16.1_Linux-64bit/octant /usr/local/bin/octant
 pip3 install locust
 
 reboot
+
+else
+    exit
+fi
 
 # End of Script

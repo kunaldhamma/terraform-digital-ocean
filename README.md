@@ -151,7 +151,6 @@ Reference URLs in this tutorial
 * Locust values are Spawn:500 & URL: x.x.x.x
 * Start Locust & Octant in another shell : sh /root/locust/startup-locust.sh
 **********************************************************************************************
-
 ```
 
 ## Clean Up Everything - 04-clean-up.sh
