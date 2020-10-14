@@ -140,9 +140,19 @@ sh 03-post-install-prep.sh
 ```
 You should see a message of the day on `digital-ocean-droplet` with all links:
 ```
-xxx
-```
+Reference URLs in this tutorial
+**********************************************************************************************
+* Sample Microservices Application - Online Boutique is here: x.x.x.x
+* Real-time Kubernetes Dashboard - Octant is here:  x.x.x.x:8900
+* Vertical Pod Autoscaler recommendations - Goldilocks is here: x.x.x.x
+* Distributed Log Aggregation - Loki is here: x.x.x.x
+* Chaos Engineering Platfom - Chaos Mesh  is here: x.x.x.x:2333
+* Load Testing Tool - Locust is here: x.x.x.x:8089
+* Locust values are Spawn:500 & URL: x.x.x.x
+* Start Locust & Octant in another shell : sh /root/locust/startup-locust.sh
+**********************************************************************************************
 
+```
 
 ## Clean Up Everything - 04-clean-up.sh
 * This script deletes all assets on Digital Ocean

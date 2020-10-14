@@ -12,19 +12,19 @@ BOUTIQUE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
 export BOUTIQUE_LB
 
 # Loki - Export the Public IP address of Loki and display the password to login
-LOKI_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
+LOKI_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
 export LOKI_LB
 LOKI_PWD=$(kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo)
 export LOKI_PWD
 
 # Chaos Mesh - Export the Public IP address of Chaos Mesh
-CHAOSMESH_LB=$(doctl compute load-balancer list | awk 'FNR == 5 {print $2}')
+CHAOSMESH_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
 export CHAOSMESH_LB
 # Scale deployment.apps/frontend to 3 replicas for Chaos Experiments 
 kubectl scale deployment.apps/frontend --replicas=3 -n ns-microservices-demo
 
 # Goldilocks - Export the Public IP address of Golidilocks 
-GOLDILOCKS_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
+GOLDILOCKS_LB=$(doctl compute load-balancer list | awk 'FNR == 5 {print $2}')
 export GOLDILOCKS_LB
 
 # Update .bashrc
