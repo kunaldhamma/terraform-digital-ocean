@@ -4,7 +4,7 @@
 
 #!/bin/bash
 
-if [$HOSTNAME == "digital-ocean-droplet" ]; 
+if [[ $HOSTNAME == 'digital-ocean-droplet' ]];
 then
 
 # Preparation of the Operating System
