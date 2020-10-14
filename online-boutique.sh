@@ -1,27 +1,31 @@
+# Author:  James Buckett
+# eMail: james.buckett@gmail.com
+# Script to setup post-install tasks
+
 #!/bin/bash
 
+# Wait for the Load Balancers to  provision
 sleep 4m
 
-# Online Boutique
+# Online Boutique - Export the Public IP address of Online Boutique 
 BOUTIQUE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
 export BOUTIQUE_LB
 
-# Goldilocks
+# Goldilocks - Export the Public IP address of Golidilocks 
 GOLDILOCKS_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
 export GOLDILOCKS_LB
 
-# Loki
+# Loki - Export the Public IP address of Loki and display the password to login
 LOKI_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
 export LOKI_LB
 LOKI_PWD=$(kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo)
 export LOKI_PWD
 
-# Chaos Mesh
+# Chaos Mesh - Export the Public IP address of Chaos Mesh
 CHAOSMESH_LB=$(doctl compute load-balancer list | awk 'FNR == 5 {print $2}')
 export CHAOSMESH_LB
-# Scale deployment.apps/frontend for Chaos Experiments 
+# Scale deployment.apps/frontend to 3 replicas for Chaos Experiments 
 kubectl scale deployment.apps/frontend --replicas=3 -n ns-microservices-demo
-
 
 # Update .bashrc
 cd ~
@@ -31,7 +35,7 @@ echo "export LOKI_LB=$LOKI_LB" >> ~/.bashrc
 echo "export CHAOSMESH_LB=$CHAOSMESH_LB" >> ~/.bashrc
 
 # Update Message of the Day
-echo "Reference commands to the various URLs in this tutorial" >> /etc/motd
+echo "Reference URLs in this tutorial" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 echo "* Sample Microservices Application - Online Boutique is here: $BOUTIQUE_LB " >> /etc/motd
 echo "* Real-time Kubernetes Dashboard - Octant is here:  $DROPLET_ADDR:8900 " >> /etc/motd
@@ -45,18 +49,20 @@ echo "* Start Locust & Octant in another shell : sh /root/locust/startup-locust.
 #echo "* Add this to .bashrc manually 'PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
-# Locust 
+# Locust - Setup Locust
 cd ~/ && rm -R ~/locust
 cd ~/ && mkdir locust && cd locust
 wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/locustfile.py
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/startup-locust.sh
 chmod +x startup-locust.sh
+
+# Locust Service - Not Working
 # cd /etc/systemd/system
 # wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/locust.service
 # chmod 755 locust.service
 # systemctl enable locust.service
 
-# Octant
+# Octant Service - Not working
 #cd /etc/systemd/system
 #wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/octant.service
 #chmod 755 octant.service

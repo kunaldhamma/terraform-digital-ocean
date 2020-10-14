@@ -1,62 +1,75 @@
 # Author:  James Buckett
 # eMail: james.buckett@gmail.com
+# Script to install various components onto the cluster
 
 #!/bin/bash
 
-# doctl
+# doctl - DigitalOcean command-line client authorize access to the Kubernetes Cluster
 doctl auth init --access-token "xxx"
 doctl kubernetes cluster kubeconfig save digital-ocean-cluster
 
 kubectl config use-context do-sgp1-digital-ocean-cluster
 
-# metrics server
+# metrics server - container resource metrics
 kubectl create namespace ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 
-# Contour
+# Contour - Ingress
 # helm upgrade --install contour-release stable/contour --namespace ns-contour --set service.loadBalancerType=LoadBalancer --create-namespace
 
-# NGINX Ingress
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install nginx-release ingress-nginx/ingress-nginx --namespace=ns-nginx --create-namespace
+# NGINX Ingress - Ingress 
+# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+# helm install nginx-release ingress-nginx/ingress-nginx --namespace=ns-nginx --create-namespace
 
-# Online Boutique
+# Online Boutique - Sample Microservices Application
 kubectl create namespace ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
 
-# Gremlin
+# Gremlin - Managed Chaos Engineering Platfom
 helm repo remove gremlin
 helm repo add gremlin https://helm.gremlin.com
 
-# Loki
+# Loki -  Distributed Log Aggregation
 helm repo remove loki
 helm repo add loki https://grafana.github.io/loki/charts
 helm repo update
-helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/loki-values.yml" -n ns-loki --create-namespace
+helm upgrade --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/loki-values.yml" \
+-n ns-loki \
+--create-namespace
 
-# Chaos Mesh
-#[Chaos Mesh](https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier)
+# Chaos Mesh - Chaos Engineering Platfom
+#Link: https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier
 helm repo remove chaos-mesh 
 helm repo add chaos-mesh https://charts.chaos-mesh.org
 curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
-helm install chaos-mesh-release chaos-mesh/chaos-mesh --set dashboard.create=true --namespace=ns-chaos-mesh --create-namespace
-#sleep 30s
-# NGINX testing LoadBalancer to ClusterIP
-# kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
+helm install chaos-mesh-release chaos-mesh/chaos-mesh \
+--set dashboard.create=true \
+--namespace=ns-chaos-mesh \
+--create-namespace
+# Cannot remember why i put this sleep in
+sleep 30s
 
-# GraphQL
+# GraphQL - Convert Kubernetes API server into GraphQL API
 # https://github.com/onelittlenightmusic/kubernetes-graphql
 helm repo remove kubernetes-graphql  
 helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
-helm install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql --namespace=ns-graphql  --create-namespace
+helm install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql \
+--namespace=ns-graphql \ 
+--create-namespace
 
-# [VPA and Goldilocks](https://learnk8s.io/setting-cpu-memory-limits-requests)
+# Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
+# Link: https://learnk8s.io/setting-cpu-memory-limits-requests
 helm repo remove fairwinds-stable
 helm repo add fairwinds-stable https://charts.fairwinds.com/stable
-helm install vpa-release fairwinds-stable/vpa --namespace ns-vpa --create-namespace
-helm install goldilocks-release --namespace ns-goldilocks fairwinds-stable/goldilocks --create-namespace
-# NGINX testing LoadBalancer to ClusterIP
-# helm install goldilocks-release --namespace ns-goldilocks fairwinds-stable/goldilocks --set dashboard.service.type=LoadBalancer --create-namespace
+helm install vpa-release fairwinds-stable/vpa \
+--namespace ns-vpa \
+--create-namespace
+
+helm install goldilocks-release fairwinds-stable/goldilocks \
+--set dashboard.service.type=LoadBalancer \
+--namespace ns-goldilocks \
+--create-namespace
+
 kubectl label namespace default goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-node-lease goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-public goldilocks.fairwinds.com/enabled=true
@@ -70,7 +83,7 @@ kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-nginx goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
 
-# Octant
+# Export the Public IP where Octant can be located
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
