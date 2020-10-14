@@ -1,5 +1,5 @@
 # Author:  James Buckett
-# eMail: james.buckett@gmail.com
+# email: james.buckett@gmail.com
 # Script to setup post-install tasks
 
 #!/bin/bash
@@ -45,7 +45,7 @@ echo "* Real-time Kubernetes Dashboard - Octant is here:  $DROPLET_ADDR:8900 " >
 echo "* Sample Microservices Application - Online Boutique is here: $BOUTIQUE_LB.xip.io " >> /etc/motd
 echo "* Distributed Log Aggregation - Loki is here: $LOKI_LB.xip.io  " >> /etc/motd
 echo "* Loki User:  admin   Loki Password: $LOKI_PWD"
-echo "* Chaos Engineering Platfom - Chaos Mesh  is here: $CHAOSMESH_LB:2333.xip.io  " >> /etc/motd
+echo "* Chaos Engineering Platfom - Chaos Mesh  is here: $CHAOSMESH_LB:2333  " >> /etc/motd
 echo "* Vertical Pod Autoscaler recommendations - Goldilocks is here: $GOLDILOCKS_LB.xip.io " >> /etc/motd
 echo "* Load Testing Tool - Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
 echo "* Locust values are Spawn:500 & URL: $BOUTIQUE_LB " >> /etc/motd                      
@@ -77,6 +77,8 @@ chmod +x startup-locust.sh
 history -c
 
 clear
+echo " "
+echo " "
 echo "03-post-install-prep.sh complete...rebooting"
 sleep 5s
 

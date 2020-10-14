@@ -1,5 +1,5 @@
 # Author:  James Buckett
-# eMail: james.buckett@gmail.com
+# email: james.buckett@gmail.com
 # Script to install various components onto the cluster
 
 #!/bin/bash
@@ -122,6 +122,8 @@ echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
 echo "export OCTANT_LISTENER_ADDR=0.0.0.0:8900" >> ~/.bashrc
 
 clear
+echo " "
+echo " "
 echo "02-cluster-prep.sh complete...rebooting"
 sleep 5s
 

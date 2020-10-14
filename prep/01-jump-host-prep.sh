@@ -1,5 +1,5 @@
 # Author:  James Buckett
-# eMail: james.buckett@gmail.com
+# email: james.buckett@gmail.com
 # Script to install various components onto the jumphost
 
 #!/bin/bash
@@ -54,6 +54,8 @@ sudo mv ./octant_0.16.1_Linux-64bit/octant /usr/local/bin/octant
 pip3 install locust
 
 clear
+echo " "
+echo " "
 echo "01-jump-host-prep.sh complete...rebooting"
 sleep 5s
 

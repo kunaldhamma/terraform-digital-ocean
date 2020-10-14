@@ -1,5 +1,5 @@
 # Author:  James Buckett
-# eMail: james.buckett@gmail.com
+# email: james.buckett@gmail.com
 # Script to delete all Digital Ocean assests 
 
 #!/bin/bash
@@ -7,7 +7,7 @@
 clear
 
 printf "%s\n" "Starting clean up on Digital Ocean...."
-
+sleep 5s
 # Kubernetes
 
 doctl kubernetes cluster delete digital-ocean-cluster -f

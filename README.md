@@ -138,15 +138,16 @@ wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/mast
 chmod +x 03-post-install-prep.sh
 ./03-post-install-prep.sh
 ```
-You should see a message of the day on `digital-ocean-droplet` with all links:
+You should see a message of the day on `digital-ocean-droplet` with information:
+`x.x.x.x` represent your IP values
 ```
 Reference URLs in this tutorial
 **********************************************************************************************
-* Sample Microservices Application - Online Boutique is here: x.x.x.x
 * Real-time Kubernetes Dashboard - Octant is here:  x.x.x.x:8900
-* Vertical Pod Autoscaler recommendations - Goldilocks is here: x.x.x.x
-* Distributed Log Aggregation - Loki is here: x.x.x.x
+* Sample Microservices Application - Online Boutique is here: x.x.x.x.xip.io
+* Distributed Log Aggregation - Loki is here: x.x.x.x.xip.io
 * Chaos Engineering Platfom - Chaos Mesh  is here: x.x.x.x:2333
+* Vertical Pod Autoscaler recommendations - Goldilocks is here: x.x.x.x.xip.io
 * Load Testing Tool - Locust is here: x.x.x.x:8089
 * Locust values are Spawn:500 & URL: x.x.x.x
 * Start Locust & Octant in another shell : sh /root/locust/startup-locust.sh
@@ -164,6 +165,8 @@ wget wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean
 chmod +x 04-clean-up.sh
 sh 04-clean-up.sh
 ```
+
+Check the Digital Ocean page for any artifacts that were not deleted and delete them from the Digital Ocean page.
 
 *End of Section*
 
