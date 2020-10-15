@@ -38,6 +38,6 @@ resource "digitalocean_kubernetes_cluster" "digital-ocean-cluster" {
   node_pool {
     name       = "digital-ocean-pool"
     size       = "s-2vcpu-2gb"
-    node_count = 3
+    node_count = 5
   }
 }
