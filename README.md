@@ -93,11 +93,11 @@ terraform apply \
   -var "ssh_fingerprint=${DO_SSH_FINGERPRINT}"
 ```
 
-### 3.2 Get the IP of digital-ocean-droplet
+### Get the IP of digital-ocean-droplet
 * `doctl compute droplet list | awk 'FNR == 2 {print $3}'`
 
 
-### 3.3 View state of infrastructure
+### View state of infrastructure
 
 `terraform show terraform.tfstate`
 
@@ -119,8 +119,7 @@ terraform plan -destroy -out=terraform.tfplan \
 
 ## 4. Preparing the Jump Host and Cluster ~11 minutes
 
-
-### 4.1 01-jump-host-prep.sh ~5 minutes
+### 4.1 Prepare the Jump Host ~5 minutes
 * This script prepares the jump host and installs some utilities
 * On `digital-ocean-droplet` run the following:
 ```
@@ -135,7 +134,7 @@ chmod +x 01-jump-host-prep.sh
 * The virtual machine will reboot at the end of this script.
 * Wait for the virtual machine to be available before continuing 
 
-### 4.2 02-cluster-prep.sh ~2 minutes
+### 4.2 Prepare the Kubernetes Cluster ~2 minutes
 * This script installs software onto the Kubernetes cluster
 * On `digital-ocean-droplet` run the following:
 ```
@@ -154,7 +153,7 @@ Update this line 'doctl auth init --access-token "xxx"' in `02-cluster-prep.sh` 
 * The virtual machine will reboot at the end of this script.
 * Wait for the virtual machine to be available before continuing 
 
-### 4.3 03-post-install-prep.sh ~4 minutes
+### 4.3 Post Install Tasks ~4 minutes
 * This script applies post install tasks to the jump host
 * On `digital-ocean-droplet` run the following:
 ```
@@ -180,7 +179,7 @@ Reference URLs in this tutorial
 **********************************************************************************************
 ```
 
-## 4.4 Clean Up Everything - 04-clean-up.sh
+## 4.4 Clean Up Everything 
 * This script deletes all assets on Digital Ocean
 * Only run this when you are done with the tutorial and cluster
 * On `digital-ocean-droplet` run the following:
@@ -199,13 +198,13 @@ Check the Digital Ocean page for any artifacts that were not deleted and delete 
 
 ### 5.1 Loki
 
-#### 5.1.1 Loki Setup
+####  Loki Setup
 Username: `admin` 
 * Obtain the password: 
 ```
 kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
-#### 5.1.2 Loki Dashboards 
+#### Loki Dashboards 
 
 * Left side look for + sign...`Import`
 
@@ -218,11 +217,9 @@ kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.
 * Cluster Monitoring for Kubernetes
   * Import this dashboard: `1471`
 
-### 5.2 GraphQL - Simple setup for converting Kubernetes API server into GraphQL API.
+### 5.2 Kubernetes GraphQL 
+* Simple setup for converting Kubernetes API server into [GraphQL API](https://github.com/onelittlenightmusic/kubernetes-graphql)
 
-Link : https://github.com/onelittlenightmusic/kubernetes-graphql
-
-Simple setup for converting Kubernetes API server into GraphQL API.
 
 Query list pods
 ```
@@ -234,6 +231,82 @@ Get pods with labels
 
 ### 5.3 Gremlin 
 
+#### Install Gremlin
+
+Create a gremlin directory
+```
+cd ~/ && rm -R ~/gremlin
+cd && mkdir gremlin && cd gremlin
+```
+
+Signup for Gremlin service
+* Go to this [link](https://app.gremlin.com/signup)
+* Sign Up for an account
+* Login to the Gremlin App using your Company name and sign-on credentials. 
+* These were emailed to you when you signed up to start using Gremlin.
+* Top Right click on `Company Settings`
+* Click `Teams` tab
+* CLick on your User
+* Click on Configuration
+* Click the blue Download button to save your certificates to your local computer. 
+  * If on Windows download the `certificate.zip` file to c:\Users\<your-name>\Downloads
+  * If on Mac download the `certificate.zip` to the `~/download` directory.
+* The downloaded `certificate.zip` contains both a public-key certificate and a matching private key.
+* Obtain the external IP address of `digital-ocean-droplet`
+  * `doctl compute droplet list | awk 'FNR == 2 {print $3}'`
+  * This is the `Public IPv4` for `digital-ocean-droplet`
+* For Windows use WinSCP to upload `certificate.zip` to `digital-ocean-droplet` to `home/root/gremlin`
+  * Add your private key to WinSCP 
+    * Advanced..SSH..Authentication..Private key file
+* For Mac use `scp` to upload `certificate.zip` to `digital-ocean-droplet`
+  * `scp certificate.zip root@<Public IPv4>:/root/gremlin/`
+
+* Unzip the `certificate.zip` and rename your certificate and key files to `gremlin.cert` and `gremlin.key`
+```
+cd ~/gremlin
+sudo apt-get install unzip
+unzip certificate.zip
+mv *.priv_key.pem gremlin.key
+mv *.pub_cert.pem gremlin.cert
+```
+Create a namespace and secret for Gremlin
+```
+k create ns ns-gremlin
+k create secret generic gremlin-team-cert --from-file=./gremlin.cert --from-file=./gremlin.key -n ns-gremlin
+```
+
+#### Configure Gremlin
+
+Let Gremlin know your Gremlin team ID and your Kubernetes cluster name
+```
+export GREMLIN_TEAM_ID="changeit"
+export GREMLIN_CLUSTER_ID=digital-ocean-cluster
+```
+
+* Replace `"changeit"` with the value from the [Gremlin page](https://app.gremlin.com/signup) 
+  * Obtain `GREMLIN_TEAM_ID` here: 
+    * Top Right click on `Company Settings`
+    * Click `Manage Teams` tab
+    * Click on your User
+    * Click on Configuration
+    * Your `Team ID` should be on the top row
+    * Your `Team ID` is your `GREMLIN_TEAM_ID`
+
+If you have trouble with this section please go [here](https://www.gremlin.com/community/tutorials/how-to-install-and-use-gremlin-with-kubernetes/)
+
+Add the Gremlin helm chart
+```
+helm repo remove gremlin
+helm repo add gremlin https://helm.gremlin.com
+```
+
+Install the Gremlin Kubernetes client
+```
+helm install gremlin gremlin/gremlin \
+  --namespace ns-gremlin \
+  --set gremlin.teamID=$GREMLIN_TEAM_ID \
+  --set gremlin.clusterID=$GREMLIN_CLUSTER_ID
+```
 
 
 
