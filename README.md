@@ -201,7 +201,7 @@ cd ~/ && rm -R ~/gremlin
 cd && mkdir gremlin && cd gremlin
 ```
 
-Signup for Gremlin service
+Sign-up for Gremlin service
 * Go to this [link](https://app.gremlin.com/signup)
 * Sign Up for an account
 * Login to the Gremlin App using your Company name and sign-on credentials. 
