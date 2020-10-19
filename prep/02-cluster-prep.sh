@@ -72,6 +72,9 @@ helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernete
 
 helm upgrade \
 --install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql \
+--set kubernetes-api-proxy.serviceAccount.create=true \
+--set kubernetes-api-proxy.serviceAccount.clusterWide=true \
+--set graphql-mesh.ingress.enabled=true \
 --namespace=ns-graphql  \
 --create-namespace
 

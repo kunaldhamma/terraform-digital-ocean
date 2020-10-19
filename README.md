@@ -169,6 +169,46 @@ sh 04-clean-up.sh
 
 Check the Digital Ocean page for any artifacts that were not deleted and delete them from the Digital Ocean page.
 
+## Setup and Testing
+
+### Loki
+
+#### Loki Setup
+Username: `admin` 
+* Obtain the password: 
+```
+kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
+#### Loki Dashboards 
+
+* Left side look for + sign...`Import`
+
+* Loki Dashboard quick search
+  * Import this dashboard: `12019`
+
+* Cluster Monitoring for Kubernetes
+  * Import this dashboard: `10000`
+
+* Cluster Monitoring for Kubernetes
+  * Import this dashboard: `1471`
+
+### GraphQL - Simple setup for converting Kubernetes API server into GraphQL API.
+
+Link : https://github.com/onelittlenightmusic/kubernetes-graphql
+
+Simple setup for converting Kubernetes API server into GraphQL API.
+
+Query list pods
+```
+kubectl get pods --namespace ns-microservices-demo -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.startTime}{"\n"}{end}'
+```
+
+Get pods with labels
+
+
+### Gremlin 
+
+
 
 
 
