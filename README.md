@@ -93,29 +93,12 @@ terraform apply \
   -var "ssh_fingerprint=${DO_SSH_FINGERPRINT}"
 ```
 
-### Get the IP of digital-ocean-droplet
+Get the IP of digital-ocean-droplet
 * `doctl compute droplet list | awk 'FNR == 2 {print $3}'`
 
 
-### View state of infrastructure
-
-`terraform show terraform.tfstate`
-
-### 3.4 Tear down the Infrastructure
-
-```
-terraform plan -destroy -out=terraform.tfplan \
-  -var "do_token=${DO_PAT}" \
-  -var "pub_key=$HOME/.ssh/id_rsa.pub" \
-  -var "pvt_key=$HOME/.ssh/id_rsa" \
-  -var "ssh_fingerprint=$DO_SSH_FINGERPRINT"
-  ```
-
-`terraform apply terraform.tfplan`
-
-```diff
-- This step does not delete the Load Balancers that are provisioned as part of the tutorial -
-```
+View state of infrastructure
+* `terraform show terraform.tfstate`
 
 ## 4. Preparing the Jump Host and Cluster ~11 minutes
 
@@ -179,21 +162,6 @@ Reference URLs in this tutorial
 **********************************************************************************************
 ```
 
-## 4.4 Clean Up Everything 
-* This script deletes all assets on Digital Ocean
-* Only run this when you are done with the tutorial and cluster
-* On `digital-ocean-droplet` run the following:
-```
-cd ~/ && rm -R ~/clean-up
-clear
-cd ~/ && mkdir clean-up && cd clean-up
-wget wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/04-clean-up.sh
-chmod +x 04-clean-up.sh
-sh 04-clean-up.sh
-```
-
-Check the Digital Ocean page for any artifacts that were not deleted and delete them from the Digital Ocean page.
-
 ## 5. Setup and Testing
 
 ### 5.1 Loki
@@ -207,14 +175,8 @@ kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.
 #### Loki Dashboards 
 
 * Left side look for + sign...`Import`
-
-* Loki Dashboard quick search
   * Import this dashboard: `12019`
-
-* Cluster Monitoring for Kubernetes
   * Import this dashboard: `10000`
-
-* Cluster Monitoring for Kubernetes
   * Import this dashboard: `1471`
 
 ### 5.2 Kubernetes GraphQL 
@@ -309,7 +271,38 @@ helm install gremlin gremlin/gremlin \
 ```
 
 
+## 6. Clean Up Everything 
+* This script deletes all assets on Digital Ocean
+* Only run this when you are done with the tutorial and cluster
+* On `digital-ocean-droplet` run the following:
+```
+cd ~/ && rm -R ~/clean-up
+clear
+cd ~/ && mkdir clean-up && cd clean-up
+wget wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/04-clean-up.sh
+chmod +x 04-clean-up.sh
+sh 04-clean-up.sh
+```
 
+Or use the Terraform method to tear down the infrastructure
+
+### 3.4 Tear down the Infrastructure
+* Only use this if you want to use Terraform to tear down the deployment.
+* Alternativly use the 
+
+```
+terraform plan -destroy -out=terraform.tfplan \
+  -var "do_token=${DO_PAT}" \
+  -var "pub_key=$HOME/.ssh/id_rsa.pub" \
+  -var "pvt_key=$HOME/.ssh/id_rsa" \
+  -var "ssh_fingerprint=$DO_SSH_FINGERPRINT"
+  ```
+
+`terraform apply terraform.tfplan`
+
+```diff
+- Check the Digital Ocean page for any artifacts that were not deleted and delete them from the Digital Ocean page. -
+```
 
 *End of Section*
 
