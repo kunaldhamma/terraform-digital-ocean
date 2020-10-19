@@ -156,6 +156,7 @@ Reference URLs in this tutorial
 
 ## Clean Up Everything - 04-clean-up.sh
 * This script deletes all assets on Digital Ocean
+* Only run this when you are done with the tutorial and cluster
 * On `digital-ocean-droplet` run the following:
 ```
 cd ~/ && rm -R ~/clean-up
@@ -167,6 +168,9 @@ sh 04-clean-up.sh
 ```
 
 Check the Digital Ocean page for any artifacts that were not deleted and delete them from the Digital Ocean page.
+
+
+
 
 *End of Section*
 
