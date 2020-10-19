@@ -12,7 +12,33 @@ The Terraform takes 9 minutes and the post build tasks take 11 minutes for a tot
 * Opinions expressed here are solely my own and do not express the views or opinions of JPMorgan Chase.
 * Any third-party trademarks are the intellectual property of their respective owners and any mention herein is for referential purposes only. 
 
-## Pre-requisites
+## 1. Introduction
+
+### 1.1 Agenda
+* Use Terraform to perform the following 
+  * Deploy an Ubuntu jump host on Digital Ocean with SSH access
+  * Deploy a Kubernetes cluster on Digital Ocean 
+  * Install command line tools and utilities on the jump host
+    * kubectl
+    * doctl 
+    * kubectx
+    * kubens 
+    * Helm 3
+    * Octant 
+    * Locust
+  * Install applications and utilities on the custer
+    * metrics server 
+    * Online Boutique 
+    * Loki
+    * Chaos Mesh
+    * Kubernetes GraphQL
+    * Vertical Pod Autoscaler and Goldilocks 
+
+The final state should be a setup similar to the diagram below in about 20 minutes.
+
+
+
+## 2. Pre-requisites
 
 Follow the steps on this [website](https://www.digitalocean.com/community/tutorials/how-to-use-terraform-with-digitalocean)
 * Prerequisites
@@ -41,7 +67,7 @@ Check the version of Kubernetes
 * Ensure they are the same 
 * If not edit `microservices-metrics-chaos.tf` with the updated version.
 
-## Initialize Terraform
+## 3. Initialize Terraform
 
 `terraform init`
 
@@ -49,7 +75,7 @@ Check the version of Kubernetes
 
 `terraform init`
 
-## Build the Infrastructure ~9 minutes
+### 3.1 Build the Infrastructure ~9 minutes
 
 ```
 terraform plan \
@@ -67,15 +93,15 @@ terraform apply \
   -var "ssh_fingerprint=${DO_SSH_FINGERPRINT}"
 ```
 
-## Get the IP of digital-ocean-droplet
+### 3.2 Get the IP of digital-ocean-droplet
 * `doctl compute droplet list | awk 'FNR == 2 {print $3}'`
 
 
-## View state of infrastructure
+### 3.3 View state of infrastructure
 
 `terraform show terraform.tfstate`
 
-## Tear down the Infrastructure
+### 3.4 Tear down the Infrastructure
 
 ```
 terraform plan -destroy -out=terraform.tfplan \
@@ -91,10 +117,10 @@ terraform plan -destroy -out=terraform.tfplan \
 - This step does not delete the Load Balancers that are provisioned as part of the tutorial -
 ```
 
-## Preparing the Jump Host and Cluster ~11 minutes
+## 4. Preparing the Jump Host and Cluster ~11 minutes
 
 
-### 01-jump-host-prep.sh ~5 minutes
+### 4.1 01-jump-host-prep.sh ~5 minutes
 * This script prepares the jump host and installs some utilities
 * On `digital-ocean-droplet` run the following:
 ```
@@ -109,7 +135,7 @@ chmod +x 01-jump-host-prep.sh
 * The virtual machine will reboot at the end of this script.
 * Wait for the virtual machine to be available before continuing 
 
-### 02-cluster-prep.sh ~2 minutes
+### 4.2 02-cluster-prep.sh ~2 minutes
 * This script installs software onto the Kubernetes cluster
 * On `digital-ocean-droplet` run the following:
 ```
@@ -128,7 +154,7 @@ Update this line 'doctl auth init --access-token "xxx"' in `02-cluster-prep.sh` 
 * The virtual machine will reboot at the end of this script.
 * Wait for the virtual machine to be available before continuing 
 
-### 03-post-install-prep.sh ~4 minutes
+### 4.3 03-post-install-prep.sh ~4 minutes
 * This script applies post install tasks to the jump host
 * On `digital-ocean-droplet` run the following:
 ```
@@ -154,7 +180,7 @@ Reference URLs in this tutorial
 **********************************************************************************************
 ```
 
-## Clean Up Everything - 04-clean-up.sh
+## 4.4 Clean Up Everything - 04-clean-up.sh
 * This script deletes all assets on Digital Ocean
 * Only run this when you are done with the tutorial and cluster
 * On `digital-ocean-droplet` run the following:
@@ -169,17 +195,17 @@ sh 04-clean-up.sh
 
 Check the Digital Ocean page for any artifacts that were not deleted and delete them from the Digital Ocean page.
 
-## Setup and Testing
+## 5. Setup and Testing
 
-### Loki
+### 5.1 Loki
 
-#### Loki Setup
+#### 5.1.1 Loki Setup
 Username: `admin` 
 * Obtain the password: 
 ```
 kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
-#### Loki Dashboards 
+#### 5.1.2 Loki Dashboards 
 
 * Left side look for + sign...`Import`
 
@@ -192,7 +218,7 @@ kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.
 * Cluster Monitoring for Kubernetes
   * Import this dashboard: `1471`
 
-### GraphQL - Simple setup for converting Kubernetes API server into GraphQL API.
+### 5.2 GraphQL - Simple setup for converting Kubernetes API server into GraphQL API.
 
 Link : https://github.com/onelittlenightmusic/kubernetes-graphql
 
@@ -206,7 +232,7 @@ kubectl get pods --namespace ns-microservices-demo -o jsonpath='{range .items[*]
 Get pods with labels
 
 
-### Gremlin 
+### 5.3 Gremlin 
 
 
 
