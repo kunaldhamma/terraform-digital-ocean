@@ -18,14 +18,17 @@ kubectl create namespace ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 
 # Contour - Ingress
+# helm uninstall contour-release
 # helm upgrade --install contour-release stable/contour 
 #--set service.loadBalancerType=LoadBalancer \
 #--namespace=ns-contour \
 #--create-namespace
 
 # NGINX Ingress - Ingress 
+# helm uninstall nginx-release
 # helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-# helm install nginx-release ingress-nginx/ingress-nginx \
+# helm repo update
+# helm  upgrade install nginx-release ingress-nginx/ingress-nginx \
 #--namespace=ns-nginx \
 #--create-namespace
 
@@ -37,12 +40,16 @@ kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jam
 # Gremlin - Managed Chaos Engineering Platfom
 helm repo remove gremlin
 helm repo add gremlin https://helm.gremlin.com
+helm repo update
 
 # Loki -  Distributed Log Aggregation
 # Second External Load Balancer
 helm repo remove loki
 helm repo add loki https://grafana.github.io/loki/charts
 helm repo update
+
+helm uninstall loki-release
+
 helm upgrade \
 --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
 --namespace=ns-loki \
@@ -53,7 +60,10 @@ helm upgrade \
 #Link: https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier
 helm repo remove chaos-mesh 
 helm repo add chaos-mesh https://charts.chaos-mesh.org
+helm repo update
 curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
+
+helm uninstall chaos-mesh-release
 
 helm upgrade \
 --install chaos-mesh-release chaos-mesh/chaos-mesh \
@@ -69,6 +79,9 @@ kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --na
 # https://github.com/onelittlenightmusic/kubernetes-graphql
 helm repo remove kubernetes-graphql  
 helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
+helm repo update
+
+helm uninstall kubernetes-graphql-release
 
 helm upgrade \
 --install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql \
@@ -83,6 +96,9 @@ helm upgrade \
 # Link: https://learnk8s.io/setting-cpu-memory-limits-requests
 helm repo remove fairwinds-stable
 helm repo add fairwinds-stable https://charts.fairwinds.com/stable
+helm repo update
+
+helm uninstall vpa-release
 
 helm upgrade \
 --install vpa-release fairwinds-stable/vpa \
