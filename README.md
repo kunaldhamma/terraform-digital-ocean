@@ -190,8 +190,19 @@ kubectl get pods --namespace ns-microservices-demo -o jsonpath='{range .items[*]
 
 Get pods with labels
 
+### 5.3 Chaos Mesh
 
-### 5.3 Gremlin 
+New Experiment
+* Name: frontend-pod-failure
+* Namespace: ns-microservices-demo
+* Next
+* Affected Pods Preview: frontend-*
+* Pod Lifecycle
+* Action: Pod Failure
+* Finish
+
+
+### 5.4 Gremlin 
 
 #### Install Gremlin
 
@@ -269,7 +280,6 @@ helm install gremlin gremlin/gremlin \
   --set gremlin.teamID=$GREMLIN_TEAM_ID \
   --set gremlin.clusterID=$GREMLIN_CLUSTER_ID
 ```
-
 
 ## 6. Clean Up Everything 
 * This script deletes all assets on Digital Ocean

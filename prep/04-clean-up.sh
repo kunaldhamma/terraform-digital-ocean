@@ -4,6 +4,9 @@
 
 #!/bin/bash
 
+# Check that you are on jump host and not local host
+if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
+
 clear
 
 printf "%s\n" "Starting clean up on Digital Ocean...."
@@ -43,3 +46,8 @@ doctl compute droplet delete digital-ocean-droplet -f
 printf "%s\n" "digital-ocean-droplet deleted"
 
 printf "%s\n" "Done with clean up on Digital Ocean...."
+
+else
+    echo "You are not on the jump host : digital-ocean-droplet"
+    exit
+fi

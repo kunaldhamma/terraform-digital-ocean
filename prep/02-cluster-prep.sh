@@ -38,9 +38,9 @@ kubectl create namespace ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
 
 # Gremlin - Managed Chaos Engineering Platfom
-helm repo remove gremlin
-helm repo add gremlin https://helm.gremlin.com
-helm repo update
+# helm repo remove gremlin
+# helm repo add gremlin https://helm.gremlin.com
+# helm repo update
 
 # Loki -  Distributed Log Aggregation
 # Second External Load Balancer
