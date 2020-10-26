@@ -147,7 +147,7 @@ echo "02-cluster-prep.sh complete...rebooting"
 sleep 5s
 
 # Reboot Jump Host
-reboot
+sudo reboot
 
 else
     echo "You are not on the jump host : digital-ocean-droplet"
