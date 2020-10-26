@@ -141,7 +141,7 @@ Update this line 'doctl auth init --access-token "xxx"' in `02-cluster-prep.sh` 
 * On `digital-ocean-droplet` run the following:
 ```
 cd prep
-rm cluster-prep.sh
+rm 02-cluster-prep.sh
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/03-post-install-prep.sh
 chmod +x 03-post-install-prep.sh
 ./03-post-install-prep.sh
