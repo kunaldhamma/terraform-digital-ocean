@@ -16,7 +16,7 @@ kubectl config use-context do-sgp1-digital-ocean-cluster
 # metrics server - container resource metrics
 kubectl create namespace ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
-kubectl wait -n ns-metrics-server deploy k8s-app=metrics-server --for condition=Available --timeout=90s
+kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
 
 # Contour - Ingress
 # helm uninstall contour-release
@@ -39,7 +39,7 @@ kubectl wait -n ns-metrics-server deploy k8s-app=metrics-server --for condition=
 # First External Load Balancer
 kubectl create namespace ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
-kubectl wait -n ns-microservices-demo deploy app=frontend --for condition=Available --timeout=90s
+kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
 
 # Gremlin - Managed Chaos Engineering Platfom
 # helm repo remove gremlin
