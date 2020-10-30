@@ -57,8 +57,8 @@ helm uninstall loki-release
 helm upgrade \
 --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
 --namespace=ns-loki \
---create-namespace \
---wait
+--create-namespace 
+#--wait
 
 # Chaos Mesh - Chaos Engineering Platfom
 # Third External Load Balancer
@@ -74,8 +74,8 @@ helm upgrade \
 --install chaos-mesh-release chaos-mesh/chaos-mesh \
 --set dashboard.create=true \
 --namespace=ns-chaos-mesh \
---create-namespace \
---wait
+--create-namespace 
+#--wait
 # Cannot remember why i put this sleep in
 sleep 30s
 # Set Chaos Mesh to external LoadBalancer
@@ -95,8 +95,8 @@ helm upgrade \
 --set kubernetes-api-proxy.serviceAccount.clusterWide=true \
 --set graphql-mesh.ingress.enabled=true \
 --namespace=ns-graphql  \
---create-namespace \
---wait
+--create-namespace 
+#--wait
 
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
 # Fourth External Load Balancer
@@ -110,15 +110,15 @@ helm uninstall vpa-release
 helm upgrade \
 --install vpa-release fairwinds-stable/vpa \
 --namespace=ns-vpa \
---create-namespace \
---wait
+--create-namespace 
+#--wait
 
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
 --set dashboard.service.type=LoadBalancer \
 --namespace=ns-goldilocks \
---create-namespace \
---wait
+--create-namespace 
+#--wait
 
 kubectl label namespace default goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-node-lease goldilocks.fairwinds.com/enabled=true
