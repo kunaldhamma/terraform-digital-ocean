@@ -16,13 +16,15 @@ kubectl config use-context do-sgp1-digital-ocean-cluster
 # metrics server - container resource metrics
 kubectl create namespace ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
+kubectl wait -n ns-metrics-server deploy k8s-app=metrics-server --for condition=Available --timeout=90s
 
 # Contour - Ingress
 # helm uninstall contour-release
 # helm upgrade --install contour-release stable/contour 
 #--set service.loadBalancerType=LoadBalancer \
 #--namespace=ns-contour \
-#--create-namespace
+#--create-namespace \
+#--wait
 
 # NGINX Ingress - Ingress 
 # helm uninstall nginx-release
@@ -30,12 +32,14 @@ kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tool
 # helm repo update
 # helm  upgrade install nginx-release ingress-nginx/ingress-nginx \
 #--namespace=ns-nginx \
-#--create-namespace
+#--create-namespace \
+#--wait
 
 # Online Boutique - Sample Microservices Application
 # First External Load Balancer
 kubectl create namespace ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
+kubectl wait -n ns-microservices-demo deploy app=frontend --for condition=Available --timeout=90s
 
 # Gremlin - Managed Chaos Engineering Platfom
 # helm repo remove gremlin
@@ -53,7 +57,8 @@ helm uninstall loki-release
 helm upgrade \
 --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
 --namespace=ns-loki \
---create-namespace
+--create-namespace \
+--wait
 
 # Chaos Mesh - Chaos Engineering Platfom
 # Third External Load Balancer
@@ -69,7 +74,8 @@ helm upgrade \
 --install chaos-mesh-release chaos-mesh/chaos-mesh \
 --set dashboard.create=true \
 --namespace=ns-chaos-mesh \
---create-namespace
+--create-namespace \
+--wait
 # Cannot remember why i put this sleep in
 sleep 30s
 # Set Chaos Mesh to external LoadBalancer
@@ -89,7 +95,8 @@ helm upgrade \
 --set kubernetes-api-proxy.serviceAccount.clusterWide=true \
 --set graphql-mesh.ingress.enabled=true \
 --namespace=ns-graphql  \
---create-namespace
+--create-namespace \
+--wait
 
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
 # Fourth External Load Balancer
@@ -103,13 +110,15 @@ helm uninstall vpa-release
 helm upgrade \
 --install vpa-release fairwinds-stable/vpa \
 --namespace=ns-vpa \
---create-namespace
+--create-namespace \
+--wait
 
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
 --set dashboard.service.type=LoadBalancer \
 --namespace=ns-goldilocks \
---create-namespace
+--create-namespace \
+--wait
 
 kubectl label namespace default goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-node-lease goldilocks.fairwinds.com/enabled=true
