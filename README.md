@@ -192,15 +192,61 @@ Get pods with labels
 
 ### 5.3 Chaos Mesh
 
-New Experiment
-* Name: frontend-pod-failure
-* Namespace: ns-microservices-demo
-* Next
+Scale Deployment `frontend`  to just one container to service requests: 
+* `kubectl scale --replicas=1 deployment.apps/frontend`
+
+Create an Experiment to test resilience of `frontend` micro-service:
+
+In Chaos Mesh dashboard: 
+* New Experiment
+  * Name: `frontend-pod-failure`
+  * Namespace: `ns-microservices-demo`
+  * Label: `app:frontend`
+    * Next
+* Label Selectors: `app:frontend`
 * Affected Pods Preview: frontend-*
 * Pod Lifecycle
 * Action: Pod Failure
 * Finish
 
+Observe that the Online Boutique application is no longer rendering the landing page.
+
+Go to the Chaos Mesh dashboard and pause the `frontend-pod-failure` experiment.
+* Experiments
+* PODCHAOS
+* Next to your `frontend-pod-failure` experiment hit the  
+* Pause button
+
+Scale Deployment `frontend`  to three containers to service requests: 
+* `kubectl scale --replicas=3 deployment.apps/frontend`
+* Verify `frontend` is 3/3
+
+Restart the experiment
+
+
+kubectl scale --replicas=3 deployment.apps/frontend
+
+#### Network Chaos
+
+```
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: web-show-network-delay
+spec:
+  action: delay # the specific chaos action to inject
+  mode: one # the mode to run chaos action; supported modes are one/all/fixed/fixed-percent/random-max-percent
+  selector: # pods where to inject chaos actions
+    namespaces:
+      - default
+    labelSelectors:
+      "app": "web-show"  # the label of the pod for chaos injection
+  delay:
+    latency: "10ms"
+  duration: "30s" # duration for the injected chaos experiment
+  scheduler: # scheduler rules for the running time of the chaos experiments about pods.
+    cron: "@every 60s"
+```
 
 ### 5.4 Gremlin 
 
