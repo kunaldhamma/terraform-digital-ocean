@@ -191,6 +191,23 @@ kubectl get pods --namespace ns-microservices-demo -o jsonpath='{range .items[*]
 Get pods with labels
 
 ### 5.3 Chaos Mesh
+* Chaos Mesh is a Cloud Native Computing Foundation (CNCF) hosted project. 
+* It is a cloud-native Chaos Engineering platform that orchestrates chaos on Kubernetes environments. 
+* At the current stage, it has the following components:
+  * Chaos Operator: the core component for chaos orchestration. 
+    * Fully open sourced.
+  * Chaos Dashboard: a Web UI for managing, designing, monitoring Chaos Experiments; under development.
+
+Example Hypothesis
+* Given an application is running in active/active mode on Kubernetes
+* When there is a Kubernetes pod outage
+* Then there is no impact on application functionality
+
+Example Experiment
+* Validate the health of the application through the landing page URL
+* Disrupt the  `frontend` micro-service instances
+* Validate the health of the application through the landing page URL
+* Thus implying that the application functionality is not impacted
 
 Scale Deployment `frontend`  to just one container to service requests: 
 * `kubectl scale --replicas=1 deployment.apps/frontend`

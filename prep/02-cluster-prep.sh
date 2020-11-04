@@ -73,6 +73,7 @@ helm uninstall chaos-mesh-release
 helm upgrade \
 --install chaos-mesh-release chaos-mesh/chaos-mesh \
 --set dashboard.create=true \
+--set chaosDaemon.hostNetwork=true \
 --namespace=ns-chaos-mesh \
 --create-namespace 
 #--wait
