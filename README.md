@@ -199,7 +199,7 @@ Get pods with labels
   * Chaos Dashboard: a Web UI for managing, designing, monitoring Chaos Experiments; under development.
 
 Example Hypothesis
-* Given an application is running in active/active mode on Kubernetes
+* Given an application is highly available on Kubernetes
 * When there is a Kubernetes pod outage
 * Then there is no impact on application functionality
 
@@ -209,8 +209,9 @@ Example Experiment
 * Validate the health of the application through the landing page URL
 * Thus implying that the application functionality is not impacted
 
-Scale Deployment `frontend`  to just one container to service requests: 
-* `kubectl scale --replicas=1 deployment.apps/frontend`
+#### Experiment Part #1
+* Scale Deployment `frontend`  to just one container to service requests: 
+  * `kubectl scale --replicas=1 deployment.apps/frontend`
 
 Create an Experiment to test resilience of `frontend` micro-service:
 
@@ -228,22 +229,21 @@ In Chaos Mesh dashboard:
 
 Observe that the Online Boutique application is no longer rendering the landing page.
 
+#### Experiment Part #2
 Go to the Chaos Mesh dashboard and pause the `frontend-pod-failure` experiment.
 * Experiments
-* PODCHAOS
 * Next to your `frontend-pod-failure` experiment hit the  
 * Pause button
 
 Scale Deployment `frontend`  to three containers to service requests: 
 * `kubectl scale --replicas=3 deployment.apps/frontend`
-* Verify `frontend` is 3/3
+* In Octanct verify `frontend` is 3/3
 
 Restart the experiment
 
+Observe that the Online Boutique application is rendering the landing page.
 
-kubectl scale --replicas=3 deployment.apps/frontend
-
-#### Network Chaos
+##### Network Chaos
 
 ```
 apiVersion: chaos-mesh.org/v1alpha1
