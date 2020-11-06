@@ -243,7 +243,8 @@ Restart the experiment
 
 Observe that the Online Boutique application is rendering the landing page.
 
-##### Network Chaos
+<!--
+##### Network Chaos Example
 
 ```
 apiVersion: chaos-mesh.org/v1alpha1
@@ -264,6 +265,7 @@ spec:
   scheduler: # scheduler rules for the running time of the chaos experiments about pods.
     cron: "@every 60s"
 ```
+--->
 
 ### 5.4 Gremlin 
 
