@@ -14,11 +14,12 @@ doctl kubernetes cluster kubeconfig save digital-ocean-cluster
 kubectl config use-context do-sgp1-digital-ocean-cluster
 
 # metrics server - container resource metrics
+kubectl delete ns ns-metrics-server
 clear
+echo "Installing metrics-server..."
 echo "watch -n 1 kubectl get all -n ns-metrics-server"
 sleep 5
 
-kubectl delete ns ns-metrics-server
 kubectl create ns ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
@@ -42,15 +43,15 @@ kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Availabl
 
 # Online Boutique - Sample Microservices Application
 # First External Load Balancer
+kubectl delete ns ns-microservices-demo
 clear
+echo "Installing Micro-services Demo..."
 echo "watch -n 1 kubectl get all -n  ns-microservices-demo"
 sleep 5
 
-kubectl delete ns ns-microservices-demo
 kubectl create ns ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
-
 
 # Gremlin - Managed Chaos Engineering Platfom
 # helm repo remove gremlin
@@ -67,6 +68,7 @@ helm uninstall loki-release
 kubectl delete ns ns-loki
 
 clear
+echo "Installing Loki/Prometheus/Grafana..."
 echo "watch -n 1 kubectl get all -n   ns-loki"
 sleep 5
 
@@ -88,6 +90,7 @@ helm uninstall chaos-mesh-release
 kubectl delete ns ns-chaos-mesh
 
 clear
+echo "Installing Chaos Mesh..."
 echo "watch -n 1 kubectl get all -n  ns-chaos-mesh"
 sleep 5
 
@@ -116,6 +119,7 @@ helm uninstall kubernetes-graphql-release
 kubectl delete ns ns-graphql 
 
 clear
+echo "Installing GraphQL..."
 echo "watch -n 1 kubectl get all -n  ns-graphql"
 sleep 5
 
@@ -140,6 +144,7 @@ kubectl delete ns ns-vpa
 kubectl delete ns ns-goldilocks
 
 clear
+echo "Installing Vertical Pod Autoscaler..."
 echo "watch -n 1 kubectl get all -n  ns-vpa"
 sleep 5
 
@@ -150,6 +155,7 @@ helm upgrade \
 # --wait
 
 clear
+echo "Installing Vertical Pod Autoscaler UI..."
 echo "watch -n 1 kubectl get all -n  ns-goldilocks"
 sleep 5
 
