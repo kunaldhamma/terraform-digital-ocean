@@ -18,6 +18,7 @@ kubectl delete ns ns-metrics-server
 kubectl create ns ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
+# watch -n 1 kubectl get all -n ns-metrics-server
 
 # Contour - Ingress
 # helm uninstall contour-release
@@ -42,6 +43,7 @@ kubectl delete ns ns-microservices-demo
 kubectl create ns ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
+# watch -n 1 kubectl get all -n  ns-microservices-demo
 
 # Gremlin - Managed Chaos Engineering Platfom
 # helm repo remove gremlin
@@ -62,6 +64,8 @@ helm upgrade \
 --namespace=ns-loki \
 --create-namespace \
 --wait
+
+# watch -n 1 kubectl get all -n  ns-loki
 
 # Chaos Mesh - Chaos Engineering Platfom
 # Third External Load Balancer
@@ -87,6 +91,8 @@ helm upgrade \
 kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 sleep 30s
 
+# watch -n 1 kubectl get all -n  ns-chaos-mesh
+
 # Chaos Ingress
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 
@@ -108,6 +114,8 @@ helm upgrade \
 --create-namespace 
 # --wait
 
+# watch -n 1 kubectl get all -n  ns-graphql
+
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
 # Fourth External Load Balancer
 # Link: https://learnk8s.io/setting-cpu-memory-limits-requests
@@ -125,12 +133,16 @@ helm upgrade \
 --create-namespace 
 # --wait
 
+# watch -n 1 kubectl get all -n  ns-vpa
+
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
 --set dashboard.service.type=LoadBalancer \
 --namespace=ns-goldilocks \
 --create-namespace 
 # --wait
+
+# watch -n 1 kubectl get all -n  ns-goldilocks
 
 kubectl label namespace default goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-node-lease goldilocks.fairwinds.com/enabled=true
