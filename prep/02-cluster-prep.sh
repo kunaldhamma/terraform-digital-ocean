@@ -83,6 +83,9 @@ helm upgrade \
 # Set Chaos Mesh to external LoadBalancer
 # kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 
+# Chaos Ingress
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
+
 # GraphQL - Convert Kubernetes API server into GraphQL API
 # https://github.com/onelittlenightmusic/kubernetes-graphql
 helm repo remove kubernetes-graphql  
