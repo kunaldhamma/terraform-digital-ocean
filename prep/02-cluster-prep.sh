@@ -14,17 +14,18 @@ doctl kubernetes cluster kubeconfig save digital-ocean-cluster
 kubectl config use-context do-sgp1-digital-ocean-cluster
 
 # metrics server - container resource metrics
-kubectl create namespace ns-metrics-server
+kubectl delete ns ns-metrics-server
+kubectl create ns ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
 
 # Contour - Ingress
-helm uninstall contour-release
-helm upgrade --install contour-release stable/contour \
---set service.loadBalancerType=LoadBalancer \
---namespace=ns-contour \
---create-namespace \
---wait
+# helm uninstall contour-release
+# helm upgrade --install contour-release stable/contour \
+# --set service.loadBalancerType=LoadBalancer \
+# --namespace=ns-contour \
+# --create-namespace \
+# --wait
 
 # NGINX Ingress - Ingress 
 # helm uninstall nginx-release
@@ -37,7 +38,8 @@ helm upgrade --install contour-release stable/contour \
 
 # Online Boutique - Sample Microservices Application
 # First External Load Balancer
-kubectl create namespace ns-microservices-demo
+kubectl delete ns ns-microservices-demo
+kubectl create ns ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
 
@@ -53,6 +55,7 @@ helm repo add loki https://grafana.github.io/loki/charts
 helm repo update
 
 helm uninstall loki-release
+kubectl delete ns ns-loki
 
 helm upgrade \
 --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
@@ -69,6 +72,7 @@ helm repo update
 curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
 
 helm uninstall chaos-mesh-release
+kubectl delete ns ns-chaos-mesh
 
 helm upgrade \
 --install chaos-mesh-release chaos-mesh/chaos-mesh \
@@ -77,14 +81,14 @@ helm upgrade \
 --namespace=ns-chaos-mesh \
 --create-namespace \
 --wait
-# Cannot remember why i put this sleep in
-# sleep 30s
+
 
 # Set Chaos Mesh to external LoadBalancer
-# kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
+kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
+sleep 30s
 
 # Chaos Ingress
-kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
+# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 
 # GraphQL - Convert Kubernetes API server into GraphQL API
 # https://github.com/onelittlenightmusic/kubernetes-graphql
@@ -93,6 +97,7 @@ helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernete
 helm repo update
 
 helm uninstall kubernetes-graphql-release
+kubectl delete ns ns-graphql 
 
 helm upgrade \
 --install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql \
@@ -100,8 +105,8 @@ helm upgrade \
 --set kubernetes-api-proxy.serviceAccount.clusterWide=true \
 --set graphql-mesh.ingress.enabled=true \
 --namespace=ns-graphql  \
---create-namespace \
---wait
+--create-namespace 
+# --wait
 
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
 # Fourth External Load Balancer
@@ -111,19 +116,21 @@ helm repo add fairwinds-stable https://charts.fairwinds.com/stable
 helm repo update
 
 helm uninstall vpa-release
+kubectl delete ns ns-vpa
+kubectl delete ns ns-goldilocks
 
 helm upgrade \
 --install vpa-release fairwinds-stable/vpa \
 --namespace=ns-vpa \
---create-namespace \
---wait
+--create-namespace 
+# --wait
 
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
 --set dashboard.service.type=LoadBalancer \
 --namespace=ns-goldilocks \
---create-namespace \
---wait
+--create-namespace 
+# --wait
 
 kubectl label namespace default goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-node-lease goldilocks.fairwinds.com/enabled=true
