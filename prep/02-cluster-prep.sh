@@ -20,7 +20,7 @@ kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Availabl
 
 # Contour - Ingress
 # helm uninstall contour-release
-# helm upgrade --install contour-release stable/contour 
+# helm upgrade --install contour-release stable/contour \
 #--set service.loadBalancerType=LoadBalancer \
 #--namespace=ns-contour \
 #--create-namespace \
