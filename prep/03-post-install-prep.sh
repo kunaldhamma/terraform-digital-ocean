@@ -8,7 +8,7 @@
 if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
 
 # Wait for the Load Balancers to  provision
-# sleep 4m
+sleep 2m
 
 # Online Boutique - Export the Public IP address of Online Boutique 
 BOUTIQUE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
