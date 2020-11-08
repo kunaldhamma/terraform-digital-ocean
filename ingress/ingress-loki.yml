@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ing-loki
+  namespace: ns-loki
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /loki
+        backend:
+          serviceName: loki-release-grafana
+          servicePort: 80
+

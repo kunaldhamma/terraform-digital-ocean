@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ing-vpa
+  namespace: ns-vpa
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /vpa
+        backend:
+          serviceName: goldilocks-release-dashboard
+          servicePort: 80
+
