@@ -51,3 +51,5 @@ else
     echo "You are not on the jump host : digital-ocean-droplet"
     exit
 fi
+
+#End of Script
