@@ -14,11 +14,14 @@ doctl kubernetes cluster kubeconfig save digital-ocean-cluster
 kubectl config use-context do-sgp1-digital-ocean-cluster
 
 # metrics server - container resource metrics
+clear
+echo "watch -n 1 kubectl get all -n ns-metrics-server"
+sleep 5
+
 kubectl delete ns ns-metrics-server
 kubectl create ns ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
-# watch -n 1 kubectl get all -n ns-metrics-server
 
 # Contour - Ingress
 # helm uninstall contour-release
@@ -39,11 +42,15 @@ kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Availabl
 
 # Online Boutique - Sample Microservices Application
 # First External Load Balancer
+clear
+echo "watch -n 1 kubectl get all -n  ns-microservices-demo"
+sleep 5
+
 kubectl delete ns ns-microservices-demo
 kubectl create ns ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
-# watch -n 1 kubectl get all -n  ns-microservices-demo
+
 
 # Gremlin - Managed Chaos Engineering Platfom
 # helm repo remove gremlin
@@ -59,13 +66,15 @@ helm repo update
 helm uninstall loki-release
 kubectl delete ns ns-loki
 
+clear
+echo "watch -n 1 kubectl get all -n   ns-loki"
+sleep 5
+
 helm upgrade \
 --install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
 --namespace=ns-loki \
 --create-namespace \
 --wait
-
-# watch -n 1 kubectl get all -n  ns-loki
 
 # Chaos Mesh - Chaos Engineering Platfom
 # Third External Load Balancer
@@ -78,6 +87,10 @@ curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
 helm uninstall chaos-mesh-release
 kubectl delete ns ns-chaos-mesh
 
+clear
+echo "watch -n 1 kubectl get all -n  ns-chaos-mesh"
+sleep 5
+
 helm upgrade \
 --install chaos-mesh-release chaos-mesh/chaos-mesh \
 --set dashboard.create=true \
@@ -86,12 +99,9 @@ helm upgrade \
 --create-namespace \
 --wait
 
-
 # Set Chaos Mesh to external LoadBalancer
 kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 sleep 30s
-
-# watch -n 1 kubectl get all -n  ns-chaos-mesh
 
 # Chaos Ingress
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
@@ -105,6 +115,10 @@ helm repo update
 helm uninstall kubernetes-graphql-release
 kubectl delete ns ns-graphql 
 
+clear
+echo "watch -n 1 kubectl get all -n  ns-graphql"
+sleep 5
+
 helm upgrade \
 --install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql \
 --set kubernetes-api-proxy.serviceAccount.create=true \
@@ -113,8 +127,6 @@ helm upgrade \
 --namespace=ns-graphql  \
 --create-namespace 
 # --wait
-
-# watch -n 1 kubectl get all -n  ns-graphql
 
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
 # Fourth External Load Balancer
@@ -127,13 +139,19 @@ helm uninstall vpa-release
 kubectl delete ns ns-vpa
 kubectl delete ns ns-goldilocks
 
+clear
+echo "watch -n 1 kubectl get all -n  ns-vpa"
+sleep 5
+
 helm upgrade \
 --install vpa-release fairwinds-stable/vpa \
 --namespace=ns-vpa \
 --create-namespace 
 # --wait
 
-# watch -n 1 kubectl get all -n  ns-vpa
+clear
+echo "watch -n 1 kubectl get all -n  ns-goldilocks"
+sleep 5
 
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
