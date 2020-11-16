@@ -50,7 +50,13 @@ kubectl patch configmap/config-network \
 echo "Kourier installed and patched..."
 sleep 5
 
-kubectl get service kourier -n kourier-system
+KOURIER_IP=$(kubectl get service kourier -n kourier-system | awk 'FNR == 2 {print $3}' )
+export KOURIER_IP
+kubectl patch configmap -n knative-serving config-domain -p "{\"data\": {\"$KOURIER_IP.nip.io\": \"\"}}"
+
+
+## Hello World
+kn service create hello --image gcr.io/knative-samples/helloworld-go
 
 else
     echo "You are not on the jump host : digital-ocean-droplet"
