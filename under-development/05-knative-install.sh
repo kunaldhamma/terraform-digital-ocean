@@ -15,11 +15,12 @@ clear
 echo "Installing Knative CLI..."
 cd ~/ && rm -R ~/knative
 cd ~/ && mkdir knative && cd knative
-git clone https://github.com/knative/client.git
-cd knative/client/hack
-./build.sh -f
+wget https://storage.googleapis.com/knative-nightly/client/latest/kn-linux-amd64
+chmod +x kn-linux-amd64
+mv kn-linux-amd64 kn
 sudo cp kn /usr/local/bin
-echo "kn version"
+kn version
+echo "Knative CLI installed..."
 sleep 5
 
 # Knative Installation
