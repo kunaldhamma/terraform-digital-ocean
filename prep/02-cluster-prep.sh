@@ -24,6 +24,9 @@ kubectl create ns ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
 
+echo "Installed metrics-server..."
+sleep 5
+
 # Contour - Ingress
 # helm uninstall contour-release
 # helm upgrade --install contour-release stable/contour \
@@ -53,6 +56,10 @@ kubectl create ns ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
 
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+sleep 5
+
 # Gremlin - Managed Chaos Engineering Platfom
 # helm repo remove gremlin
 # helm repo add gremlin https://helm.gremlin.com
@@ -77,6 +84,12 @@ helm upgrade \
 --namespace=ns-loki \
 --create-namespace \
 --wait
+
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+echo "Installed Loki/Prometheus/Grafana..."
+sleep 5
+
 
 # Chaos Mesh - Chaos Engineering Platfom
 # Third External Load Balancer
@@ -109,6 +122,12 @@ sleep 30s
 # Chaos Ingress
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+echo "Installed Loki/Prometheus/Grafana..."
+echo "Installed Chaos Mesh..."
+sleep 5
+
 # GraphQL - Convert Kubernetes API server into GraphQL API
 # https://github.com/onelittlenightmusic/kubernetes-graphql
 helm repo remove kubernetes-graphql  
@@ -131,6 +150,13 @@ helm upgrade \
 --namespace=ns-graphql  \
 --create-namespace 
 # --wait
+
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+echo "Installed Loki/Prometheus/Grafana..."
+echo "Installed Chaos Mesh..."
+echo "Installed GraphQL..."
+sleep 5
 
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
 # Fourth External Load Balancer
@@ -184,6 +210,14 @@ kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+echo "Installed Loki/Prometheus/Grafana..."
+echo "Installed Chaos Mesh..."
+echo "Installed GraphQL..."
+echo "Installed Vertical Pod Autoscaler..."
+sleep 5
+
 # Update .bashrc
 cd ~
 # echo "source <(kubectl completion bash)" >>~/.bashrc
@@ -196,9 +230,14 @@ echo "export DROPLET_ADDR=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> ~/.bashrc
 echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
 echo "export OCTANT_LISTENER_ADDR=0.0.0.0:8900" >> ~/.bashrc
-
 clear
-echo " "
+
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+echo "Installed Loki/Prometheus/Grafana..."
+echo "Installed Chaos Mesh..."
+echo "Installed GraphQL..."
+echo "Installed Vertical Pod Autoscaler..."
 echo " "
 echo "02-cluster-prep.sh complete...rebooting"
 sleep 5s

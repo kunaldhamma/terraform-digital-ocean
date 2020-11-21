@@ -27,6 +27,7 @@ curl -LO https://github.com/digitalocean/doctl/releases/download/v1.46.0/doctl-1
 tar -xvf doctl-1.46.0-linux-amd64.tar.gz
 sudo mv ~/doctl/doctl /usr/local/bin
 clear
+echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
 sleep 5
 
@@ -39,6 +40,8 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s http
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 clear
+echo "Updated the Operating System and installed Python..."
+echo "Installed the Digital Ocean Command Line Interface..."
 echo "Installed the Kubernetes Command Line Interface..."
 sleep 5
 
@@ -49,6 +52,9 @@ sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
 sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
 sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 clear
+echo "Updated the Operating System and installed Python..."
+echo "Installed the Digital Ocean Command Line Interface..."
+echo "Installed the Kubernetes Command Line Interface..."
 echo "Installed kubectx and kubens..."
 sleep 5
 
@@ -65,6 +71,10 @@ tar -zxvf helm-v3.3.1-linux-amd64.tar.gz
 sudo mv linux-amd64/helm /usr/local/bin/helm
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 clear
+echo "Updated the Operating System and installed Python..."
+echo "Installed the Digital Ocean Command Line Interface..."
+echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed kubectx and kubens..."
 echo "Installed Helm 3..."
 sleep 5
 
@@ -77,6 +87,11 @@ curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.16.1/octant
 tar -xvf octant_0.16.1_Linux-64bit.tar.gz
 sudo mv ./octant_0.16.1_Linux-64bit/octant /usr/local/bin/octant
 clear
+echo "Updated the Operating System and installed Python..."
+echo "Installed the Digital Ocean Command Line Interface..."
+echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed kubectx and kubens..."
+echo "Installed Helm 3..."
 echo "Installed Octant..."
 sleep 5
 
@@ -85,10 +100,14 @@ clear
 echo "Installing Locust..."
 pip3 install locust
 clear
-echo "Installed Locust..."
 
-clear
-echo " "
+echo "Updated the Operating System and installed Python..."
+echo "Installed the Digital Ocean Command Line Interface..."
+echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed kubectx and kubens..."
+echo "Installed Helm 3..."
+echo "Installed Octant..."
+echo "Installed Locust..."
 echo " "
 echo "01-jump-host-prep.sh complete...rebooting"
 sleep 5s
