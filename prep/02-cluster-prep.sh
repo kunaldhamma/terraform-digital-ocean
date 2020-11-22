@@ -7,6 +7,12 @@
 # Check that you are on jump host and not local host
 if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
 
+# doctl - DigitalOcean command-line client authorize access to the Kubernetes Cluster
+doctl auth init --access-token "xxx"
+doctl kubernetes cluster kubeconfig save digital-ocean-cluster
+
+kubectl config use-context do-sgp1-digital-ocean-cluster
+
 # Clear any previous installations
 helm repo remove loki
 helm uninstall loki-release
@@ -27,12 +33,6 @@ kubectl delete ns ns-goldilocks
 
 # Stop the script on errors
 set -euo pipefail
-
-# doctl - DigitalOcean command-line client authorize access to the Kubernetes Cluster
-doctl auth init --access-token "xxx"
-doctl kubernetes cluster kubeconfig save digital-ocean-cluster
-
-kubectl config use-context do-sgp1-digital-ocean-cluster
 
 # metrics server - container resource metrics
 kubectl delete ns ns-metrics-server
