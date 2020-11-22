@@ -15,6 +15,7 @@ clear
 set -euo pipefail
 
 # Wait for the Load Balancers to  provision
+echo "Sleeping for two minutes to let Load Balancers settle..."
 sleep 2m
 
 # Online Boutique - Export the Public IP address of Online Boutique 
