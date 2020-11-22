@@ -14,6 +14,9 @@ doctl kubernetes cluster kubeconfig save digital-ocean-cluster
 kubectl config use-context do-sgp1-digital-ocean-cluster
 
 # Clear any previous installations
+kubectl delete ns ns-metrics-server
+kubectl delete ns ns-microservices-demo
+
 helm repo remove loki
 helm uninstall loki-release
 kubectl delete ns ns-loki
@@ -35,7 +38,6 @@ kubectl delete ns ns-goldilocks
 set -euo pipefail
 
 # metrics server - container resource metrics
-kubectl delete ns ns-metrics-server
 clear
 echo "Installing metrics-server..."
 echo "watch -n 1 kubectl get all -n ns-metrics-server"
@@ -67,7 +69,6 @@ sleep 5
 
 # Online Boutique - Sample Microservices Application
 # First External Load Balancer
-kubectl delete ns ns-microservices-demo
 clear
 echo "Installing Micro-services Demo..."
 echo "watch -n 1 kubectl get all -n  ns-microservices-demo"
