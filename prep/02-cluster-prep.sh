@@ -47,6 +47,7 @@ kubectl create ns ns-metrics-server
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
 
+clear
 echo "Installed metrics-server..."
 sleep 5
 
@@ -78,6 +79,7 @@ kubectl create ns ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
 
+clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 sleep 5
@@ -104,6 +106,7 @@ helm upgrade \
 --create-namespace \
 --wait
 
+clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
@@ -138,6 +141,7 @@ sleep 30s
 # Chaos Ingress
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 
+clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
@@ -163,6 +167,7 @@ helm upgrade \
 --create-namespace 
 # --wait
 
+clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
@@ -218,6 +223,7 @@ kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
+clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
@@ -240,6 +246,7 @@ echo "export OCTANT_DISABLE_OPEN_BROWSER=1" >> ~/.bashrc
 echo "export OCTANT_LISTENER_ADDR=0.0.0.0:8900" >> ~/.bashrc
 clear
 
+clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
