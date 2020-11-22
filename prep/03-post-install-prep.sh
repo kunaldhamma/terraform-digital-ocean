@@ -16,7 +16,6 @@ set -euo pipefail
 
 # Wait for the Load Balancers to  provision
 sleep 2m
-echo "watch -n1 doctl compute load-balancer list"
 
 # Online Boutique - Export the Public IP address of Online Boutique 
 BOUTIQUE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
