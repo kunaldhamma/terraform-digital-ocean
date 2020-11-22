@@ -4,11 +4,17 @@
 
 #!/bin/bash
 
-# Stop the script on errors
-set -euo pipefail
-
 # Check that you are on jump host and not local host
 if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
+
+# Clear any previous installations
+cd ~/ && rm -R ~/doctl
+cd ~/ && rm -R ~/kubectl
+cd ~/ && rm -R ~/helm-3
+cd ~/ && rm -R ~/octant
+
+# Stop the script on errors
+set -euo pipefail
 
 # Preparation of the Operating System
 clear
@@ -22,7 +28,6 @@ echo "Updated the Operating System and installed Python..."
 sleep 5
 
 # doctl - DigitalOcean command-line client
-cd ~/ && rm -R ~/doctl
 clear
 echo "Installing the Digital Ocean Command Line Interface..."
 cd ~/ && mkdir doctl && cd doctl
@@ -35,7 +40,6 @@ echo "Installed the Digital Ocean Command Line Interface..."
 sleep 5
 
 # kubectl - Kubernetes command-line client
-cd ~/ && rm -R ~/kubectl
 clear
 echo "Installing the Kubernetes Command Line Interface..."
 cd ~/ && mkdir kubectl && cd kubectl
@@ -65,7 +69,6 @@ sleep 5
 sudo git clone https://github.com/jonmosco/kube-ps1.git /opt/kube-ps1
 
 # Helm 3 - Kubernetes Application Package Manager
-cd ~/ && rm -R ~/helm-3
 clear
 echo "Installing Helm 3..."
 cd ~/ && mkdir helm-3 && cd helm-3
@@ -82,7 +85,6 @@ echo "Installed Helm 3..."
 sleep 5
 
 # Octant - Real-time Kubernetes Dashboard
-cd ~/ && rm -R ~/octant
 clear
 echo "Installing Octant..."
 cd ~/ && mkdir octant && cd octant

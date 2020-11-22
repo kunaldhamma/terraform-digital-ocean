@@ -4,11 +4,29 @@
 
 #!/bin/bash
 
-# Stop the script on errors
-set -euo pipefail
-
 # Check that you are on jump host and not local host
 if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
+
+# Clear any previous installations
+helm repo remove loki
+helm uninstall loki-release
+kubectl delete ns ns-loki
+
+helm repo remove chaos-mesh 
+helm uninstall chaos-mesh-release
+kubectl delete ns ns-chaos-mesh
+
+helm repo remove kubernetes-graphql  
+helm uninstall kubernetes-graphql-release
+kubectl delete ns ns-graphql 
+
+helm repo remove fairwinds-stable
+helm uninstall vpa-release
+kubectl delete ns ns-vpa
+kubectl delete ns ns-goldilocks
+
+# Stop the script on errors
+set -euo pipefail
 
 # doctl - DigitalOcean command-line client authorize access to the Kubernetes Cluster
 doctl auth init --access-token "xxx"
@@ -70,12 +88,9 @@ sleep 5
 
 # Loki -  Distributed Log Aggregation
 # Second External Load Balancer
-helm repo remove loki
+
 helm repo add loki https://grafana.github.io/loki/charts
 helm repo update
-
-helm uninstall loki-release
-kubectl delete ns ns-loki
 
 clear
 echo "Installing Loki/Prometheus/Grafana..."
@@ -97,13 +112,10 @@ sleep 5
 # Chaos Mesh - Chaos Engineering Platfom
 # Third External Load Balancer
 #Link: https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier
-helm repo remove chaos-mesh 
+
 helm repo add chaos-mesh https://charts.chaos-mesh.org
 helm repo update
 curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
-
-helm uninstall chaos-mesh-release
-kubectl delete ns ns-chaos-mesh
 
 clear
 echo "Installing Chaos Mesh..."
@@ -133,12 +145,8 @@ sleep 5
 
 # GraphQL - Convert Kubernetes API server into GraphQL API
 # https://github.com/onelittlenightmusic/kubernetes-graphql
-helm repo remove kubernetes-graphql  
 helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
 helm repo update
-
-helm uninstall kubernetes-graphql-release
-kubectl delete ns ns-graphql 
 
 clear
 echo "Installing GraphQL..."
@@ -164,13 +172,9 @@ sleep 5
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
 # Fourth External Load Balancer
 # Link: https://learnk8s.io/setting-cpu-memory-limits-requests
-helm repo remove fairwinds-stable
+
 helm repo add fairwinds-stable https://charts.fairwinds.com/stable
 helm repo update
-
-helm uninstall vpa-release
-kubectl delete ns ns-vpa
-kubectl delete ns ns-goldilocks
 
 clear
 echo "Installing Vertical Pod Autoscaler..."
