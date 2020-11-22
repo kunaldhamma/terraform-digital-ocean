@@ -81,6 +81,22 @@ chmod +x startup-locust.sh
 #echo Environment="OCTANT_ACCEPTED_HOSTS=$DROPLET_ADDR" >> octant.service
 #systemctl enable octant.service
 
+# Hashicorp Waypoint
+clear
+echo "Installing Waypoint..."
+cd ~/ && mkdir waypoint && cd waypoint
+
+curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+sudo apt-get update && sudo apt-get install waypoint
+
+git clone https://github.com/hashicorp/waypoint-examples.git
+cd waypoint-examples/docker/nodejs
+
+waypoint install --platform=kubernetes -accept-tos
+waypoint init
+#waypoint up
+
 # Clear browser history
 history -c
 
