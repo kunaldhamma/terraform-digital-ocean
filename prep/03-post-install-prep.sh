@@ -82,30 +82,30 @@ chmod +x startup-locust.sh
 #systemctl enable octant.service
 
 # Docker (required by Waypoint)
-sudo apt update -y
-sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
-sudo apt update -y
-apt-cache policy docker-ce
-sudo apt install docker-ce -y
-sudo systemctl status docker
-docker login --username=jamesbuckett 
+# sudo apt update -y
+# sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
+# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+# sudo apt update -y
+# apt-cache policy docker-ce
+# sudo apt install docker-ce -y
+# sudo systemctl status docker
+# docker login --username=jamesbuckett 
 
 # Hashicorp Waypoint
-clear
-echo "Installing Waypoint..."
-cd ~/ && mkdir waypoint && cd waypoint
+# clear
+# echo "Installing Waypoint..."
+# cd ~/ && mkdir waypoint && cd waypoint
 
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-sudo apt-get update && sudo apt-get install waypoint
+# curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+# sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+# sudo apt-get update && sudo apt-get install waypoint
 
-git clone https://github.com/hashicorp/waypoint-examples.git
-cd waypoint-examples/docker/nodejs
+# git clone https://github.com/hashicorp/waypoint-examples.git
+# cd waypoint-examples/docker/nodejs
 
-waypoint install --platform=kubernetes -accept-tos
-waypoint init
+# waypoint install --platform=kubernetes -accept-tos
+# waypoint init
 #waypoint up
 
 # Clear browser history
