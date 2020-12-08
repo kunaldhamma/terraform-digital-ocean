@@ -223,6 +223,12 @@ kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
+# Argo - Cloud Native Workflow
+kubectl create ns ns-argo
+kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo/stable/manifests/quick-start-postgres.yaml
+# kubectl wait -n ns-argo deploy frontend --for condition=Available --timeout=90s
+kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
+
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."

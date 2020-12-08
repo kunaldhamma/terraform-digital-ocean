@@ -105,6 +105,25 @@ clear
 echo "Installing Locust..."
 pip3 install locust
 clear
+echo "Updated the Operating System and installed Python..."
+echo "Installed the Digital Ocean Command Line Interface..."
+echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed kubectx and kubens..."
+echo "Installed Helm 3..."
+echo "Installed Octant..."
+echo "Installed Locust..."
+sleep 5
+
+# Argo CLI
+clear
+echo "Installing Argo..."
+cd ~/ && mkdir argo && cd argo
+curl -sLO https://github.com/argoproj/argo/releases/download/v2.12.0-rc4/argo-linux-amd64.gz
+gunzip argo-linux-amd64.gz
+chmod +x argo-linux-amd64
+mv ./argo-linux-amd64 /usr/local/bin/argo
+argo version
+sleep 5
 
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
@@ -113,6 +132,7 @@ echo "Installed kubectx and kubens..."
 echo "Installed Helm 3..."
 echo "Installed Octant..."
 echo "Installed Locust..."
+echo "Installed Argo..."
 echo " "
 echo "01-jump-host-prep.sh complete...rebooting"
 sleep 5s
