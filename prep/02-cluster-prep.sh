@@ -34,6 +34,8 @@ helm uninstall vpa-release
 kubectl delete ns ns-vpa
 kubectl delete ns ns-goldilocks
 
+helm dependencies update
+
 # Stop the script on errors
 set -euo pipefail
 
@@ -150,30 +152,30 @@ sleep 5
 
 # GraphQL - Convert Kubernetes API server into GraphQL API
 # https://github.com/onelittlenightmusic/kubernetes-graphql
-helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
-helm repo update
+# helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
+# helm repo update
 
-clear
-echo "Installing GraphQL..."
-echo "watch -n 1 kubectl get all -n  ns-graphql"
-sleep 5
+# clear
+# echo "Installing GraphQL..."
+# echo "watch -n 1 kubectl get all -n  ns-graphql"
+# sleep 5
 
-helm upgrade \
---install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql \
---set kubernetes-api-proxy.serviceAccount.create=true \
---set kubernetes-api-proxy.serviceAccount.clusterWide=true \
---set graphql-mesh.ingress.enabled=true \
---namespace=ns-graphql  \
---create-namespace 
-# --wait
+# helm upgrade \
+# --install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql \
+# --set kubernetes-api-proxy.serviceAccount.create=true \
+# --set kubernetes-api-proxy.serviceAccount.clusterWide=true \
+# --set graphql-mesh.ingress.enabled=true \
+# --namespace=ns-graphql  \
+# --create-namespace 
+# # --wait
 
-clear
-echo "Installed metrics-server..."
-echo "Installed Micro-services Demo..."
-echo "Installed Loki/Prometheus/Grafana..."
-echo "Installed Chaos Mesh..."
-echo "Installed GraphQL..."
-sleep 5
+# clear
+# echo "Installed metrics-server..."
+# echo "Installed Micro-services Demo..."
+# echo "Installed Loki/Prometheus/Grafana..."
+# echo "Installed Chaos Mesh..."
+# echo "Installed GraphQL..."
+# sleep 5
 
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
 # Fourth External Load Balancer
@@ -237,6 +239,17 @@ kubectl create ns ns-argo
 kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo/stable/manifests/quick-start-postgres.yaml
 # kubectl wait -n ns-argo deploy frontend --for condition=Available --timeout=90s
 kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
+
+#Temporal
+# helm install \
+# --set server.replicaCount=1 \
+# --set cassandra.config.cluster_size=1 \
+# --set prometheus.enabled=false \
+#  --set grafana.enabled=false \
+# --set elasticsearch.enabled=false \
+# --set kafka.enabled=false \
+# temporaltest . --timeout 15m
+
 
 clear
 echo "Installed metrics-server..."

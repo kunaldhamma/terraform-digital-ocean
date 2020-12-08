@@ -346,6 +346,15 @@ helm install gremlin gremlin/gremlin \
   --set gremlin.clusterID=$GREMLIN_CLUSTER_ID
 ```
 
+### 5.5 Argo
+
+```
+argo submit -n argo --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml
+argo list -n argo
+argo get -n argo @latest
+argo logs -n argo @latest
+```
+
 ## 6. Clean Up Everything 
 * This script deletes all assets on Digital Ocean
 * Only run this when you are done with the tutorial and cluster
