@@ -219,6 +219,15 @@ kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=t
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
 
+clear
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+echo "Installed Loki/Prometheus/Grafana..."
+echo "Installed Chaos Mesh..."
+echo "Installed GraphQL..."
+echo "Installed Vertical Pod Autoscaler..."
+sleep 5
+
 # Export the Public IP where Octant can be located
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
@@ -236,6 +245,7 @@ echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
 echo "Installed GraphQL..."
 echo "Installed Vertical Pod Autoscaler..."
+echo "Installed Argo..."
 sleep 5
 
 # Update .bashrc
@@ -259,6 +269,7 @@ echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
 echo "Installed GraphQL..."
 echo "Installed Vertical Pod Autoscaler..."
+echo "Installed Argo..."
 echo " "
 echo "02-cluster-prep.sh complete...rebooting"
 sleep 5s
