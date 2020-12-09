@@ -30,6 +30,7 @@ sleep 5
 # Check that you are on jump host and not local host
 if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
 
+clear
 printf "%s\n" "Starting clean up on Digital Ocean...."
 echo " "
 sleep 5s

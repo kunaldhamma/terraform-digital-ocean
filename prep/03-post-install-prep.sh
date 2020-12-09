@@ -63,7 +63,7 @@ echo "* Vertical Pod Autoscaler recommendations - Goldilocks is here: $GOLDILOCK
 echo "* Load Testing Tool - Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
 echo "* Locust values are Spawn:500 & URL: $BOUTIQUE_LB " >> /etc/motd                      
 echo "* Start Locust & Octant in another shell : sh /root/locust/startup-locust.sh " >> /etc/motd      
-echo "* Workflow Tool - Argo is here: $ARGO_LB.xip.io " >> /etc/motd
+echo "* Workflow Tool - Argo is here: $ARGO_LB:2746 " >> /etc/motd
 #echo "* Add this to .bashrc manually PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
