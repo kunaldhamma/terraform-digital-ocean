@@ -75,7 +75,7 @@ cd ~/ && mkdir helm-3 && cd helm-3
 wget https://get.helm.sh/helm-v3.3.1-linux-amd64.tar.gz
 tar -zxvf helm-v3.3.1-linux-amd64.tar.gz
 sudo mv linux-amd64/helm /usr/local/bin/helm
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo add stable https://charts.helm.sh/stable
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
