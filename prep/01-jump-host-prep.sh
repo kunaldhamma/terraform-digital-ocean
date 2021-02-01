@@ -72,8 +72,8 @@ sudo git clone https://github.com/jonmosco/kube-ps1.git /opt/kube-ps1
 clear
 echo "Installing Helm 3..."
 cd ~/ && mkdir helm-3 && cd helm-3
-wget https://get.helm.sh/helm-v3.3.1-linux-amd64.tar.gz
-tar -zxvf helm-v3.3.1-linux-amd64.tar.gz
+wget https://get.helm.sh/helm-v3.5.1-linux-amd64.tar.gz
+tar -zxvf helm-v3.5.1-linux-amd64.tar.gz
 sudo mv linux-amd64/helm /usr/local/bin/helm
 helm repo add stable https://charts.helm.sh/stable
 clear
