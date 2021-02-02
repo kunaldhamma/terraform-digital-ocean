@@ -17,7 +17,7 @@ kubectl config use-context do-sgp1-digital-ocean-cluster
 kubectl delete ns ns-metrics-server
 kubectl delete ns ns-microservices-demo
 
-helm repo remove loki
+helm repo remove grafana
 helm uninstall loki-release
 kubectl delete ns ns-loki
 
@@ -103,7 +103,7 @@ echo "watch -n 1 kubectl get all -n   ns-loki"
 sleep 5
 
 helm upgrade \
---install loki-release loki/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
+--install loki-release grafana/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
 --namespace=ns-loki \
 --create-namespace \
 --wait
