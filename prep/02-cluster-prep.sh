@@ -17,13 +17,13 @@ kubectl config use-context do-sgp1-digital-ocean-cluster
 kubectl delete ns ns-metrics-server
 kubectl delete ns ns-microservices-demo
 
-helm repo remove grafana
-helm uninstall loki-release
-kubectl delete ns ns-loki
+# helm repo remove grafana
+# helm uninstall loki-release
+# kubectl delete ns ns-loki
 
-helm repo remove chaos-mesh 
-helm uninstall chaos-mesh-release
-kubectl delete ns ns-chaos-mesh
+# helm repo remove chaos-mesh 
+# helm uninstall chaos-mesh-release
+# kubectl delete ns ns-chaos-mesh
 
 helm repo remove kubernetes-graphql  
 helm uninstall kubernetes-graphql-release
@@ -94,25 +94,25 @@ sleep 5
 # Loki -  Distributed Log Aggregation
 # Second External Load Balancer
 
-helm repo add grafana https://grafana.github.io/helm-charts
-helm repo update
+# helm repo add grafana https://grafana.github.io/helm-charts
+# helm repo update
 
-clear
-echo "Installing Loki/Prometheus/Grafana..."
-echo "watch -n 1 kubectl get all -n   ns-loki"
-sleep 5
+# clear
+# echo "Installing Loki/Prometheus/Grafana..."
+# echo "watch -n 1 kubectl get all -n   ns-loki"
+# sleep 5
 
-helm upgrade \
---install loki-release grafana/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
---namespace=ns-loki \
---create-namespace \
---wait
+# helm upgrade \
+# --install loki-release grafana/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
+# --namespace=ns-loki \
+# --create-namespace \
+# --wait
 
-clear
-echo "Installed metrics-server..."
-echo "Installed Micro-services Demo..."
-echo "Installed Loki/Prometheus/Grafana..."
-sleep 5
+# clear
+# echo "Installed metrics-server..."
+# echo "Installed Micro-services Demo..."
+# echo "Installed Loki/Prometheus/Grafana..."
+# sleep 5
 
 
 # Chaos Mesh - Chaos Engineering Platfom
