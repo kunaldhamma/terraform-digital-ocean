@@ -49,8 +49,8 @@ Install current version of Terraform
 ```
 cd ~/ && rm -R ~/terraform
 cd ~/ && mkdir terraform && cd terraform
-curl -O https://releases.hashicorp.com/terraform/0.13.0/terraform_0.13.0_linux_amd64.zip
-unzip terraform_0.13.0_linux_amd64.zip
+curl -O https://releases.hashicorp.com/terraform/0.14.7/terraform_0.14.7_linux_amd64.zip
+unzip terraform_0.14.7_linux_amd64.zip
 sudo mv ./terraform /usr/local/bin/terraform
 ```
 
@@ -63,7 +63,7 @@ Change into the directory.
 
 Check the version of Kubernetes
 * `doctl kubernetes options versions`
-* Check this version against `version = "1.18.3-do.0"`
+* Check this version against `version = "1.19.6-do.0"`
 * Ensure they are the same 
 * If not edit `microservices-metrics-chaos.tf` with the updated version.
 
