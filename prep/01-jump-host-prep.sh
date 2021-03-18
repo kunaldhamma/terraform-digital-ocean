@@ -31,8 +31,8 @@ sleep 5
 clear
 echo "Installing the Digital Ocean Command Line Interface..."
 cd ~/ && mkdir doctl && cd doctl
-curl -LO https://github.com/digitalocean/doctl/releases/download/v1.55.0/doctl-1.55.0-linux-amd64.tar.gz 
-tar -xvf doctl-1.55.0-linux-amd64.tar.gz
+curl -LO https://github.com/digitalocean/doctl/releases/download/v1.57.0/doctl-1.57.0-linux-amd64.tar.gz 
+tar -xvf doctl-1.57.0-linux-amd64.tar.gz
 sudo mv ~/doctl/doctl /usr/local/bin
 clear
 echo "Updated the Operating System and installed Python..."
