@@ -71,10 +71,6 @@ Check the version of Kubernetes
 
 `terraform init`
 
-`terraform 0.13upgrade .`
-
-`terraform init`
-
 ### 3.1 Build the Infrastructure ~9 minutes
 
 ```
