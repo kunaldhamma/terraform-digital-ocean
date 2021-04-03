@@ -88,9 +88,9 @@ sleep 5
 clear
 echo "Installing Octant..."
 cd ~/ && mkdir octant && cd octant
-curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.16.3/octant_0.16.3_Linux-64bit.tar.gz
-tar -xvf octant_0.16.3_Linux-64bit.tar.gz
-sudo mv ./octant_0.16.3_Linux-64bit/octant /usr/local/bin/octant
+curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.18.0/octant_0.18.0_Linux-64bit.tar.gz
+tar -xvf octant_0.18.0_Linux-64bit.tar.gz
+sudo mv ./octant_0.18.0_Linux-64bit/octant /usr/local/bin/octant
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
@@ -118,7 +118,7 @@ sleep 5
 clear
 echo "Installing Argo..."
 cd ~/ && mkdir argo && cd argo
-curl -sLO https://github.com/argoproj/argo/releases/download/v2.12.0-rc4/argo-linux-amd64.gz
+curl -sLO https://github.com/argoproj/argo/releases/download/v3.0.1/argo-linux-amd64.gz
 gunzip argo-linux-amd64.gz
 chmod +x argo-linux-amd64
 mv ./argo-linux-amd64 /usr/local/bin/argo

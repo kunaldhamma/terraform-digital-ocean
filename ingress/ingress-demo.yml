@@ -1,12 +1,12 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: ingress-demo
+  name: httpbin
 spec:
   rules:
-  - http:
+  - host: frontend.jamesbuckett.com
+    http:
       paths:
-      - path: /demo
-        backend:
+      - backend:
           serviceName: frontend
           servicePort: 80
