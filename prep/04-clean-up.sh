@@ -93,12 +93,12 @@ echo " "
 ################################################################################
 # Virtual Machine
 ################################################################################
-doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list --record-type A | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
 
 #doctl compute domain records delete --record-type A --record-name www --record-data do.jamesbuckett.com
 

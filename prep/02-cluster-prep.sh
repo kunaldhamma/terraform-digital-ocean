@@ -20,6 +20,7 @@ kubectl config use-context do-sgp1-digital-ocean-cluster
 ################################################################################
 kubectl delete ns ns-metrics-server
 kubectl delete ns ns-microservices-demo
+kubectl delete ns projectcontour
 
 helm repo remove grafana
 helm uninstall loki-release
@@ -37,6 +38,8 @@ helm repo remove fairwinds-stable
 helm uninstall vpa-release
 kubectl delete ns ns-vpa
 kubectl delete ns ns-goldilocks
+
+kubectl delete ns ns-argo
 
 helm dependencies update
 
