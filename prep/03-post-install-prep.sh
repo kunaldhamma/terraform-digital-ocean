@@ -12,7 +12,9 @@ cd ~/ && rm -R ~/locust
 clear
 
 # Stop the script on errors
-set -euo pipefail
+### Contour Testing ###
+### comment out command below
+# set -euo pipefail
 
 # Wait for the Load Balancers to  provision
 echo "Sleeping for two minutes to let Load Balancers settle..."
