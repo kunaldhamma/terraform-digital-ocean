@@ -94,25 +94,25 @@ sleep 5
 # Loki -  Distributed Log Aggregation
 # Second External Load Balancer
 
-# helm repo add grafana https://grafana.github.io/helm-charts
-# helm repo update
+helm repo add grafana https://grafana.github.io/helm-charts
+helm repo update
 
-# clear
-# echo "Installing Loki/Prometheus/Grafana..."
-# echo "watch -n 1 kubectl get all -n   ns-loki"
-# sleep 5
+clear
+echo "Installing Loki/Prometheus/Grafana..."
+echo "watch -n 1 kubectl get all -n   ns-loki"
+sleep 5
 
-# helm upgrade \
-# --install loki-release grafana/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
-# --namespace=ns-loki \
-# --create-namespace \
-# --wait
+helm upgrade \
+--install loki-release grafana/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
+--namespace=ns-loki \
+--create-namespace \
+--wait
 
-# clear
-# echo "Installed metrics-server..."
-# echo "Installed Micro-services Demo..."
-# echo "Installed Loki/Prometheus/Grafana..."
-# sleep 5
+clear
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+echo "Installed Loki/Prometheus/Grafana..."
+sleep 5
 
 
 # Chaos Mesh - Chaos Engineering Platfom
@@ -214,7 +214,7 @@ kubectl label namespace kube-node-lease goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-public goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-system goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-chaos-mesh goldilocks.fairwinds.com/enabled=true
-# kubectl label namespace ns-loki  goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-loki  goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-metrics-server goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
@@ -237,7 +237,7 @@ export DROPLET_ADDR
 # Argo - Cloud Native Workflow
 kubectl create ns ns-argo
 kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo/stable/manifests/quick-start-postgres.yaml
-# kubectl wait -n ns-argo deploy frontend --for condition=Available --timeout=90s
+kubectl wait -n ns-argo deploy frontend --for condition=Available --timeout=90s
 kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
 
 #Temporal
