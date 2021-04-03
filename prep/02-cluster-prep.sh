@@ -237,7 +237,7 @@ export DROPLET_ADDR
 # Argo - Cloud Native Workflow
 kubectl create ns ns-argo
 kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo/stable/manifests/quick-start-postgres.yaml
-kubectl wait -n ns-argo deploy frontend --for condition=Available --timeout=90s
+kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
 kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
 
 #Temporal
