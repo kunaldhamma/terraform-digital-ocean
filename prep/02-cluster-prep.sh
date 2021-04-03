@@ -55,7 +55,8 @@ echo "watch -n 1 kubectl get all -n ns-metrics-server"
 sleep 5
 
 kubectl create ns ns-metrics-server
-kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
+kubectl apply -n ns-metrics-server -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
 
 clear
@@ -85,7 +86,7 @@ echo "watch -n 1 kubectl get all -n  ns-microservices-demo"
 sleep 5
 
 kubectl create ns ns-microservices-demo
-kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/complete-demo.yml"
+kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/complete-demo.yaml"
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-demo.yml"
 

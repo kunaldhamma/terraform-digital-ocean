@@ -93,12 +93,14 @@ echo " "
 ################################################################################
 # Virtual Machine
 ################################################################################
-doctl compute domain records delete Name demo
-doctl compute domain records delete Name loki
-doctl compute domain records delete Name vpa
-doctl compute domain records delete Name chaos
-doctl compute domain records delete Name agro
-doctl compute domain records delete --record-type A --record-name www --record-data do.jamesbuckett.com
+doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+doctl compute domain records list | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+
+#doctl compute domain records delete --record-type A --record-name www --record-data do.jamesbuckett.com
 
 printf "%s\n" "Done with clean up on Digital Ocean...."
 echo " "
