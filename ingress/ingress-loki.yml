@@ -5,10 +5,9 @@ metadata:
   namespace: ns-loki
 spec:
   rules:
-  - http:
+  - host: loki.jamesbuckett.com
+    http:
       paths:
-      - path: /loki
-        backend:
+      - backend:
           serviceName: loki-release-grafana
           servicePort: 80
-

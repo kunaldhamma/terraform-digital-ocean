@@ -1,10 +1,11 @@
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  name: httpbin
+  name: ing-demo
+  namespace: ns-microservices-demo
 spec:
   rules:
-  - host: frontend.jamesbuckett.com
+  - host: demo.jamesbuckett.com
     http:
       paths:
       - backend:

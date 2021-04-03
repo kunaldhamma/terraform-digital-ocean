@@ -5,10 +5,9 @@ metadata:
   namespace: ns-chaos-mesh
 spec:
   rules:
-  - http:
+  - host: chaosmesh.jamesbuckett.com
+    http:
       paths:
-      - path: /chaos
-        backend:
+      - backend:
           serviceName: chaos-dashboard
           servicePort: 2333
-

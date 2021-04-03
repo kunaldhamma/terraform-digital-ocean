@@ -5,10 +5,9 @@ metadata:
   namespace: ns-vpa
 spec:
   rules:
-  - http:
+  - host: goldilocks.jamesbuckett.com
+    http:
       paths:
-      - path: /vpa
-        backend:
+      - backend:
           serviceName: goldilocks-release-dashboard
           servicePort: 80
-
