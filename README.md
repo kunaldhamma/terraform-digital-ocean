@@ -49,8 +49,8 @@ Install current version of Terraform
 ```
 cd ~/ && rm -R ~/terraform
 cd ~/ && mkdir terraform && cd terraform
-curl -O https://releases.hashicorp.com/terraform/0.14.8/terraform_0.14.8_linux_amd64.zip
-unzip terraform_0.14.8_linux_amd64.zip
+curl -O https://releases.hashicorp.com/terraform/0.14.9/terraform_0.14.9_linux_amd64.zip
+unzip terraform_0.14.9_linux_amd64.zip
 sudo mv ./terraform /usr/local/bin/terraform
 ```
 
