@@ -32,10 +32,21 @@ sleep 2m
 ################################################################################
 # Contour Ingress - Export the Public IP address of Contour Ingress 
 ################################################################################
+
+# The host names, like "demo.jamesbuckett.com" are CNAME records 
+# to the "do.jamesbuckett.com" A record  
+
+
 INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
 export INGRESS_LB
 
 doctl compute domain records create --record-type A --record-name www --record-data $INGRESS_LB do.jamesbuckett.com
+doctl compute domain records create --record-type CNAME --record-name www --record-data demo do.jamesbuckett.com
+doctl compute domain records create --record-type CNAME --record-name www --record-data loki do.jamesbuckett.com
+doctl compute domain records create --record-type CNAME --record-name www --record-data vpa do.jamesbuckett.com
+doctl compute domain records create --record-type CNAME --record-name www --record-data chaos do.jamesbuckett.com
+doctl compute domain records create --record-type CNAME --record-name www --record-data argo do.jamesbuckett.com
+
 
 ################################################################################
 # Online Boutique - Export the Public IP address of Online Boutique 
@@ -93,10 +104,10 @@ cp .bashrc .bashrc-original
 ################################################################################
 echo "Reference URLs in this tutorial" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
-echo "* Real-time Kubernetes Dashboard - Octant is here:  $DROPLET_ADDR:8900 " >> /etc/motd
+echo "* Real-time Kubernetes Dashboard - Octant is here: $DROPLET_ADDR:8900 " >> /etc/motd
 echo "* Sample Microservices Application - Online Boutique is here: demo.jamesbuckett.com " >> /etc/motd
-echo "* Chaos Engineering Platfom - Chaos Mesh is here: chaosmesh.jamesbuckett.com " >> /etc/motd
-echo "* Vertical Pod Autoscaler recommendations - Goldilocks is here: goldilocks.jamesbuckett.com " >> /etc/motd
+echo "* Chaos Engineering Platfom - Chaos Mesh is here: chaos.jamesbuckett.com " >> /etc/motd
+echo "* Vertical Pod Autoscaler recommendations - Goldilocks is here: vpa.jamesbuckett.com " >> /etc/motd
 echo "* Workflow Tool - Argo is here: argo.jamesbuckett.com " >> /etc/motd
 echo "* Distributed Log Aggregation - Loki is here: loki.jamesbuckett.com " >> /etc/motd
 echo "* Loki User:  admin   Loki Password: $LOKI_PWD" >> /etc/motd
