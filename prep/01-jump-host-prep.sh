@@ -4,19 +4,27 @@
 
 #!/bin/bash
 
+################################################################################
 # Check that you are on jump host and not local host
+################################################################################
 if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
 
+################################################################################
 # Clear any previous installations
+################################################################################
 cd ~/ && rm -R ~/doctl
 cd ~/ && rm -R ~/kubectl
 cd ~/ && rm -R ~/helm-3
 cd ~/ && rm -R ~/octant
 
+################################################################################
 # Stop the script on errors
+################################################################################
 set -euo pipefail
 
+################################################################################
 # Preparation of the Operating System
+################################################################################
 clear
 echo "Updating the Operating System and installing Python..."
 sudo apt-get update
@@ -27,7 +35,9 @@ clear
 echo "Updated the Operating System and installed Python..."
 sleep 5
 
+################################################################################
 # doctl - DigitalOcean command-line client
+################################################################################
 clear
 echo "Installing the Digital Ocean Command Line Interface..."
 cd ~/ && mkdir doctl && cd doctl
@@ -39,7 +49,9 @@ echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
 sleep 5
 
+################################################################################
 # kubectl - Kubernetes command-line client
+################################################################################
 clear
 echo "Installing the Kubernetes Command Line Interface..."
 cd ~/ && mkdir kubectl && cd kubectl
@@ -52,7 +64,9 @@ echo "Installed the Digital Ocean Command Line Interface..."
 echo "Installed the Kubernetes Command Line Interface..."
 sleep 5
 
+################################################################################
 # kubectx & kubens - Kubernetes Namespace and Cluster helpers
+################################################################################
 clear
 echo "Installing kubectx and kubens..."
 sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
@@ -65,10 +79,14 @@ echo "Installed the Kubernetes Command Line Interface..."
 echo "Installed kubectx and kubens..."
 sleep 5
 
+################################################################################
 # kube-ps1 - Kubernetes prompt 
+################################################################################
 sudo git clone https://github.com/jonmosco/kube-ps1.git /opt/kube-ps1
 
+################################################################################
 # Helm 3 - Kubernetes Application Package Manager
+################################################################################
 clear
 echo "Installing Helm 3..."
 cd ~/ && mkdir helm-3 && cd helm-3
@@ -84,7 +102,9 @@ echo "Installed kubectx and kubens..."
 echo "Installed Helm 3..."
 sleep 5
 
+################################################################################
 # Octant - Real-time Kubernetes Dashboard
+################################################################################
 clear
 echo "Installing Octant..."
 cd ~/ && mkdir octant && cd octant
@@ -100,7 +120,9 @@ echo "Installed Helm 3..."
 echo "Installed Octant..."
 sleep 5
 
+################################################################################
 # Locust - Load Testing Tool
+################################################################################
 clear
 echo "Installing Locust..."
 pip3 install locust
@@ -114,7 +136,9 @@ echo "Installed Octant..."
 echo "Installed Locust..."
 sleep 5
 
+################################################################################
 # Argo CLI
+################################################################################
 clear
 echo "Installing Argo..."
 cd ~/ && mkdir argo && cd argo

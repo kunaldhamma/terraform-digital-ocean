@@ -7,13 +7,17 @@
 # Check that you are on jump host and not local host
 if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
 
+################################################################################
 # doctl - DigitalOcean command-line client authorize access to the Kubernetes Cluster
+################################################################################
 doctl auth init --access-token "xxx"
 doctl kubernetes cluster kubeconfig save digital-ocean-cluster
 
 kubectl config use-context do-sgp1-digital-ocean-cluster
 
+################################################################################
 # Clear any previous installations
+################################################################################
 kubectl delete ns ns-metrics-server
 kubectl delete ns ns-microservices-demo
 
@@ -36,10 +40,15 @@ kubectl delete ns ns-goldilocks
 
 helm dependencies update
 
+################################################################################
 # Stop the script on errors
+################################################################################
 set -euo pipefail
 
+################################################################################
 # metrics server - container resource metrics
+################################################################################
+
 clear
 echo "Installing metrics-server..."
 echo "watch -n 1 kubectl get all -n ns-metrics-server"
@@ -53,9 +62,10 @@ clear
 echo "Installed metrics-server..."
 sleep 5
 
+################################################################################
 # Contour - Ingress
-### Contour Testing ###
-### Added line below
+################################################################################
+
 kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
 
 # helm uninstall contour-release
@@ -65,38 +75,35 @@ kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
 # --create-namespace \
 # --wait
 
-# NGINX Ingress - Ingress 
-# helm uninstall nginx-release
-# helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-# helm repo update
-# helm  upgrade install nginx-release ingress-nginx/ingress-nginx \
-#--namespace=ns-nginx \
-#--create-namespace \
-#--wait
-
+################################################################################
 # Online Boutique - Sample Microservices Application
-# First External Load Balancer
+################################################################################
+
 clear
 echo "Installing Micro-services Demo..."
 echo "watch -n 1 kubectl get all -n  ns-microservices-demo"
 sleep 5
 
 kubectl create ns ns-microservices-demo
-kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/master/complete-demo.yaml"
+kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/complete-demo.yml"
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-demo.yml"
 
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 sleep 5
 
+################################################################################
 # Gremlin - Managed Chaos Engineering Platfom
 # helm repo remove gremlin
 # helm repo add gremlin https://helm.gremlin.com
 # helm repo update
+################################################################################
 
+################################################################################
 # Loki -  Distributed Log Aggregation
-# Second External Load Balancer
+################################################################################
 
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
@@ -112,16 +119,19 @@ helm upgrade \
 --create-namespace \
 --wait
 
+# Loki Ingress
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-loki.yml"
+
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
 sleep 5
 
-
+################################################################################
 # Chaos Mesh - Chaos Engineering Platfom
-# Third External Load Balancer
-#Link: https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier
+# Link: https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier
+################################################################################
 
 helm repo add chaos-mesh https://charts.chaos-mesh.org
 helm repo update
@@ -140,14 +150,10 @@ helm upgrade \
 --create-namespace \
 --wait
 
-### Contour Testing ###
-### Comment Lines Below
-# Set Chaos Mesh to external LoadBalancer
-# kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
-# sleep 30s
+# Chaos Mesh Ingress
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 
-# Chaos Ingress
-# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
+# kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 
 clear
 echo "Installed metrics-server..."
@@ -156,6 +162,7 @@ echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
 sleep 5
 
+################################################################################
 # GraphQL - Convert Kubernetes API server into GraphQL API
 # https://github.com/onelittlenightmusic/kubernetes-graphql
 # helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
@@ -182,10 +189,12 @@ sleep 5
 # echo "Installed Chaos Mesh..."
 # echo "Installed GraphQL..."
 # sleep 5
+################################################################################
 
+################################################################################
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
-# Fourth External Load Balancer
 # Link: https://learnk8s.io/setting-cpu-memory-limits-requests
+################################################################################
 
 helm repo add fairwinds-stable https://charts.fairwinds.com/stable
 helm repo update
@@ -199,21 +208,22 @@ helm upgrade \
 --install vpa-release fairwinds-stable/vpa \
 --namespace=ns-vpa \
 --create-namespace 
-# --wait
+--wait
 
 clear
 echo "Installing Vertical Pod Autoscaler UI..."
 echo "watch -n 1 kubectl get all -n  ns-goldilocks"
 sleep 5
 
-### Contour Testing ###
-### comment out --set dashboard.service.type=LoadBalancer \
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
-#--set dashboard.service.type=LoadBalancer \
+--set dashboard.service.type=ClusterIP \
 --namespace=ns-goldilocks \
 --create-namespace 
-# --wait
+--wait
+
+# VPA Ingress
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-vpa.yml"
 
 # watch -n 1 kubectl get all -n  ns-goldilocks
 
@@ -238,28 +248,23 @@ echo "Installed GraphQL..."
 echo "Installed Vertical Pod Autoscaler..."
 sleep 5
 
+################################################################################
 # Export the Public IP where Octant can be located
+################################################################################
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
-### Contour Testing ###
-### comment out kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
+################################################################################
 # Argo - Cloud Native Workflow
+################################################################################
 kubectl create ns ns-argo
 kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/stable/manifests/quick-start-postgres.yaml
-# Check this value and fix
-#kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
+kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
 #kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
 
-#Temporal
-# helm install \
-# --set server.replicaCount=1 \
-# --set cassandra.config.cluster_size=1 \
-# --set prometheus.enabled=false \
-#  --set grafana.enabled=false \
-# --set elasticsearch.enabled=false \
-# --set kafka.enabled=false \
-# temporaltest . --timeout 15m
+# Argo Ingress
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-argo.yml"
+
 
 clear
 echo "Installed metrics-server..."
@@ -271,7 +276,9 @@ echo "Installed Vertical Pod Autoscaler..."
 echo "Installed Argo..."
 sleep 5
 
+################################################################################
 # Update .bashrc
+################################################################################
 cd ~
 # echo "source <(kubectl completion bash)" >>~/.bashrc
 echo "alias cls='clear'" >> ~/.bashrc
@@ -297,7 +304,9 @@ echo " "
 echo "02-cluster-prep.sh complete...rebooting"
 sleep 5s
 
+################################################################################
 # Reboot Jump Host
+################################################################################
 sudo reboot
 
 else
@@ -305,4 +314,4 @@ else
     exit
 fi
 
-#End of Script
+# End of Script
