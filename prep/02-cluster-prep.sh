@@ -17,13 +17,13 @@ kubectl config use-context do-sgp1-digital-ocean-cluster
 kubectl delete ns ns-metrics-server
 kubectl delete ns ns-microservices-demo
 
-# helm repo remove grafana
-# helm uninstall loki-release
-# kubectl delete ns ns-loki
+helm repo remove grafana
+helm uninstall loki-release
+kubectl delete ns ns-loki
 
-# helm repo remove chaos-mesh 
-# helm uninstall chaos-mesh-release
-# kubectl delete ns ns-chaos-mesh
+helm repo remove chaos-mesh 
+helm uninstall chaos-mesh-release
+kubectl delete ns ns-chaos-mesh
 
 helm repo remove kubernetes-graphql  
 helm uninstall kubernetes-graphql-release
@@ -54,6 +54,10 @@ echo "Installed metrics-server..."
 sleep 5
 
 # Contour - Ingress
+### Contour Testing ###
+### Added line below
+kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
+
 # helm uninstall contour-release
 # helm upgrade --install contour-release stable/contour \
 # --set service.loadBalancerType=LoadBalancer \
@@ -136,9 +140,11 @@ helm upgrade \
 --create-namespace \
 --wait
 
+### Contour Testing ###
+### Comment Lines Below
 # Set Chaos Mesh to external LoadBalancer
-kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
-sleep 30s
+# kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
+# sleep 30s
 
 # Chaos Ingress
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
@@ -200,9 +206,11 @@ echo "Installing Vertical Pod Autoscaler UI..."
 echo "watch -n 1 kubectl get all -n  ns-goldilocks"
 sleep 5
 
+### Contour Testing ###
+### comment out --set dashboard.service.type=LoadBalancer \
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
---set dashboard.service.type=LoadBalancer \
+#--set dashboard.service.type=LoadBalancer \
 --namespace=ns-goldilocks \
 --create-namespace 
 # --wait
@@ -234,11 +242,14 @@ sleep 5
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
+### Contour Testing ###
+### comment out kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
 # Argo - Cloud Native Workflow
 kubectl create ns ns-argo
-kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo/stable/manifests/quick-start-postgres.yaml
-kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
-kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
+kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/stable/manifests/quick-start-postgres.yaml
+# Check this value and fix
+#kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
+#kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
 
 #Temporal
 # helm install \
@@ -249,7 +260,6 @@ kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
 # --set elasticsearch.enabled=false \
 # --set kafka.enabled=false \
 # temporaltest . --timeout 15m
-
 
 clear
 echo "Installed metrics-server..."

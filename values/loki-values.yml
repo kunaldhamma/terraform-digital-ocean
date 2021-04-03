@@ -5,7 +5,7 @@
 loki:
   enabled: true
   image:
-    tag: 2.0.0
+    tag: 2.2.0
 
 promtail:
   enabled: true
@@ -21,13 +21,16 @@ grafana:
     datasources:
       enabled: true
   image:
-    tag: 7.3.1
+    tag: 7.5.2
   service:
-    type: LoadBalancer
+### Contour Testing ###
+### Added line below from type: LoadBalancer to ClusterIP
+    #type: LoadBalancer    
+    type: ClusterIP
   
 prometheus:
   enabled: true
   alertmanager.persistentVolume.enabled: false
   server.persistentVolume.enabled: false
   image:
-    tag: 2.22.0
+    tag: 2.25.2
