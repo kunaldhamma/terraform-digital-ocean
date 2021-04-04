@@ -167,6 +167,8 @@ helm upgrade \
 
 # Chaos Mesh Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
+
+# If external Load Balancer is required use this command below
 # kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 
 clear
@@ -176,34 +178,6 @@ echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
 sleep 5
 
-################################################################################
-# GraphQL - Convert Kubernetes API server into GraphQL API
-# https://github.com/onelittlenightmusic/kubernetes-graphql
-# helm repo add kubernetes-graphql https://onelittlenightmusic.github.io/kubernetes-graphql/helm-chart
-# helm repo update
-
-# clear
-# echo "Installing GraphQL..."
-# echo "watch -n 1 kubectl get all -n  ns-graphql"
-# sleep 5
-
-# helm upgrade \
-# --install kubernetes-graphql-release kubernetes-graphql/kubernetes-graphql \
-# --set kubernetes-api-proxy.serviceAccount.create=true \
-# --set kubernetes-api-proxy.serviceAccount.clusterWide=true \
-# --set graphql-mesh.ingress.enabled=true \
-# --namespace=ns-graphql  \
-# --create-namespace 
-# # --wait
-
-# clear
-# echo "Installed metrics-server..."
-# echo "Installed Micro-services Demo..."
-# echo "Installed Loki/Prometheus/Grafana..."
-# echo "Installed Chaos Mesh..."
-# echo "Installed GraphQL..."
-# sleep 5
-################################################################################
 
 ################################################################################
 # Vertical Pod Autoscaler and Goldilocks - Vertical Pod Autoscaler recommendations
@@ -226,7 +200,7 @@ helm upgrade \
 
 clear
 echo "Installing Vertical Pod Autoscaler UI..."
-echo "watch -n 1 kubectl get all -n  ns-goldilocks"
+# watch -n 1 kubectl get all -n  ns-goldilocks
 sleep 5
 
 
@@ -253,8 +227,6 @@ kubectl label namespace ns-loki  goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
-# kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
-# kubectl label namespace ns-metrics-server goldilocks.fairwinds.com/enabled=true
 
 pause
 clear
@@ -262,7 +234,6 @@ echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
-# echo "Installed GraphQL..."
 echo "Installed Vertical Pod Autoscaler..."
 sleep 5
 
