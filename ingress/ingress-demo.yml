@@ -8,7 +8,7 @@ spec:
   - host: demo.jamesbuckett.com
     http:
       paths:
-      - defaultBackend:
+      - backend:
           service.name: frontend
           service.port.number: 80
 
