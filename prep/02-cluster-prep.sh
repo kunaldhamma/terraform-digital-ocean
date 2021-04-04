@@ -45,6 +45,8 @@ kubectl delete ns ns-argo
 
 helm dependencies update
 
+clear
+
 ################################################################################
 # Stop the script on errors
 ################################################################################
@@ -59,8 +61,8 @@ echo "Installing metrics-server..."
 echo "watch -n 1 kubectl get all -n ns-metrics-server"
 sleep 5
 
-kubectl create ns ns-metrics-server
-kubectl apply -n ns-metrics-server -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+# kubectl create ns ns-metrics-server
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
 
