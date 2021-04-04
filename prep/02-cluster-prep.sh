@@ -159,6 +159,7 @@ sleep 5
 helm upgrade \
 --install chaos-mesh-release chaos-mesh/chaos-mesh \
 --set dashboard.create=true \
+--set dashboard.securityMode=false \
 --set chaosDaemon.hostNetwork=true \
 --namespace=ns-chaos-mesh \
 --create-namespace \
@@ -228,6 +229,9 @@ echo "Installing Vertical Pod Autoscaler UI..."
 echo "watch -n 1 kubectl get all -n  ns-goldilocks"
 sleep 5
 
+
+helm install goldilocks fairwinds-stable/goldilocks --namespace goldilocks
+
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
 --set dashboard.service.type=ClusterIP \
@@ -274,7 +278,13 @@ export DROPLET_ADDR
 kubectl create ns ns-argo
 kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/stable/manifests/quick-start-postgres.yaml
 kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
-#kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
+
+# kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
+# ports:
+#     - name: https # Use http or https
+#        protocol: TCP
+#        port: 8080
+#        targetPort: 8080
 
 # Argo Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-argo.yml"
