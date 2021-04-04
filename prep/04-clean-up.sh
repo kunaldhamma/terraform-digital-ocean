@@ -35,8 +35,7 @@ printf "%s\n" "Digital Ocean DNS Records"
 doctl compute domain records list jamesbuckett.com
 echo " " 
 
-pause
-#sleep 5
+sleep 5
 
 ################################################################################
 # Check that you are on jump host and not local host
