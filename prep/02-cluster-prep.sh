@@ -67,7 +67,7 @@ sleep 5
 # kubectl create ns ns-metrics-server
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
-kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
+kubectl wait -n kube-system deploy metrics-server --for condition=Available --timeout=90s
 
 pause
 clear
