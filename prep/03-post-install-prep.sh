@@ -28,8 +28,8 @@ set -euo pipefail
 ################################################################################
 # Wait for the Load Balancers to  provision
 ################################################################################
-echo "Sleeping for two minutes to let Load Balancers settle..."
-sleep 2m
+# echo "Sleeping for two minutes to let Load Balancers settle..."
+# sleep 2m
 
 ################################################################################
 # Contour Ingress - Export the Public IP address of Contour Ingress 
