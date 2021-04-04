@@ -20,6 +20,9 @@ kubectl config use-context do-sgp1-digital-ocean-cluster
 ################################################################################
 # Clear any previous installations
 ################################################################################
+
+rm /root/prep/02-cluster-prep.sh
+
 kubectl delete ns ns-metrics-server
 kubectl delete ns ns-microservices-demo
 kubectl delete ns projectcontour
