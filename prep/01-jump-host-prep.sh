@@ -1,5 +1,5 @@
 ################################################################################
-# Author:  James Buckett
+# Author: James Buckett
 # email: james.buckett@gmail.com
 # Script to install various components onto the jumphost
 ################################################################################
@@ -152,6 +152,7 @@ mv ./argo-linux-amd64 /usr/local/bin/argo
 argo version
 sleep 5
 
+clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
 echo "Installed the Kubernetes Command Line Interface..."

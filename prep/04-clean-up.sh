@@ -1,5 +1,5 @@
 ################################################################################
-# Author:  James Buckett
+# Author: James Buckett
 # email: james.buckett@gmail.com
 # Script to delete all Digital Ocean assests 
 ################################################################################
