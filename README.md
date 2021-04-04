@@ -368,7 +368,7 @@ Or use the Terraform method to tear down the infrastructure
 
 ### 3.4 Tear down the Infrastructure
 * Only use this if you want to use Terraform to tear down the deployment.
-* Alternativly use the 
+* Alternatively use the 
 
 ```
 terraform plan -destroy -out=terraform.tfplan \

@@ -251,10 +251,10 @@ kubectl label namespace kube-system goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-chaos-mesh goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-loki  goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
-kubectl label namespace ns-metrics-server goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
-#kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
+# kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
+# kubectl label namespace ns-metrics-server goldilocks.fairwinds.com/enabled=true
 
 pause
 clear
