@@ -48,12 +48,14 @@ printf "%s\n" "Starting clean up on Digital Ocean...."
 echo " "
 sleep 5s
 
+
 ################################################################################
 # Kubernetes
 ################################################################################
 doctl kubernetes cluster delete digital-ocean-cluster -f
 printf "%s\n" "digital-ocean-cluster deleted"
 echo " "
+
 
 ################################################################################
 # Load Balancers
@@ -77,14 +79,25 @@ doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compu
 printf "%s\n" "digital-ocean-loadbalancers deleted"
 echo " "
 
+
 ################################################################################
 # Volumes
 ################################################################################
 doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
 doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
-doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
 printf "%s\n" "digital-ocean-droplet volume deleted"
 echo " "
+
+
+################################################################################
+# DNS Records 
+################################################################################
+doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+
 
 ################################################################################
 # Virtual Machine
@@ -92,18 +105,6 @@ echo " "
 doctl compute droplet delete digital-ocean-droplet -f
 printf "%s\n" "digital-ocean-droplet deleted"
 echo " "
-
-################################################################################
-# DNS Records - comment this until tested
-################################################################################
-# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-# doctl compute domain records list --record-type A | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-
-# doctl compute domain records delete --record-type A --record-name www --record-data do.jamesbuckett.com
 
 printf "%s\n" "Done with clean up on Digital Ocean...."
 echo " "

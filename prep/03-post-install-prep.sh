@@ -47,7 +47,7 @@ doctl compute domain records create jamesbuckett.com --record-type CNAME --recor
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name loki --record-data www. --record-ttl=43200
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name vpa --record-data www. --record-ttl=43200
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name chaos --record-data www. --record-ttl=43200
-doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name argo --record-data www. --record-ttl=43200
+# doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name argo --record-data www. --record-ttl=43200
 
 
 ################################################################################
@@ -110,7 +110,7 @@ echo "* Real-time Kubernetes Dashboard - Octant is here: $DROPLET_ADDR:8900 " >>
 echo "* Sample Microservices Application - Online Boutique is here: demo.jamesbuckett.com " >> /etc/motd
 echo "* Chaos Engineering Platfom - Chaos Mesh is here: chaos.jamesbuckett.com " >> /etc/motd
 echo "* Vertical Pod Autoscaler recommendations - Goldilocks is here: vpa.jamesbuckett.com " >> /etc/motd
-echo "* Workflow Tool - Argo is here: argo.jamesbuckett.com " >> /etc/motd
+# echo "* Workflow Tool - Argo is here: argo.jamesbuckett.com " >> /etc/motd
 echo "* Distributed Log Aggregation - Loki is here: loki.jamesbuckett.com " >> /etc/motd
 echo "* Loki User:  admin   Loki Password: $LOKI_PWD" >> /etc/motd
 echo "* Load Testing Tool - Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
