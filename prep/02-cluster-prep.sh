@@ -262,7 +262,7 @@ echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
-echo "Installed GraphQL..."
+# echo "Installed GraphQL..."
 echo "Installed Vertical Pod Autoscaler..."
 sleep 5
 
@@ -275,9 +275,9 @@ export DROPLET_ADDR
 ################################################################################
 # Argo - Cloud Native Workflow
 ################################################################################
-kubectl create ns ns-argo
-kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/stable/manifests/quick-start-postgres.yaml
-kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
+# kubectl create ns ns-argo
+# kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/stable/manifests/quick-start-postgres.yaml
+# kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
 
 # kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
 # ports:
@@ -287,18 +287,18 @@ kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=9
 #        targetPort: 8080
 
 # Argo Ingress
-kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-argo.yml"
+# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-argo.yml"
 
-pause
-clear
-echo "Installed metrics-server..."
-echo "Installed Micro-services Demo..."
-echo "Installed Loki/Prometheus/Grafana..."
-echo "Installed Chaos Mesh..."
-echo "Installed GraphQL..."
-echo "Installed Vertical Pod Autoscaler..."
-echo "Installed Argo..."
-sleep 5
+# pause
+# clear
+# echo "Installed metrics-server..."
+# echo "Installed Micro-services Demo..."
+# echo "Installed Loki/Prometheus/Grafana..."
+# echo "Installed Chaos Mesh..."
+# echo "Installed GraphQL..."
+# echo "Installed Vertical Pod Autoscaler..."
+# echo "Installed Argo..."
+# sleep 5
 
 ################################################################################
 # Update .bashrc
@@ -321,9 +321,9 @@ echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
-echo "Installed GraphQL..."
+# echo "Installed GraphQL..."
 echo "Installed Vertical Pod Autoscaler..."
-echo "Installed Argo..."
+# echo "Installed Argo..."
 echo " "
 echo "02-cluster-prep.sh complete...rebooting"
 sleep 5s
