@@ -69,7 +69,6 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n kube-system deploy metrics-server --for condition=Available --timeout=90s
 
-pause
 clear
 echo "Installed metrics-server..."
 sleep 5
@@ -228,7 +227,6 @@ kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
 
-pause
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
@@ -260,7 +258,6 @@ export DROPLET_ADDR
 # Argo Ingress
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-argo.yml"
 
-# pause
 # clear
 # echo "Installed metrics-server..."
 # echo "Installed Micro-services Demo..."
