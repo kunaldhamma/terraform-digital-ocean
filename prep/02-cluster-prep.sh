@@ -64,6 +64,7 @@ kubectl apply -n ns-metrics-server -f https://github.com/kubernetes-sigs/metrics
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n ns-metrics-server deploy metrics-server --for condition=Available --timeout=90s
 
+pause
 clear
 echo "Installed metrics-server..."
 sleep 5
@@ -95,6 +96,7 @@ kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jam
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-demo.yml"
 
+pause
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
@@ -128,6 +130,7 @@ helm upgrade \
 # Loki Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-loki.yml"
 
+pause
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
@@ -158,9 +161,9 @@ helm upgrade \
 
 # Chaos Mesh Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
-
 # kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 
+pause
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
@@ -216,6 +219,7 @@ helm upgrade \
 --create-namespace 
 --wait
 
+pause
 clear
 echo "Installing Vertical Pod Autoscaler UI..."
 echo "watch -n 1 kubectl get all -n  ns-goldilocks"
@@ -245,6 +249,7 @@ kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=t
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
 #kubectl label namespace ns-graphql  goldilocks.fairwinds.com/enabled=true
 
+pause
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
@@ -271,7 +276,7 @@ kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=9
 # Argo Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-argo.yml"
 
-
+pause
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
