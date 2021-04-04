@@ -18,6 +18,7 @@ cd ~/ && rm -R ~/doctl
 cd ~/ && rm -R ~/kubectl
 cd ~/ && rm -R ~/helm-3
 cd ~/ && rm -R ~/octant
+cd ~/ && rm -R ~/argo
 
 ################################################################################
 # Stop the script on errors
