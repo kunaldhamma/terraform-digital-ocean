@@ -38,16 +38,16 @@ sleep 2m
 # The host names, like "demo.jamesbuckett.com" are CNAME records 
 # to the "do.jamesbuckett.com" A record  
 
-
 INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
 export INGRESS_LB
 
-doctl compute domain records create --record-type A --record-name www --record-data $INGRESS_LB do.jamesbuckett.com
-doctl compute domain records create --record-type CNAME --record-name www --record-data demo do.jamesbuckett.com
-doctl compute domain records create --record-type CNAME --record-name www --record-data loki do.jamesbuckett.com
-doctl compute domain records create --record-type CNAME --record-name www --record-data vpa do.jamesbuckett.com
-doctl compute domain records create --record-type CNAME --record-name www --record-data chaos do.jamesbuckett.com
-doctl compute domain records create --record-type CNAME --record-name www --record-data argo do.jamesbuckett.com
+doctl compute domain records create --record-type A --record-name www --record-data $INGRESS_LB jamesbuckett.com --record-ttl=43200
+
+doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name demo --record-data www. --record-ttl=43200
+doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name loki --record-data www. --record-ttl=43200
+doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name vpa --record-data www. --record-ttl=43200
+doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name chaos --record-data www. --record-ttl=43200
+doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name argo --record-data www. --record-ttl=43200
 
 
 ################################################################################

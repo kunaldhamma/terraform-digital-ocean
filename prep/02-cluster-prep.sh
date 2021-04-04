@@ -99,9 +99,10 @@ sleep 5
 kubectl create ns ns-microservices-demo
 kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/complete-demo.yaml"
 kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
+
+# Microservices Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-demo.yml"
 
-pause
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
@@ -135,7 +136,6 @@ helm upgrade \
 # Loki Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-loki.yml"
 
-pause
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
@@ -168,7 +168,6 @@ helm upgrade \
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 # kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
 
-pause
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
@@ -221,10 +220,9 @@ sleep 5
 helm upgrade \
 --install vpa-release fairwinds-stable/vpa \
 --namespace=ns-vpa \
---create-namespace 
+--create-namespace \
 --wait
 
-pause
 clear
 echo "Installing Vertical Pod Autoscaler UI..."
 echo "watch -n 1 kubectl get all -n  ns-goldilocks"
@@ -234,7 +232,7 @@ helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
 --set dashboard.service.type=ClusterIP \
 --namespace=ns-goldilocks \
---create-namespace 
+--create-namespace \
 --wait
 
 # VPA Ingress
