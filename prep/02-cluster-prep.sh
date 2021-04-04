@@ -61,7 +61,7 @@ set -euo pipefail
 
 clear
 echo "Installing metrics-server..."
-echo "watch -n 1 kubectl get all -n ns-metrics-server"
+# watch -n 1 kubectl get all -n ns-metrics-server
 sleep 5
 
 # kubectl create ns ns-metrics-server
