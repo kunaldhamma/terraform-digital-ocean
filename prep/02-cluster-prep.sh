@@ -203,8 +203,6 @@ echo "Installing Vertical Pod Autoscaler UI..."
 sleep 5
 
 
-helm install goldilocks fairwinds-stable/goldilocks --namespace goldilocks
-
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
 --set dashboard.service.type=ClusterIP \
