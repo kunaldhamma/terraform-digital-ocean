@@ -147,14 +147,14 @@ You should see a message of the day on `digital-ocean-droplet` with information:
 ```
 Reference URLs in this tutorial
 **********************************************************************************************
-* Real-time Kubernetes Dashboard - Octant is here:  x.x.x.x:8900
-* Sample Microservices Application - Online Boutique is here: x.x.x.x.xip.io
-* Distributed Log Aggregation - Loki is here: x.x.x.x.xip.io
-* Chaos Engineering Platfom - Chaos Mesh  is here: x.x.x.x:2333
-* Vertical Pod Autoscaler recommendations - Goldilocks is here: x.x.x.x.xip.io
-* Load Testing Tool - Locust is here: x.x.x.x:8089
-* Locust values are Spawn:500 & URL: x.x.x.x
-* Start Locust & Octant in another shell : sh /root/locust/startup-locust.sh
+* Real-time Kubernetes Dashboard - Octant is here: 165.232.164.222:8900 
+* Sample Microservices Application - Online Boutique is here: demo.jamesbuckett.com 
+* Chaos Engineering Platform - Chaos Mesh is here: chaos.jamesbuckett.com 
+* Vertical Pod Autoscaler recommendations - Goldilocks is here: vpa.jamesbuckett.com 
+* Distributed Log Aggregation - Loki is here: loki.jamesbuckett.com 
+* Loki User:  admin   Loki Password: 5IcULwlPmXyMoayYk67aLxkkut3RzT3tqOgWg8QB
+* Load Testing Tool - Locust is here: 165.232.164.222:8089 
+* To start Locust & Octant, open another shell and execute: sh /root/locust/startup-locust.sh 
 **********************************************************************************************
 ```
 
@@ -171,6 +171,7 @@ kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.
 #### Loki Dashboards 
 
 * Left side look for + sign...`Import`
+  * Import this dashboard: `12611`
   * Import this dashboard: `12019`
   * Import this dashboard: `10000`
   * Import this dashboard: `1471`
