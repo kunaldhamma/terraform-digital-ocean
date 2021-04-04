@@ -8,6 +8,6 @@ spec:
   - host: goldilocks.jamesbuckett.com
     http:
       paths:
-      - backend:
-          serviceName: goldilocks-release-dashboard
-          servicePort: 80
+      - defaultBackend:
+          service.name: goldilocks-release-dashboard
+          service.port.number: 80

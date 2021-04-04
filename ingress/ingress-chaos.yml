@@ -8,6 +8,6 @@ spec:
   - host: chaosmesh.jamesbuckett.com
     http:
       paths:
-      - backend:
-          serviceName: chaos-dashboard
-          servicePort: 2333
+      - defaultBackend:
+          service.name: chaos-dashboard
+          service.port.number: 2333

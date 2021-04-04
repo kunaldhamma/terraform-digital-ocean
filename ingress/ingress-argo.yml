@@ -8,6 +8,6 @@ spec:
   - host: argo.jamesbuckett.com
     http:
       paths:
-      - backend:
-          serviceName: argo-server
-          servicePort: 2746
+      - defaultBackend:
+          service.name: argo-server
+          service.port.number: 2746

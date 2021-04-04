@@ -8,6 +8,6 @@ spec:
   - host: loki.jamesbuckett.com
     http:
       paths:
-      - backend:
-          serviceName: loki-release-grafana
-          servicePort: 80
+      - defaultBackend:
+          service.name: loki-release-grafana
+          service.port.number: 80

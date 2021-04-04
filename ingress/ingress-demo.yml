@@ -8,6 +8,20 @@ spec:
   - host: demo.jamesbuckett.com
     http:
       paths:
-      - backend:
-          serviceName: frontend
-          servicePort: 80
+      - defaultBackend:
+          service.name: frontend
+          service.port.number: 80
+
+
+# Ingress and IngressClass resources have graduated to `networking.k8s.io/v1`. 
+# Ingress and IngressClass types in the `extensions/v1beta1` and `networking.k8s.io/v1beta1` API versions are deprecated and will no longer be served in 1.22+. 
+# Persisted objects can be accessed via the `networking.k8s.io/v1` API. 
+# Notable changes in v1 Ingress objects (v1beta1 field names are unchanged):
+# * `spec.backend` -> `spec.defaultBackend`
+# * `serviceName` -> `service.name`
+# * `servicePort` -> `service.port.name` (for string values)
+# * `servicePort` -> `service.port.number` (for numeric values)
+# * `pathType` no longer has a default value in v1; "Exact", "Prefix", or "ImplementationSpecific" must be specified
+# Other Ingress API updates:
+# * backends can now be resource or service backends
+# * `path` is no longer required to be a valid regular expression          
