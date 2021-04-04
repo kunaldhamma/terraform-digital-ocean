@@ -1,6 +1,8 @@
+################################################################################
 # Author:  James Buckett
 # email: james.buckett@gmail.com
 # Script to delete all Digital Ocean assests 
+################################################################################
 
 #!/bin/bash
 
@@ -33,7 +35,8 @@ printf "%s\n" "Digital Ocean DNS Records"
 doctl compute domain records list jamesbuckett.com
 echo " " 
 
-sleep 5
+pause
+#sleep 5
 
 ################################################################################
 # Check that you are on jump host and not local host
@@ -56,19 +59,19 @@ echo " "
 # Load Balancers
 ################################################################################
 
-# Contour Ingress
+# Contour Ingress - Only single Load Balancer 
 doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
-# Online Boutique
+# Online Boutique - not required since Contour implemented
 # doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
-# Loki 
+# Loki - not required since Contour implemented
 # doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
-# Chaos Mesh
+# Chaos Mesh - not required since Contour implemented
 # doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
-# Goldilocks
+# Goldilocks - not required since Contour implemented
 # doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
 printf "%s\n" "digital-ocean-loadbalancers deleted"
@@ -91,16 +94,16 @@ printf "%s\n" "digital-ocean-droplet deleted"
 echo " "
 
 ################################################################################
-# Virtual Machine
+# DNS Records - comment this until tested
 ################################################################################
-doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
-doctl compute domain records list --record-type A | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+# doctl compute domain records list --record-type CNAME | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
+# doctl compute domain records list --record-type A | awk 'FNR == 2 {print $1}' | xargs doctl domain records delete -f
 
-#doctl compute domain records delete --record-type A --record-name www --record-data do.jamesbuckett.com
+# doctl compute domain records delete --record-type A --record-name www --record-data do.jamesbuckett.com
 
 printf "%s\n" "Done with clean up on Digital Ocean...."
 echo " "
