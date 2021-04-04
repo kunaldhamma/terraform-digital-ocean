@@ -93,7 +93,7 @@ kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
 
 clear
 echo "Installing Micro-services Demo..."
-echo "watch -n 1 kubectl get all -n  ns-microservices-demo"
+# watch -n 1 kubectl get all -n  ns-microservices-demo
 sleep 5
 
 kubectl create ns ns-microservices-demo
@@ -123,7 +123,7 @@ helm repo update
 
 clear
 echo "Installing Loki/Prometheus/Grafana..."
-echo "watch -n 1 kubectl get all -n   ns-loki"
+# watch -n 1 kubectl get all -n   ns-loki
 sleep 5
 
 helm upgrade \
@@ -153,7 +153,7 @@ curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
 
 clear
 echo "Installing Chaos Mesh..."
-echo "watch -n 1 kubectl get all -n  ns-chaos-mesh"
+# watch -n 1 kubectl get all -n  ns-chaos-mesh
 sleep 5
 
 helm upgrade \
@@ -215,7 +215,7 @@ helm repo update
 
 clear
 echo "Installing Vertical Pod Autoscaler..."
-echo "watch -n 1 kubectl get all -n  ns-vpa"
+# watch -n 1 kubectl get all -n  ns-vpa
 sleep 5
 
 helm upgrade \

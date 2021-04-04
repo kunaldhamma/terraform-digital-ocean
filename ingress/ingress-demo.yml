@@ -12,8 +12,6 @@ spec:
           serviceName: frontend
           servicePort: 80
 
-
-
 # Ingress and IngressClass resources have graduated to `networking.k8s.io/v1`. 
 # Ingress and IngressClass types in the `extensions/v1beta1` and `networking.k8s.io/v1beta1` API versions are deprecated and will no longer be served in 1.22+. 
 # Persisted objects can be accessed via the `networking.k8s.io/v1` API. 
