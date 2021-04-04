@@ -1,4 +1,4 @@
-apiVersion: networking.k8s.io/v1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ing-loki
@@ -8,6 +8,6 @@ spec:
   - host: loki.jamesbuckett.com
     http:
       paths:
-      - defaultBackend:
-          service.name: loki-release-grafana
-          service.port.number: 80
+      - backend:
+          serviceName: loki-release-grafana
+          servicePort: 80
