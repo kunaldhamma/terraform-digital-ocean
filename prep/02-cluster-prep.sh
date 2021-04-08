@@ -95,9 +95,9 @@ echo "Installing Micro-services Demo..."
 # watch -n 1 kubectl get all -n  ns-microservices-demo
 sleep 5
 
-kubectl create ns ns-microservices-demo
-kubectl apply -n ns-microservices-demo -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/complete-demo.yaml"
-kubectl wait -n ns-microservices-demo deploy frontend --for condition=Available --timeout=90s
+kubectl create ns ns-demo
+kubectl apply -n ns-demo -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/complete-demo.yaml"
+kubectl wait -n ns-demo deploy frontend --for condition=Available --timeout=90s
 
 # Microservices Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-demo.yml"
@@ -160,7 +160,7 @@ helm upgrade \
 --set dashboard.create=true \
 --set dashboard.securityMode=false \
 --set chaosDaemon.hostNetwork=true \
---namespace=ns-chaos-mesh \
+--namespace=ns-chaos \
 --create-namespace \
 --wait
 

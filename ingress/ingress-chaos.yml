@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ing-chaos-mesh
-  namespace: ns-chaos-mesh
+  namespace: ns-chaos
 spec:
   rules:
   - host: chaos.jamesbuckett.com
