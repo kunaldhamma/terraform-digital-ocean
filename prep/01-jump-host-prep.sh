@@ -56,7 +56,7 @@ sleep 5
 # kubectl - Kubernetes command-line client
 ################################################################################
 clear
-echo "Installing the Kubernetes Command Line Interface..."
+echo "Installing the Kubernetes Command Line Interface and K9S..."
 cd ~/ && mkdir kubectl && cd kubectl
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 chmod +x ./kubectl
