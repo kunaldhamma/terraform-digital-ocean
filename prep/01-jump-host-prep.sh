@@ -112,9 +112,9 @@ sleep 5
 clear
 echo "Installing Octant..."
 cd ~/ && mkdir octant && cd octant
-curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.18.0/octant_0.18.0_Linux-64bit.tar.gz
-tar -xvf octant_0.18.0_Linux-64bit.tar.gz
-sudo mv ./octant_0.18.0_Linux-64bit/octant /usr/local/bin/octant
+curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.19.0/octant_0.19.0_Linux-64bit.tar.gz
+tar -xvf octant_0.19.0_Linux-64bit.tar.gz
+sudo mv ./octant_0.19.0_Linux-64bit/octant /usr/local/bin/octant
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
