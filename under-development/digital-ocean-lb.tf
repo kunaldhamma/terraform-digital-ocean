@@ -1,5 +1,5 @@
-resource "digitalocean_loadbalancer" "www-lb" {
-  name = "www-lb"
+resource "digitalocean_loadbalancer" "digitalocean-loadbalancer" {
+  name = "digitalocean-loadbalancer"
   region = "sgp1"
 
   forwarding_rule {
