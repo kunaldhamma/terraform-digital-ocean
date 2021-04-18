@@ -219,10 +219,10 @@ kubectl label namespace default goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-node-lease goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-public goldilocks.fairwinds.com/enabled=true
 kubectl label namespace kube-system goldilocks.fairwinds.com/enabled=true
-kubectl label namespace ns-chaos-mesh goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-chaos goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-loki  goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
-kubectl label namespace ns-microservices-demo goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-demo goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
 
 clear
