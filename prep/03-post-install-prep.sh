@@ -72,7 +72,7 @@ export LOKI_PWD
 # CHAOSMESH_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
 # export CHAOSMESH_LB
 # Scale deployment.apps/frontend to 3 replicas for Chaos Experiments 
-kubectl scale deployment.apps/frontend --replicas=3 -n ns-microservices-demo
+kubectl scale deployment.apps/frontend --replicas=3 -n ns-demo
 
 
 ################################################################################
@@ -97,7 +97,7 @@ cp .bashrc .bashrc-original
 # echo "export BOUTIQUE_LB=$BOUTIQUE_LB" >> ~/.bashrc
 # echo "export GOLDILOCKS_LB=$GOLDILOCKS_LB" >> ~/.bashrc
 # echo "export LOKI_LB=$LOKI_LB" >> ~/.bashrc
-# echo "export LOKI_PWD=$LOKI_PWD" >> ~/.bashrc
+echo "export LOKI_PWD=$LOKI_PWD" >> ~/.bashrc
 # echo "export CHAOSMESH_LB=$CHAOSMESH_LB" >> ~/.bashrc
 
 
