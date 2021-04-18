@@ -97,14 +97,16 @@ cp .bashrc .bashrc-original
 # echo "export BOUTIQUE_LB=$BOUTIQUE_LB" >> ~/.bashrc
 # echo "export GOLDILOCKS_LB=$GOLDILOCKS_LB" >> ~/.bashrc
 # echo "export LOKI_LB=$LOKI_LB" >> ~/.bashrc
-echo "export LOKI_PWD=$LOKI_PWD" >> ~/.bashrc
+# echo "export LOKI_PWD=$LOKI_PWD" >> ~/.bashrc
 # echo "export CHAOSMESH_LB=$CHAOSMESH_LB" >> ~/.bashrc
 
 
 ################################################################################
 # Update Message of the Day
 ################################################################################
-echo "Reference URLs in this tutorial" >> /etc/motd
+echo "*################################################################################"
+echo "*# Reference URLs in this tutorial" >> /etc/motd
+echo "*################################################################################"
 echo "**********************************************************************************************" >> /etc/motd
 echo "* Real-time Kubernetes Dashboard - Octant is here: $DROPLET_ADDR:8900 " >> /etc/motd
 echo "* Sample Microservices Application - Online Boutique is here: demo.jamesbuckett.com " >> /etc/motd
