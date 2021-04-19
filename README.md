@@ -171,10 +171,8 @@ kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.
 #### Loki Dashboards 
 
 * Left side look for + sign...`Import`
-  * Import this dashboard: `12611`
-  * Import this dashboard: `12019`
-  * Import this dashboard: `10000`
-  * Import this dashboard: `1471`
+  * Import this dashboard: `12611` - Logging Dashboard via Loki
+
 
 ### 5.2 Kubernetes GraphQL 
 * Simple setup for converting Kubernetes API server into [GraphQL API](https://github.com/onelittlenightmusic/kubernetes-graphql)
