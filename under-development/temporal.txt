@@ -1,0 +1,66 @@
+mkdir temporal
+
+cd temporal
+
+git clone https://github.com/temporalio/helm-charts.git
+
+helm repo update
+
+helm dependencies update
+
+helm install \
+    --set server.replicaCount=1 \
+    --set cassandra.config.cluster_size=1 \
+    --set prometheus.enabled=false \
+    --set grafana.enabled=false \
+    --set elasticsearch.enabled=false \
+    --set kafka.enabled=false \
+    --namespace=ns-temporal \
+    --create-namespace \
+    temporaltest . --timeout 15m
+    
+    
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ing-temporal
+  namespace: ns-temporal
+spec:
+  rules:
+  - host: temporal.jamesbuckett.com
+    http:
+      paths:
+      - backend:
+          serviceName: temporaltest-web
+          servicePort: 8088
+
+
+sudo apt install openjdk-8-jdk -y
+
+
+wget https://services.gradle.org/distributions/gradle-7.0-bin.zip
+
+mkdir /opt/gradle
+
+unzip -d /opt/gradle gradle-7.0-bin.zip
+
+ls /opt/gradle/gradle-7.0
+
+sudo vi /etc/profile.d/gradle.sh
+
+export GRADLE_HOME=/opt/gradle/gradle-7.0
+export PATH=${GRADLE_HOME}/bin:${PATH}
+
+sudo chmod +x /etc/profile.d/gradle.sh
+
+source /etc/profile.d/gradle.sh
+
+gradle -v
+
+git clone https://github.com/temporalio/samples-java
+
+cd samples-java
+
+./gradlew build
+
+
