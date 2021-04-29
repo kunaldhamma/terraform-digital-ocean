@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aks-application 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: aks-application
+  template:
+    metadata:
+      labels:
+        app: aks-application
+    spec:
+      containers:
+      - name: aks-application
+        image: hubname/aks-application-image:1.0.0
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 250m
+            memory: 256Mi

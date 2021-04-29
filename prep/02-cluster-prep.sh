@@ -202,6 +202,7 @@ echo "Installing Vertical Pod Autoscaler UI..."
 # watch -n 1 kubectl get all -n  ns-goldilocks
 sleep 5
 
+# Goldilocks scans pods for resource limits and creates reports with recommended resources.
 
 helm upgrade \
 --install goldilocks-release fairwinds-stable/goldilocks \
