@@ -49,6 +49,20 @@ doctl compute domain records create jamesbuckett.com --record-type CNAME --recor
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name chaos --record-data www. --record-ttl=43200
 # doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name argo --record-data www. --record-ttl=43200
 
+################################################################################
+# Octant - octant.jamesbuckett.com
+################################################################################
+doctl compute load-balancer create \
+    --name digitalocean-loadbalancer \
+    --region sgp1 \
+    --forwarding-rules entry_protocol:http,entry_port:80,target_protocol:http,target_port:8900
+   
+doctl compute load-balancer add-droplets digitalocean-loadbalancer digital-ocean-droplet
+
+OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
+export OCTANT_LB
+doctl compute domain records create --record-type A --record-name www --record-data $OCTANT_LB octant.jamesbuckett.com --record-ttl=43200
+
 
 ################################################################################
 # Online Boutique - Export the Public IP address of Online Boutique 
