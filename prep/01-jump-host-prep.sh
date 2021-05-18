@@ -21,6 +21,7 @@ cd ~/ && rm -R ~/octant
 cd ~/ && rm -R ~/argo
 rm -R /opt/kubectx
 rm /usr/local/bin/kubectx
+rm /usr/local/bin/kubens
 
 ################################################################################
 # Stop the script on errors
