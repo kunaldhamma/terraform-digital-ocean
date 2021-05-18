@@ -38,8 +38,7 @@ set -euo pipefail
 # The host names, like "demo.jamesbuckett.com" are CNAME records 
 # to the "do.jamesbuckett.com" A record  
 
-# Second LB after Octant so FNR = 3 for second row value
-INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
+INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
 export INGRESS_LB
 doctl compute domain records create --record-type A --record-name www --record-data $INGRESS_LB jamesbuckett.com --record-ttl=43200
 
@@ -59,7 +58,7 @@ doctl compute load-balancer create \
    
 doctl compute load-balancer add-droplets digitalocean-loadbalancer digital-ocean-droplet
 
-OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
+OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
 export OCTANT_LB
 doctl compute domain records create --record-type A --record-name www --record-data $OCTANT_LB octant.jamesbuckett.com --record-ttl=43200
 
