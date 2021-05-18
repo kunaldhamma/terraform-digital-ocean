@@ -19,6 +19,7 @@ cd ~/ && rm -R ~/kubectl
 cd ~/ && rm -R ~/helm-3
 cd ~/ && rm -R ~/octant
 cd ~/ && rm -R ~/argo
+rm -R /opt/kubectx
 
 ################################################################################
 # Stop the script on errors
@@ -115,20 +116,6 @@ cd ~/ && mkdir octant && cd octant
 curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.19.0/octant_0.19.0_Linux-64bit.tar.gz
 tar -xvf octant_0.19.0_Linux-64bit.tar.gz
 sudo mv ./octant_0.19.0_Linux-64bit/octant /usr/local/bin/octant
-
-################################################################################
-# Octant - octant.jamesbuckett.com
-################################################################################
-doctl compute load-balancer create \
-    --name digitalocean-loadbalancer \
-    --region sgp1 \
-    --forwarding-rules entry_protocol:http,entry_port:80,target_protocol:http,target_port:8900
-   
-doctl compute load-balancer add-droplets digital-ocean-droplet
-
-OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
-export OCTANT_LB
-doctl compute domain records create --record-type A --record-name www --record-data $OCTANT_LB octant.jamesbuckett.com --record-ttl=43200
 
 clear
 echo "Updated the Operating System and installed Python..."
