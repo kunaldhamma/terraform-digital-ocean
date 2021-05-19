@@ -102,7 +102,7 @@ echo "export LOKI_PWD=$LOKI_PWD" >> ~/.bashrc
 # Update Message of the Day
 ################################################################################
 echo "*################################################################################"
-echo "*# Reference URLs in this tutorial" >> /etc/motd
+echo "* Reference URLs in this tutorial" >> /etc/motd
 echo "*################################################################################"
 echo "**********************************************************************************************" >> /etc/motd
 echo "* Real-time Kubernetes Dashboard - Octant is here: $DROPLET_ADDR:8900 " >> /etc/motd
