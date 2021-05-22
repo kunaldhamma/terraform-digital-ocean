@@ -105,7 +105,7 @@ echo "*#########################################################################
 echo "* Reference URLs in this tutorial" >> /etc/motd
 echo "*################################################################################"
 echo "**********************************************************************************************" >> /etc/motd
-echo "* Real-time Kubernetes Dashboard - Octant is here: $DROPLET_ADDR:8900 " >> /etc/motd
+echo "* Real-time Kubernetes Dashboard - Octant is here: $DROPLET_ADDR:8900 or octant.jamesbuckett.com " >> /etc/motd
 echo "* Sample Microservices Application - Online Boutique is here: demo.jamesbuckett.com " >> /etc/motd
 echo "* Chaos Engineering Platfom - Chaos Mesh is here: chaos.jamesbuckett.com " >> /etc/motd
 echo "* Vertical Pod Autoscaler recommendations - Goldilocks is here: vpa.jamesbuckett.com " >> /etc/motd
