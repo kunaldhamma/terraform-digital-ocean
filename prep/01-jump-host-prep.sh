@@ -59,12 +59,13 @@ sleep 5
 # kubectl - Kubernetes command-line client
 ################################################################################
 clear
-echo "Installing the Kubernetes Command Line Interface and K9S..."
+echo "Installing the Kubernetes Command Line Interface, K9S and Arkade..."
 cd ~/ && mkdir kubectl && cd kubectl
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 chmod +x ./kubectl
 sudo mv ./kubectl /usr/local/bin/kubectl
 curl -sS https://webinstall.dev/k9s | bash
+curl -sSLf https://dl.get-arkade.dev/ | sudo sh 
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
