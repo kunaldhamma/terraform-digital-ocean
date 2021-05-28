@@ -69,7 +69,7 @@ curl -sSLf https://dl.get-arkade.dev/ | sudo sh
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
-echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed the Kubernetes Utilities..."
 sleep 5
 
 ################################################################################
@@ -83,7 +83,7 @@ sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
-echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed the Kubernetes Utilities..."
 echo "Installed kubectx and kubens..."
 sleep 5
 
@@ -105,7 +105,7 @@ helm repo add stable https://charts.helm.sh/stable
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
-echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed the Kubernetes Utilities..."
 echo "Installed kubectx and kubens..."
 echo "Installed Helm 3..."
 sleep 5
@@ -123,7 +123,7 @@ sudo mv ./octant_0.19.0_Linux-64bit/octant /usr/local/bin/octant
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
-echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed the Kubernetes Utilities..."
 echo "Installed kubectx and kubens..."
 echo "Installed Helm 3..."
 echo "Installed Octant..."
@@ -138,7 +138,7 @@ pip3 install locust
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
-echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed the Kubernetes Utilities..."
 echo "Installed kubectx and kubens..."
 echo "Installed Helm 3..."
 echo "Installed Octant..."
@@ -149,7 +149,7 @@ sleep 5
 # Argo CLI
 ################################################################################
 clear
-echo "Installing Argo..."
+echo "Installing Argo CLI..."
 cd ~/ && mkdir argo && cd argo
 curl -sLO https://github.com/argoproj/argo/releases/download/v3.0.1/argo-linux-amd64.gz
 gunzip argo-linux-amd64.gz
@@ -161,12 +161,12 @@ sleep 5
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
-echo "Installed the Kubernetes Command Line Interface..."
+echo "Installed the Kubernetes Utilities..."
 echo "Installed kubectx and kubens..."
 echo "Installed Helm 3..."
 echo "Installed Octant..."
 echo "Installed Locust..."
-echo "Installed Argo..."
+echo "Installed Argo CLI..."
 echo " "
 echo "01-jump-host-prep.sh complete...rebooting"
 sleep 5s

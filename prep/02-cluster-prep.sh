@@ -225,6 +225,7 @@ kubectl label namespace ns-loki  goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-demo goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-istio goldilocks.fairwinds.com/enabled=true
 
 clear
 echo "Installed metrics-server..."
@@ -233,6 +234,44 @@ echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
 echo "Installed Vertical Pod Autoscaler..."
 sleep 5
+
+################################################################################
+# Istio - Service Mesh
+# Link: https://blog.alexellis.io/a-bit-of-istio-before-tea-time/ 
+################################################################################
+
+clear
+echo "Installing Istio..."
+# watch -n 1 kubectl get all -n  ns-istio
+sleep 5
+
+arkade install istio
+
+kubectl create namespace ns-istio
+
+kubectl label namespace ns-istio istio-injection=enabled
+
+kubectl config set-context --current --namespace=ns-istio 
+
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/samples/bookinfo/platform/kube/bookinfo.yaml 
+
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.10/samples/addons/kiali.yaml
+
+sleep 10
+
+kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.10/samples/addons/kiali.yaml
+
+# Istio Ingress
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-istio.yml"
+
+clear
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+echo "Installed Loki/Prometheus/Grafana..."
+echo "Installed Chaos Mesh..."
+echo "Installed Istio..."
+sleep 5
+
 
 ################################################################################
 # Export the Public IP where Octant can be located
