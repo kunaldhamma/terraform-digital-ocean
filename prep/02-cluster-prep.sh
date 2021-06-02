@@ -97,6 +97,7 @@ sleep 5
 
 kubectl create ns ns-demo
 kubectl apply -n ns-demo -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/complete-demo.yaml"
+kubectl apply -n ns-demo -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/hpa-demo.yaml"
 kubectl wait -n ns-demo deploy frontend --for condition=Available --timeout=90s
 
 # Microservices Ingress
