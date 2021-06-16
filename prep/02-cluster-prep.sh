@@ -275,11 +275,18 @@ echo "Installed Istio..."
 echo "Installed Vertical Pod Autoscaler..."
 sleep 5
 
+
 ################################################################################
 # Export the Public IP where Octant can be located
 ################################################################################
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
+
+
+################################################################################
+# Clone Useful Repositories
+################################################################################
+git clone https://github.com/cloudacademy/intro-to-k8s.git
 
 ################################################################################
 # Argo - Cloud Native Workflow
