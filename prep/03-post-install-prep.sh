@@ -71,7 +71,7 @@ export LOKI_PWD
 # CHAOSMESH_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
 # export CHAOSMESH_LB
 # Scale deployment.apps/frontend to 3 replicas for Chaos Experiments 
-kubectl scale deployment.apps/frontend --replicas=3 -n ns-demo
+# kubectl scale deployment.apps/frontend --replicas=3 -n ns-demo
 
 
 ################################################################################
@@ -116,7 +116,7 @@ echo "* Loki User:  admin   Loki Password: $LOKI_PWD" >> /etc/motd
 echo "* Load Testing Tool - Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
 echo "* Locust values are Spawn:500 & URL: demo.jamesbuckett.com " >> /etc/motd                      
 echo "* To start Locust & Octant, open another shell and execute: sh /root/locust/startup-locust.sh " >> /etc/motd      
-#echo "* Add this to .bashrc manually PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
+echo "* Add this to .bashrc manually PS1='[\u@\h \w $(kube_ps1)]\$ '                             *" >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
 
@@ -135,7 +135,7 @@ chmod +x startup-locust.sh
 doctl compute load-balancer create \
     --name digitalocean-loadbalancer \
     --region sgp1 \
-    --tag-name digital-ocean-droplet
+    --tag-name digital-ocean-droplet \
     --forwarding-rules entry_protocol:http,entry_port:80,target_protocol:http,target_port:8900
    
 #doctl compute load-balancer add-droplets digitalocean-loadbalancer digital-ocean-droplet

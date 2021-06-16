@@ -203,6 +203,9 @@ kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.10/samp
 
 sleep 10
 
+# This second kubectl apply due to the error below:
+# MonitoringDashboard" in version "monitoring.kiali.io/v1alpha1"
+# unable to recognize "https://raw.githubusercontent.com/istio/istio/release-1.10/samples/addons/kiali.yaml": no matches for kind "
 kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.10/samples/addons/kiali.yaml
 
 # Istio Ingress

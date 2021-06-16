@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ing-kiali
+  namespace: istio-system
+  # annotations:
+  #   ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - host: kiali.jamesbuckett.com
+      http:
+        paths:
+          - backend:
+              serviceName: kiali
+              servicePort: 20001
+            # path: /argo(/|$)(.*)
