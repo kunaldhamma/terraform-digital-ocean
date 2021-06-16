@@ -41,6 +41,7 @@ clear
 echo "Updated the Operating System and installed Python..."
 sleep 5
 
+
 ################################################################################
 # doctl - DigitalOcean command-line client
 ################################################################################
@@ -54,6 +55,7 @@ clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
 sleep 5
+
 
 ################################################################################
 # kubectl - Kubernetes command-line client
@@ -72,6 +74,7 @@ echo "Installed the Digital Ocean Command Line Interface..."
 echo "Installed the Kubernetes Utilities..."
 sleep 5
 
+
 ################################################################################
 # kubectx & kubens - Kubernetes Namespace and Cluster helpers
 ################################################################################
@@ -87,10 +90,12 @@ echo "Installed the Kubernetes Utilities..."
 echo "Installed kubectx and kubens..."
 sleep 5
 
+
 ################################################################################
 # kube-ps1 - Kubernetes prompt 
 ################################################################################
 sudo git clone https://github.com/jonmosco/kube-ps1.git /opt/kube-ps1
+
 
 ################################################################################
 # Helm 3 - Kubernetes Application Package Manager
@@ -129,6 +134,7 @@ echo "Installed Helm 3..."
 echo "Installed Octant..."
 sleep 5
 
+
 ################################################################################
 # Locust - Load Testing Tool
 ################################################################################
@@ -145,6 +151,7 @@ echo "Installed Octant..."
 echo "Installed Locust..."
 sleep 5
 
+
 ################################################################################
 # Argo CLI
 ################################################################################
@@ -157,6 +164,12 @@ chmod +x argo-linux-amd64
 mv ./argo-linux-amd64 /usr/local/bin/argo
 argo version
 sleep 5
+
+
+################################################################################
+# Clone Useful Repositories
+################################################################################
+git clone https://github.com/cloudacademy/intro-to-k8s.git
 
 clear
 echo "Updated the Operating System and installed Python..."
