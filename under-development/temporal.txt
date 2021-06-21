@@ -37,7 +37,6 @@ spec:
 
 sudo apt install openjdk-8-jdk -y
 
-
 wget https://services.gradle.org/distributions/gradle-7.0-bin.zip
 
 mkdir /opt/gradle

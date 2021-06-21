@@ -62,18 +62,7 @@ echo " "
 
 # Contour Ingress - Only single Load Balancer 
 doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
-
-# Online Boutique - not required since Contour implemented
-# doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
-
-# Loki - not required since Contour implemented
-# doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
-
-# Chaos Mesh - not required since Contour implemented
-# doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
-
-# Goldilocks - not required since Contour implemented
-# doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
+doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 
 printf "%s\n" "digital-ocean-loadbalancers deleted"
 echo " "
@@ -91,12 +80,20 @@ echo " "
 ################################################################################
 # DNS Records 
 ################################################################################
+# Demo Microservice
 doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+# Loki
 doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+# Chaos
 doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+# VPA
 doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+# Istio
 doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
-
+# Argo
+doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+# Temporal
+doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
 
 ################################################################################
 # Virtual Machine

@@ -1,14 +1,26 @@
-# Author:  James Buckett
-# eMail: james.buckett@gmail.com
+################################################################################
+# Author: James Buckett
+# email: james.buckett@gmail.com
 # Script to install Knative
-
 # Create your first Knative app
 # Link : https://opensource.com/article/20/11/knative
+################################################################################
 
 #!/bin/bash
 
+################################################################################
 # Check that you are on jump host and not local host
+################################################################################
 if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
+
+################################################################################
+# Stop the script on errors
+################################################################################
+set -euo pipefail
+
+clear
+echo "Installing Knative..."
+sleep 5
 
 # Knative CLI install
 clear
@@ -60,10 +72,11 @@ kn service create hello --image gcr.io/knative-samples/helloworld-go --namespace
 
 kubectl run busybox -i --tty --image=busybox --restart=Never -- sh
 
-
 # kn service delete hello --namespace  ns-kn-hello-world
 
 else
     echo "You are not on the jump host : digital-ocean-droplet"
     exit
 fi
+
+# End of Script
