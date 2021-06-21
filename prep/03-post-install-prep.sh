@@ -81,7 +81,7 @@ echo "* Loki User:  admin   Loki Password: $LOKI_PWD" >> /etc/motd
 echo "* Load Testing Tool - Locust is here: $DROPLET_ADDR:8089 " >> /etc/motd
 echo "* Locust values are Spawn:100 & URL: demo.jamesbuckett.com " >> /etc/motd                      
 echo "* To start Locust & Octant, open another shell and execute: sh /root/locust/startup-locust.sh " >> /etc/motd      
-echo "* "Add this to .bashrc manually PS1='[\u@\h \w $(kube_ps1)]\$ ' " " >> /etc/motd
+echo "* PS1='[\u@\h \w $(kube_ps1)]\$ ' to .bashrc"  >> /etc/motd
 echo "**********************************************************************************************" >> /etc/motd
 
 
