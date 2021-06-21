@@ -167,11 +167,6 @@ echo "Installed Locust..."
 sleep 5
 
 
-################################################################################
-# Clone Useful Repositories
-################################################################################
-git clone https://github.com/cloudacademy/intro-to-k8s.git
-
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."

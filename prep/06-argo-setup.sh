@@ -41,19 +41,21 @@ kubectl create ns ns-argo
 kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/stable/manifests/quick-start-postgres.yaml
 kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
 
-# kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
-# ports:
-#     - name: https # Use http or https
-#        protocol: TCP
-#        port: 8080
-#        targetPort: 8080
-
 kubectl label namespace ns-argo goldilocks.fairwinds.com/enabled=true
 
 # Argo Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-argo.yml"
 
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name argo --record-data www. --record-ttl=43200
+
+################################################################################
+# Argo Setup
+################################################################################
+kubectl create ns ns-argo
+argo submit -n argo --watch https://raw.githubusercontent.com/argoproj/argo/master/examples/hello-world.yaml
+argo list -n argo
+argo get -n argo @latest
+argo logs -n argo @latest
 
 clear
 echo "Installed Argo..."
