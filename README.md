@@ -37,7 +37,7 @@ The Terraform takes 9 minutes and the post build tasks take 11 minutes for a tot
 
 The final state should be a setup similar to the diagram below in about 20 minutes.
 
-![image](https://user-images.githubusercontent.com/18049790/96455039-3d97b180-124f-11eb-80bc-2a72df451592.png)
+![image](https://user-images.githubusercontent.com/18049790/122709822-a1b4be80-d291-11eb-8470-fca6c6413b9d.png)
 
 ## 2. Pre-requisites
 
