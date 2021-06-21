@@ -40,7 +40,7 @@ cd krane
 
 kubectl create \
   --context do-sgp1-digital-ocean-cluster \
-  --namespace krane \
+  --namespace default \
   -f k8s/redisgraph-service.yaml \
   -f k8s/redisgraph-deployment.yaml \
   -f k8s/krane-service.yaml \

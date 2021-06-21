@@ -6,6 +6,11 @@
 # Link : https://opensource.com/article/20/11/knative
 ################################################################################
 
+# To install from digital-ocean-droplet
+# wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/08-knative-install.sh
+# chmod +x 08-knative-install.sh
+# ./08-knative-install.sh
+
 #!/bin/bash
 
 ################################################################################

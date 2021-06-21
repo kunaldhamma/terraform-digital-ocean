@@ -4,6 +4,11 @@
 # Script to install Istio
 ################################################################################
 
+# To install from digital-ocean-droplet
+# wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/06-argo-setup.sh
+# chmod +x 06-argo-setup.sh
+# ./06-argo-setup.sh
+
 #!/bin/bash
 
 ################################################################################

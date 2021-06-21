@@ -6,6 +6,11 @@
 
 # tl;dr - As Terraform is to infrastructure, Waypoint is to applications
 
+# To install from digital-ocean-droplet
+# wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/10-waypoint-setup.sh
+# chmod +x 10-waypoint-setup.sh
+# ./10-waypoint-setup.sh
+
 #!/bin/bash
 
 ################################################################################

@@ -4,6 +4,11 @@
 # Script to install Istio
 ################################################################################
 
+# To install from digital-ocean-droplet
+# wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/05-istio-setup.sh
+# chmod +x 05-istio-setup.sh
+# ./05-istio-setup.sh
+
 #!/bin/bash
 
 ################################################################################

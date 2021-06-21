@@ -4,6 +4,11 @@
 # Script to install Temporal
 ################################################################################
 
+# To install from digital-ocean-droplet
+# wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/07-temporal-setup.sh
+# chmod +x 07-temporal-setup.sh
+# ./07-temporal-setup.sh
+
 #!/bin/bash
 
 ################################################################################
