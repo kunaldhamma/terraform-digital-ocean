@@ -46,8 +46,6 @@ doctl compute domain records create jamesbuckett.com --record-type CNAME --recor
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name loki --record-data www. --record-ttl=43200
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name vpa --record-data www. --record-ttl=43200
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name chaos --record-data www. --record-ttl=43200
-doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name istio --record-data www. --record-ttl=43200
-# doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name argo --record-data www. --record-ttl=43200
 
 ################################################################################
 # Online Boutique - Export the Public IP address of Online Boutique 
@@ -92,11 +90,7 @@ export LOKI_PWD
 ################################################################################
 cd ~
 cp .bashrc .bashrc-original
-# echo "export BOUTIQUE_LB=$BOUTIQUE_LB" >> ~/.bashrc
-# echo "export GOLDILOCKS_LB=$GOLDILOCKS_LB" >> ~/.bashrc
-# echo "export LOKI_LB=$LOKI_LB" >> ~/.bashrc
 echo "export LOKI_PWD=$LOKI_PWD" >> ~/.bashrc
-# echo "export CHAOSMESH_LB=$CHAOSMESH_LB" >> ~/.bashrc
 
 
 ################################################################################

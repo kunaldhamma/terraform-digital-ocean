@@ -168,55 +168,11 @@ helm upgrade \
 # Chaos Mesh Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 
-# If external Load Balancer is required use this command below
-# kubectl patch service/chaos-dashboard -p '{"spec":{"type":"LoadBalancer"}}' --namespace=ns-chaos-mesh
-
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
-sleep 5
-
-
-################################################################################
-# Istio - Service Mesh
-# Link: https://blog.alexellis.io/a-bit-of-istio-before-tea-time/ 
-################################################################################
-
-clear
-echo "Installing Istio..."
-# watch -n 1 kubectl get all -n  ns-istio
-sleep 5
-
-arkade install istio
-
-kubectl create namespace ns-istio
-
-kubectl label namespace ns-istio istio-injection=enabled
-
-kubectl config set-context --current --namespace=ns-istio 
-
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.9/samples/bookinfo/platform/kube/bookinfo.yaml 
-
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.10/samples/addons/kiali.yaml
-
-sleep 10
-
-# This second kubectl apply due to the error below:
-# MonitoringDashboard" in version "monitoring.kiali.io/v1alpha1"
-# unable to recognize "https://raw.githubusercontent.com/istio/istio/release-1.10/samples/addons/kiali.yaml": no matches for kind "
-kubectl apply -f https://raw.githubusercontent.com/istio/istio/release-1.10/samples/addons/kiali.yaml
-
-# Istio Ingress
-kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-istio.yml"
-
-clear
-echo "Installed metrics-server..."
-echo "Installed Micro-services Demo..."
-echo "Installed Loki/Prometheus/Grafana..."
-echo "Installed Chaos Mesh..."
-echo "Installed Istio..."
 sleep 5
 
 
@@ -267,14 +223,12 @@ kubectl label namespace ns-loki  goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-goldilocks goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-demo goldilocks.fairwinds.com/enabled=true
 kubectl label namespace ns-vpa goldilocks.fairwinds.com/enabled=true
-kubectl label namespace ns-istio goldilocks.fairwinds.com/enabled=true
 
 clear
 echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
-echo "Installed Istio..."
 echo "Installed Vertical Pod Autoscaler..."
 sleep 5
 
@@ -285,32 +239,6 @@ sleep 5
 DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
 export DROPLET_ADDR
 
-
-################################################################################
-# Argo - Cloud Native Workflow
-################################################################################
-# kubectl create ns ns-argo
-# kubectl apply -n ns-argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/stable/manifests/quick-start-postgres.yaml
-# kubectl wait -n ns-argo deploy argo-server --for condition=Available --timeout=90s
-
-# kubectl patch svc argo-server -n ns-argo -p '{"spec": {"type": "LoadBalancer"}}'
-# ports:
-#     - name: https # Use http or https
-#        protocol: TCP
-#        port: 8080
-#        targetPort: 8080
-
-# Argo Ingress
-# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-argo.yml"
-
-# clear
-# echo "Installed metrics-server..."
-# echo "Installed Micro-services Demo..."
-# echo "Installed Loki/Prometheus/Grafana..."
-# echo "Installed Chaos Mesh..."
-# echo "Installed Vertical Pod Autoscaler..."
-# echo "Installed Argo..."
-# sleep 5
 
 ################################################################################
 # Update .bashrc
@@ -334,7 +262,6 @@ echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
 echo "Installed Chaos Mesh..."
 echo "Installed Vertical Pod Autoscaler..."
-# echo "Installed Argo..."
 echo " "
 echo "02-cluster-prep.sh complete...rebooting"
 sleep 5s
