@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: ing-istio
-  namespace: ns-istio
+  namespace: ns-istio-sample
 spec:
   rules:
   - host: istio.jamesbuckett.com
