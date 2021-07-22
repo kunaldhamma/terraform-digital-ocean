@@ -71,12 +71,14 @@ sudo mv ./kubectl /usr/local/bin/kubectl
 # Kubernetes Utilities
 ################################################################################
 clear
-echo "Installing K9S and Arkade..."
+echo "Installing Kubernetes Utilities..."
 
 # k9s
 curl -sS https://webinstall.dev/k9s | bash
 # arkade
 curl -sSLf https://dl.get-arkade.dev/ | sudo sh 
+# kustomize
+curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh"  | bash
 
 clear
 echo "Updated the Operating System and installed Python..."

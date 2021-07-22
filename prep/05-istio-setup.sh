@@ -39,7 +39,7 @@ kubectl label namespace ns-istio-sample istio-injection=enabled
 
 kubectl config set-context --current --namespace=ns-istio-sample
 
-kubectl label namespace ns-istio goldilocks.fairwinds.com/enabled=true
+kubectl label namespace ns-istio-sample goldilocks.fairwinds.com/enabled=true
 
 # Istio Ingress
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-istio.yml"
