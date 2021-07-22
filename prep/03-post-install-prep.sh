@@ -97,11 +97,6 @@ chmod +x startup-locust.sh
 ################################################################################
 # Octant Load Balancer - octant.jamesbuckett.com
 ################################################################################
-doctl compute load-balancer create \
-    --name digitalocean-loadbalancer \
-    --region sgp1 \
-    --tag-name digital-ocean-droplet \
-    --forwarding-rules entry_protocol:http,entry_port:80,target_protocol:http,target_port:8900
    
 OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
 export OCTANT_LB
@@ -123,8 +118,12 @@ doctl compute domain records create --record-type A --record-name www --record-d
 # Under Development
 ################################################################################
 
-# Nothing here
+# https://github.com/alcideio/rbac-tool
+curl https://raw.githubusercontent.com/alcideio/rbac-tool/master/download.sh | bash
 
+/root/bin/rbac-tool viz --outformat dot
+
+# rbac.dot
 
 ################################################################################
 # Clear terminal history

@@ -6,8 +6,11 @@
 
 #!/bin/bash
 
+################################################################################
 # Check that you are on jump host and not local host
+################################################################################
 if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
+
 
 ################################################################################
 # doctl - DigitalOcean command-line client authorize access to the Kubernetes Cluster
@@ -85,6 +88,17 @@ kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
 # --namespace=ns-contour \
 # --create-namespace \
 # --wait
+
+
+################################################################################
+# Octant Load Balancer - octant.jamesbuckett.com
+################################################################################
+doctl compute load-balancer create \
+    --name digitalocean-loadbalancer \
+    --region sgp1 \
+    --tag-name digital-ocean-droplet \
+    --forwarding-rules entry_protocol:http,entry_port:80,target_protocol:http,target_port:8900
+
 
 ################################################################################
 # Online Boutique - Sample Microservices Application
