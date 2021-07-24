@@ -97,20 +97,23 @@ chmod +x startup-locust.sh
 ################################################################################
 # Octant Load Balancer - octant.jamesbuckett.com
 ################################################################################
-   
-OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
-export OCTANT_LB
 
-doctl compute domain records create --record-type A --record-name www --record-data $OCTANT_LB octant --record-ttl=43200
+# At script runtime this value is empty - Try to figure out why  
+# OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
+# export OCTANT_LB
+
+# This command to set the LB value to the DNS also fails
+# doctl compute domain records create --record-type A --record-name www --record-data $OCTANT_LB octant --record-ttl=43200
 
 # octant.jamesbuckett.com
 # maps to
-# digitalocean-loadbalancer
+# digitalocean-loadbalancer:80
 # maps to
-# digital-ocean-droplet
+# digital-ocean-droplet:8900
 
-# To Do
-# Add the Health Check to Port 8900 the Octant Port
+# Remeber to 
+# Add the redirect to Port 8900
+# Add the Health Check to Port 8900 - This is very important or it will not work
 #doctl compute load-balancer add-droplets digitalocean-loadbalancer digital-ocean-droplet
 
 
@@ -119,9 +122,9 @@ doctl compute domain records create --record-type A --record-name www --record-d
 ################################################################################
 
 # https://github.com/alcideio/rbac-tool
-curl https://raw.githubusercontent.com/alcideio/rbac-tool/master/download.sh | bash
+# curl https://raw.githubusercontent.com/alcideio/rbac-tool/master/download.sh | bash
 
-/root/bin/rbac-tool viz --outformat dot
+#/root/bin/rbac-tool viz --outformat dot
 
 # rbac.dot
 
