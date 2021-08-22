@@ -55,7 +55,7 @@ sleep 5
 
 # Kourier Installation
 echo "Installing Kourier..."
-export KOURIER="0.17.0"
+export KOURIER="0.25.0"
 kubectl delete namespace kourier-system
 kubectl create namespace kourier-system
 kubectl apply -f https://github.com/knative/net-kourier/releases/download/v$KOURIER/kourier.yaml
