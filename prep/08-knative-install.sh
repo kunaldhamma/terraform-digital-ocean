@@ -68,9 +68,9 @@ kubectl patch configmap/config-network \
 echo "Kourier installed and patched..."
 sleep 5
 
-KOURIER_IP=$(kubectl get service kourier -n kourier-system | awk 'FNR == 2 {print $4}' )
-export KOURIER_IP
-kubectl patch configmap -n knative-serving config-domain -p "{\"data\": {\"$KOURIER_IP.nip.io\": \"\"}}"
+Kourier will create a Digital Ocean Load Balancer 
+
+Assign a Type A record kourier.jamesbuckett.com to the Kourier Loadbalancer
 
 ## Hello World
 kubectl create namespace ns-kn-hello-world
