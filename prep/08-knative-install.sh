@@ -42,7 +42,8 @@ sleep 5
 
 # Knative Installation
 echo "Installing Knative Serving..."
-export KNATIVE="0.17.2"
+export KNATIVE="0.25.0"
+
 kubectl delete namespace knative-serving
 clear
 kubectl create namespace knative-serving
