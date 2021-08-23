@@ -54,23 +54,20 @@ kubectl wait -n knative-serving deploy controller --for condition=Available --ti
 echo "Knative serving installed...."
 sleep 5
 
-# Contour Installation
+# Contour Integration
 kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
   --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
-echo "Contour and patched..."
+echo "Contour patched..."
 sleep 5
 
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name *.knative --record-data www. --record-ttl=43200
 
 ## Hello World
-kubectl create namespace ns-kn-hello-world
-kn service create hello --image gcr.io/knative-samples/helloworld-go --namespace ns-kn-hello-world
 
-kubectl run busybox -i --tty --image=busybox --restart=Never -- sh
+# kn service create hello-example --image gcr.io/knative-samples/helloworld-go --env TARGET="First" -n knative
 
-# kn service delete hello --namespace  ns-kn-hello-world
 
 else
     echo "You are not on the jump host : digital-ocean-droplet"
