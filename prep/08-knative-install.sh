@@ -4,6 +4,7 @@
 # Script to install Knative
 # Create your first Knative app
 # Link : https://opensource.com/article/20/11/knative
+# Link : https://knative.dev/docs/admin/install/serving/install-serving-with-yaml/
 ################################################################################
 
 # To install from digital-ocean-droplet
@@ -44,7 +45,8 @@ sleep 5
 
 # Knative Installation
 echo "Installing Knative Serving..."
-export KNATIVE="0.17.2"
+export KNATIVE="0.25.0"
+
 kubectl delete namespace knative-serving
 clear
 kubectl create namespace knative-serving
@@ -54,32 +56,20 @@ kubectl wait -n knative-serving deploy controller --for condition=Available --ti
 echo "Knative serving installed...."
 sleep 5
 
-# Kourier Installation
-echo "Installing Kourier..."
-export KOURIER="0.17.0"
-kubectl delete namespace kourier-system
-kubectl create namespace kourier-system
-kubectl apply -f https://github.com/knative/net-kourier/releases/download/v$KOURIER/kourier.yaml
-kubectl wait -n kourier-system deploy 3scale-kourier-gateway --for condition=Available --timeout=90s
-
+# Contour Integration
 kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
-  --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
-echo "Kourier installed and patched..."
+  --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
+echo "Contour patched..."
 sleep 5
 
-KOURIER_IP=$(kubectl get service kourier -n kourier-system | awk 'FNR == 2 {print $4}' )
-export KOURIER_IP
-kubectl patch configmap -n knative-serving config-domain -p "{\"data\": {\"$KOURIER_IP.nip.io\": \"\"}}"
+doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name *.knative --record-data www. --record-ttl=43200
 
 ## Hello World
-kubectl create namespace ns-kn-hello-world
-kn service create hello --image gcr.io/knative-samples/helloworld-go --namespace ns-kn-hello-world
 
-kubectl run busybox -i --tty --image=busybox --restart=Never -- sh
+# kn service create hello-example --image gcr.io/knative-samples/helloworld-go --env TARGET="First" -n knative
 
-# kn service delete hello --namespace  ns-kn-hello-world
 
 else
     echo "You are not on the jump host : digital-ocean-droplet"
