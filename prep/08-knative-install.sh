@@ -4,6 +4,7 @@
 # Script to install Knative
 # Create your first Knative app
 # Link : https://opensource.com/article/20/11/knative
+# Link : https://knative.dev/docs/admin/install/serving/install-serving-with-yaml/
 ################################################################################
 
 # To install from digital-ocean-droplet
