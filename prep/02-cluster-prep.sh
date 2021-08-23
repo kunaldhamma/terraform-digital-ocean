@@ -82,7 +82,15 @@ sleep 5
 # Contour - Ingress
 ################################################################################
 
-kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
+kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/contour.yaml
+kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/net-contour.yaml
+
+kubectl patch configmap/config-network \
+  --namespace knative-serving \
+  --type merge \
+  --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
+
+# kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
 
 # helm uninstall contour-release
 # helm upgrade --install contour-release stable/contour \
