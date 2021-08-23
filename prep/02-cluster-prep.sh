@@ -78,6 +78,14 @@ clear
 echo "Installed metrics-server..."
 sleep 5
 
+
+################################################################################
+# Knative - Event Driven
+################################################################################
+kubectl apply -f https://github.com/knative/serving/releases/download/v0.24.0/serving-crds.yaml
+kubectl apply -f https://github.com/knative/serving/releases/download/v0.24.0/serving-core.yaml
+
+
 ################################################################################
 # Contour - Ingress
 ################################################################################
@@ -98,13 +106,6 @@ kubectl patch configmap/config-network \
 # --namespace=ns-contour \
 # --create-namespace \
 # --wait
-
-
-################################################################################
-# Knative - Event Driven
-################################################################################
-kubectl apply -f https://github.com/knative/serving/releases/download/v0.24.0/serving-crds.yaml
-kubectl apply -f https://github.com/knative/serving/releases/download/v0.24.0/serving-core.yaml
 
 
 ################################################################################
