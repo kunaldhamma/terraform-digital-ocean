@@ -49,8 +49,8 @@ sleep 5
 clear
 echo "Installing the Digital Ocean Command Line Interface..."
 cd ~/ && mkdir doctl && cd doctl
-curl -LO https://github.com/digitalocean/doctl/releases/download/v1.60.0/doctl-1.60.0-linux-amd64.tar.gz 
-tar -xvf doctl-1.60.0-linux-amd64.tar.gz
+curl -LO https://github.com/digitalocean/doctl/releases/download/v1.64.0/doctl-1.64.0-linux-amd64.tar.gz 
+tar -xvf doctl-1.64.0-linux-amd64.tar.gz
 sudo mv ~/doctl/doctl /usr/local/bin
 clear
 echo "Updated the Operating System and installed Python..."
@@ -119,8 +119,8 @@ sudo git clone https://github.com/jonmosco/kube-ps1.git /opt/kube-ps1
 clear
 echo "Installing Helm 3..."
 cd ~/ && mkdir helm-3 && cd helm-3
-wget https://get.helm.sh/helm-v3.6.1-linux-amd64.tar.gz
-tar -zxvf helm-v3.6.1-linux-amd64.tar.gz
+wget https://get.helm.sh/helm-v3.6.3-linux-amd64.tar.gz
+tar -zxvf helm-v3.6.3-linux-amd64.tar.gz
 sudo mv linux-amd64/helm /usr/local/bin/helm
 helm repo add stable https://charts.helm.sh/stable
 clear
@@ -138,9 +138,9 @@ sleep 5
 clear
 echo "Installing Octant..."
 cd ~/ && mkdir octant && cd octant
-curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.21.0/octant_0.21.0_Linux-64bit.tar.gz
-tar -xvf octant_0.21.0_Linux-64bit.tar.gz
-sudo mv ./octant_0.21.0_Linux-64bit/octant /usr/local/bin/octant
+curl -LO https://github.com/vmware-tanzu/octant/releases/download/v0.23.0/octant_0.23.0_Linux-64bit.tar.gz
+tar -xvf octant_0.23.0_Linux-64bit.tar.gz
+sudo mv ./octant_0.23.0_Linux-64bit/octant /usr/local/bin/octant
 
 clear
 echo "Updated the Operating System and installed Python..."
