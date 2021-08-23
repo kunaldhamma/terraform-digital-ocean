@@ -22,6 +22,8 @@ if [ "$HOSTNAME" = "digital-ocean-droplet" ]; then
 # Stop the script on errors
 ################################################################################
 set -euo pipefail
+set -o nounset
+set -o errexit
 
 clear
 echo "Installing Knative..."
