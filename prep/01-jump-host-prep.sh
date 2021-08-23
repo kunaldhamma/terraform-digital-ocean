@@ -26,6 +26,8 @@ rm /usr/local/bin/kubens
 # Stop the script on errors
 ################################################################################
 set -euo pipefail
+set -o nounset
+set -o errexit
 
 ################################################################################
 # Preparation of the Operating System

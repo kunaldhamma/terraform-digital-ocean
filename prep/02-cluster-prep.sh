@@ -57,6 +57,8 @@ clear
 # Stop the script on errors
 ################################################################################
 set -euo pipefail
+set -o nounset
+set -o errexit
 
 ################################################################################
 # metrics server - container resource metrics
