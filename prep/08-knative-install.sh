@@ -57,16 +57,15 @@ echo "Knative serving installed...."
 sleep 5
 
 # Contour Integration
-kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/net-contour.yaml
-
-kubectl patch configmap/config-network \
-  --namespace knative-serving \
-  --type merge \
-  --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
-echo "Contour patched..."
+kubectl --namespace contour-external get service envoy
 sleep 5
 
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name *.knative --record-data www. --record-ttl=43200
+
+kubectl patch configmap/config-domain \
+  --namespace knative-serving \
+  --type merge \
+  --patch '{"data":{"knative.example.com":""}}'
 
 ## Hello World
 
