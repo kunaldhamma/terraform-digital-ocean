@@ -57,6 +57,8 @@ echo "Knative serving installed...."
 sleep 5
 
 # Contour Integration
+kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/net-contour.yaml
+
 kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
