@@ -54,24 +54,15 @@ kubectl wait -n knative-serving deploy controller --for condition=Available --ti
 echo "Knative serving installed...."
 sleep 5
 
-# Kourier Installation
-echo "Installing Kourier..."
-export KOURIER="0.25.0"
-kubectl delete namespace kourier-system
-kubectl create namespace kourier-system
-kubectl apply -f https://github.com/knative/net-kourier/releases/download/v$KOURIER/kourier.yaml
-kubectl wait -n kourier-system deploy 3scale-kourier-gateway --for condition=Available --timeout=90s
-
+# Contour Installation
 kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
-  --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
-echo "Kourier installed and patched..."
+  --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
+echo "Contour and patched..."
 sleep 5
 
-Kourier will create a Digital Ocean Load Balancer 
-
-Assign a Type A record kourier.jamesbuckett.com to the Kourier Loadbalancer
+doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name *.knative --record-data www. --record-ttl=43200
 
 ## Hello World
 kubectl create namespace ns-kn-hello-world
