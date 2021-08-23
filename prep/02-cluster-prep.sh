@@ -172,33 +172,33 @@ sleep 5
 # Link: https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier
 ################################################################################
 
-helm repo add chaos-mesh https://charts.chaos-mesh.org
-helm repo update
-curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
+# helm repo add chaos-mesh https://charts.chaos-mesh.org
+# helm repo update
+# curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
 
-clear
-echo "Installing Chaos Mesh..."
-# watch -n 1 kubectl get all -n  ns-chaos-mesh
-sleep 5
+# clear
+# echo "Installing Chaos Mesh..."
+# # watch -n 1 kubectl get all -n  ns-chaos-mesh
+# sleep 5
 
-helm upgrade \
---install chaos-mesh-release chaos-mesh/chaos-mesh \
---set dashboard.create=true \
---set dashboard.securityMode=false \
---set chaosDaemon.hostNetwork=true \
---namespace=ns-chaos \
---create-namespace \
---wait
+# helm upgrade \
+# --install chaos-mesh-release chaos-mesh/chaos-mesh \
+# --set dashboard.create=true \
+# --set dashboard.securityMode=false \
+# --set chaosDaemon.hostNetwork=true \
+# --namespace=ns-chaos \
+# --create-namespace \
+# --wait
 
-# Chaos Mesh Ingress
-kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
+# # Chaos Mesh Ingress
+# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 
-clear
-echo "Installed metrics-server..."
-echo "Installed Micro-services Demo..."
-echo "Installed Loki/Prometheus/Grafana..."
-echo "Installed Chaos Mesh..."
-sleep 5
+# clear
+# echo "Installed metrics-server..."
+# echo "Installed Micro-services Demo..."
+# echo "Installed Loki/Prometheus/Grafana..."
+# echo "Installed Chaos Mesh..."
+# sleep 5
 
 
 ################################################################################
