@@ -125,13 +125,6 @@ echo "Installed Micro-services Demo..."
 sleep 5
 
 ################################################################################
-# Gremlin - Managed Chaos Engineering Platfom
-# helm repo remove gremlin
-# helm repo add gremlin https://helm.gremlin.com
-# helm repo update
-################################################################################
-
-################################################################################
 # Loki -  Distributed Log Aggregation
 ################################################################################
 
