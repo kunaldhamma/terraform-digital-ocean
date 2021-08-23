@@ -30,46 +30,28 @@ clear
 echo "Installing Knative..."
 sleep 5
 
-# Knative CLI install
-clear
-echo "Installing Knative CLI..."
-cd ~/ && rm -R ~/knative
-cd ~/ && mkdir knative && cd knative
-wget https://storage.googleapis.com/knative-nightly/client/latest/kn-linux-amd64
-chmod +x kn-linux-amd64
-mv kn-linux-amd64 kn
-sudo cp kn /usr/local/bin
-kn version
-echo "Knative CLI installed..."
-sleep 5
-
-# Knative Installation
-echo "Installing Knative Serving..."
-export KNATIVE="0.25.0"
-
-kubectl delete namespace knative-serving
-clear
-kubectl create namespace knative-serving
-kubectl apply -f https://github.com/knative/serving/releases/download/v$KNATIVE/serving-crds.yaml
-kubectl apply -f https://github.com/knative/serving/releases/download/v$KNATIVE/serving-core.yaml
-kubectl wait -n knative-serving deploy controller --for condition=Available --timeout=90s
-echo "Knative serving installed...."
-sleep 5
-
 # Contour Integration
+
 kubectl --namespace contour-external get service envoy
-sleep 5
 
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name *.knative --record-data www. --record-ttl=43200
 
-kubectl patch configmap/config-domain \
-  --namespace knative-serving \
-  --type merge \
-  --patch '{"data":{"knative.example.com":""}}'
+kubectl patch configmap/config-domain   --namespace knative-serving   --type merge   --patch '{"data":{"knative.jamesbuckett.com":""}}'
 
 ## Hello World
 
-# kn service create hello-example --image gcr.io/knative-samples/helloworld-go --env TARGET="First" -n knative
+# kn service create hello-example --image gcr.io/knative-samples/helloworld-go --env TARGET="First" -n ns-knative
+
+# kn service update hello-example --env TARGET=Second -n ns-knative
+
+# kn revision list
+
+# kn revision describe 
+
+# kn service update hello-example --image gcr.io/knative-samples/helloworld-rust
+
+# Split Service
+# kn service update hello-example --traffic hello-example-bqbbr-2=50 --traffic hello-example-nfwgx-3=50
 
 
 else

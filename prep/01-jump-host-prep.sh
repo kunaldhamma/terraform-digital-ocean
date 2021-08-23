@@ -171,6 +171,21 @@ echo "Installed Locust..."
 sleep 5
 
 
+################################################################################
+# Knative CLI
+################################################################################
+clear
+echo "Installing Knative CLI..."
+cd ~/ && rm -R ~/knative
+cd ~/ && mkdir knative && cd knative
+wget https://storage.googleapis.com/knative-nightly/client/latest/kn-linux-amd64
+chmod +x kn-linux-amd64
+mv kn-linux-amd64 kn
+sudo cp kn /usr/local/bin
+kn version
+echo "Knative CLI installed..."
+sleep 5
+
 clear
 echo "Updated the Operating System and installed Python..."
 echo "Installed the Digital Ocean Command Line Interface..."
@@ -180,6 +195,7 @@ echo "Installed kubectx and kubens..."
 echo "Installed Helm 3..."
 echo "Installed Octant..."
 echo "Installed Locust..."
+echo "Installed Knative CLI"
 echo " "
 echo "01-jump-host-prep.sh complete...rebooting"
 sleep 5s
