@@ -73,6 +73,9 @@ echo " "
 ################################################################################
 doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
 doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
+doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
+doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
+doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
 printf "%s\n" "digital-ocean-droplet volume deleted"
 echo " "
 
