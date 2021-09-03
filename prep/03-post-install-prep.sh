@@ -100,6 +100,11 @@ chmod +x startup-locust.sh
 # Octant Load Balancer - octant.jamesbuckett.com
 ################################################################################
 
+# Under Construction ex[ect this to break]
+OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $1}')
+OCTANT_DROPLET=$(doctl compute droplet list | awk 'FNR == 2 {print $1}')
+doctl compute load-balancer add-droplets $OCTANT_LB --droplet-ids $OCTANT_DROPLET
+
 # At script runtime this value is empty - Try to figure out why  
 # OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
 # export OCTANT_LB
