@@ -75,6 +75,11 @@ echo " "
 ################################################################################
 for i in {0..2}
 do
+doctl compute volume-action detach | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
+done
+
+for i in {0..2}
+do
    doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
 done
 
