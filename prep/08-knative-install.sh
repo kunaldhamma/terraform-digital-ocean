@@ -30,13 +30,29 @@ clear
 echo "Installing Knative..."
 sleep 5
 
-# Contour Integration
+################################################################################
+# Knative - Event Driven
+################################################################################
+kubectl apply -f https://github.com/knative/serving/releases/download/v0.25.0/serving-crds.yaml
+kubectl apply -f https://github.com/knative/serving/releases/download/v0.25.0/serving-core.yaml
 
-kubectl --namespace contour-external get service envoy
+kubectl apply -f https://github.com/knative/net-kourier/releases/download/v0.25.0/kourier.yaml
 
-doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name *.knative --record-data www. --record-ttl=43200
+kubectl patch configmap/config-network \
+  --namespace knative-serving \
+  --type merge \
+  --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
 
-kubectl patch configmap/config-domain   --namespace knative-serving   --type merge   --patch '{"data":{"knative.jamesbuckett.com":""}}'
+################################################################################
+# Knative Ingress Loadbalancer
+################################################################################
+
+KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
+export KNATIVE_LB
+
+doctl compute domain records create --record-type A --record-name *.knative --record-data $KNATIVE_LB jamesbuckett.com --record-ttl=43200
+
+kubectl patch configmap/config-domain   --namespace knative-serving   --type merge   --patch '{"data":{"knative.jamesbuckett.com":""}}'  
 
 ## Hello Example
 

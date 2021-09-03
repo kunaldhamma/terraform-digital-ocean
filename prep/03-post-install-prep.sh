@@ -42,9 +42,13 @@ git clone https://github.com/jamesbuckett/intro-to-k8s.git
 # to the "do.jamesbuckett.com" A record  
 
 # kubectl config set-context --current --namespace=projectcontour
-# INGRESS_LB=(kubectl get service | 'grep -i envoy | awk 'FNR == 1 {print $4}''
+# INGRESS_LB=(kubectl get service | (grep -i envoy) | (awk 'FNR == 1 {print $4}'))
 
-INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
+# Verify that this IP Addess: kubectl get service | grep -i envoy | awk 'FNR == 1 {print $4}'
+# Is the same as this IP Addess: doctl compute load-balancer list | awk 'FNR == 3 {print $2}'
+# This is the External IP Address of the Contour Load Balancer
+
+INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
 export INGRESS_LB
 
 doctl compute domain records create --record-type A --record-name www --record-data $INGRESS_LB jamesbuckett.com --record-ttl=43200
@@ -52,18 +56,6 @@ doctl compute domain records create jamesbuckett.com --record-type CNAME --recor
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name loki --record-data www. --record-ttl=43200
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name vpa --record-data www. --record-ttl=43200
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name chaos --record-data www. --record-ttl=43200
-
-
-################################################################################
-# Knative Ingress Loadbalancer
-################################################################################
-
-KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
-export KNATIVE_LB
-
-doctl compute domain records create --record-type A --record-name *.knative --record-data $KNATIVE_LB jamesbuckett.com --record-ttl=43200
-
-kubectl patch configmap/config-domain   --namespace knative-serving   --type merge   --patch '{"data":{"knative.jamesbuckett.com":""}}'
 
 
 ################################################################################
@@ -123,10 +115,6 @@ OCTANT_DROPLET=$(doctl compute droplet list | awk 'FNR == 2 {print $1}')
 export OCTANT_DROPLET
 
 doctl compute load-balancer add-droplets $OCTANT_LB --droplet-ids $OCTANT_DROPLET
-
-# At script runtime this value is empty - Try to figure out why  
-# OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
-# export OCTANT_LB
 
 # This command to set the LB value to the DNS also fails
 # doctl compute domain records create --record-type A --record-name www --record-data $OCTANT_LB octant --record-ttl=43200
