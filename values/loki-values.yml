@@ -4,8 +4,9 @@
 
 loki:
   enabled: true
-  image:
-    tag: 2.2.0
+  persistence.enabled: true
+  persistence.storageClassName: standard
+  persistence.size: 5Gi
 
 promtail:
   enabled: true
@@ -20,17 +21,13 @@ grafana:
   sidecar:
     datasources:
       enabled: true
-  image:
-    tag: 7.5.2
   service:
-### Contour Testing ###
-### Added line below from type: LoadBalancer to ClusterIP
-    #type: LoadBalancer    
+    ### Contour Testing ###
+    ### Added line below from type: LoadBalancer to ClusterIP
+    #type: LoadBalancer
     type: ClusterIP
-  
+
 prometheus:
   enabled: true
   alertmanager.persistentVolume.enabled: false
   server.persistentVolume.enabled: false
-  image:
-    tag: 2.25.2
