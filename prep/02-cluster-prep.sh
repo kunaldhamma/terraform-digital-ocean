@@ -71,7 +71,6 @@ sleep 5
 
 # kubectl create ns ns-metrics-server
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/kubernetes-tools/master/components.yaml"
 kubectl wait -n kube-system deploy metrics-server --for condition=Available --timeout=90s
 
 clear
@@ -90,15 +89,17 @@ kubectl apply -f https://github.com/knative/serving/releases/download/v0.24.0/se
 # Contour - Ingress
 ################################################################################
 
-kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/contour.yaml
-kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/net-contour.yaml
+# Knative with Contour Ingress
+# kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/contour.yaml
+# kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/net-contour.yaml
 
-kubectl patch configmap/config-network \
-  --namespace knative-serving \
-  --type merge \
-  --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
+# kubectl patch configmap/config-network \
+#   --namespace knative-serving \
+#   --type merge \
+#  --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
 
-# kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
+# Regular Contour 
+kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
 
 # helm uninstall contour-release
 # helm upgrade --install contour-release stable/contour \
@@ -172,26 +173,27 @@ sleep 5
 # Link: https://pingcap.com/blog/Chaos-Mesh-1.0-Chaos-Engineering-on-Kubernetes-Made-Easier
 ################################################################################
 
-# helm repo add chaos-mesh https://charts.chaos-mesh.org
-# helm repo update
-# curl -sSL https://mirrors.chaos-mesh.org/v1.0.0/crd.yaml | kubectl apply -f -
+helm repo add chaos-mesh https://charts.chaos-mesh.org
+helm repo update
+curl -sSL https://mirrors.chaos-mesh.org/latest/crd.yaml | kubectl apply -f -
 
-# clear
-# echo "Installing Chaos Mesh..."
-# # watch -n 1 kubectl get all -n  ns-chaos-mesh
-# sleep 5
 
-# helm upgrade \
-# --install chaos-mesh-release chaos-mesh/chaos-mesh \
-# --set dashboard.create=true \
-# --set dashboard.securityMode=false \
-# --set chaosDaemon.hostNetwork=true \
-# --namespace=ns-chaos \
-# --create-namespace \
-# --wait
+clear
+echo "Installing Chaos Mesh..."
+# watch -n 1 kubectl get all -n  ns-chaos-mesh
+sleep 5
 
-# # Chaos Mesh Ingress
-# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
+helm upgrade \
+--install chaos-mesh-release chaos-mesh/chaos-mesh \
+--set dashboard.create=true \
+--set dashboard.securityMode=false \
+--set chaosDaemon.hostNetwork=true \
+--namespace=ns-chaos \
+--create-namespace \
+--wait
+
+# Chaos Mesh Ingress
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 
 # clear
 # echo "Installed metrics-server..."
