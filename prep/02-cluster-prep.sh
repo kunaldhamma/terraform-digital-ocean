@@ -84,19 +84,25 @@ sleep 5
 kubectl apply -f https://github.com/knative/serving/releases/download/v0.24.0/serving-crds.yaml
 kubectl apply -f https://github.com/knative/serving/releases/download/v0.24.0/serving-core.yaml
 
+kubectl apply -f https://github.com/knative/net-kourier/releases/download/v0.25.0/kourier.yaml
+
+kubectl patch configmap/config-network \
+  --namespace knative-serving \
+  --type merge \
+  --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
 
 ################################################################################
 # Contour - Ingress
 ################################################################################
 
 # Knative with Contour Ingress
-kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/contour.yaml
-kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/net-contour.yaml
+# kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/contour.yaml
+# kubectl apply -f https://github.com/knative/net-contour/releases/download/v0.24.0/net-contour.yaml
 
-kubectl patch configmap/config-network \
-   --namespace knative-serving \
-   --type merge \
-  --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
+# kubectl patch configmap/config-network \
+#   --namespace knative-serving \
+#   --type merge \
+#  --patch '{"data":{"ingress.class":"contour.ingress.networking.knative.dev"}}'
 
 # Regular Contour 
 # kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
@@ -118,10 +124,6 @@ doctl compute load-balancer create \
     --tag-name digital-ocean-droplet \
     --forwarding-rules entry_protocol:http,entry_port:80,target_protocol:http,target_port:8900
 
-OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $1}')
-OCTANT_DROPLET=$(doctl compute droplet list | awk 'FNR == 2 {print $1}')
-
-doctl compute load-balancer add-droplets $OCTANT_LB --droplet-ids $OCTANT_DROPLET
 
 ################################################################################
 # Online Boutique - Sample Microservices Application
@@ -182,15 +184,11 @@ sleep 5
 ################################################################################
 
 helm repo add chaos-mesh https://charts.chaos-mesh.org
-helm search repo chaos-mesh
-curl -sSL https://mirrors.chaos-mesh.org/v0.9.1/crd.yaml | kubectl apply -f -
 
 clear
 echo "Installing Chaos Mesh..."
-# watch -n 1 kubectl get all -n  ns-chaos-mesh
+# watch -n 1 kubectl get all -n  ns-chaos
 sleep 5
-
-helm install chaos-mesh chaos-mesh/chaos-mesh --namespace=chaos-testing
 
 helm upgrade \
 --install chaos-mesh-release chaos-mesh/chaos-mesh \
@@ -202,14 +200,14 @@ helm upgrade \
 --wait
 
 # # Chaos Mesh Ingress
-# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-chaos.yml"
 
-# clear
-# echo "Installed metrics-server..."
-# echo "Installed Micro-services Demo..."
-# echo "Installed Loki/Prometheus/Grafana..."
-# echo "Installed Chaos Mesh..."
-# sleep 5
+clear
+echo "Installed metrics-server..."
+echo "Installed Micro-services Demo..."
+echo "Installed Loki/Prometheus/Grafana..."
+echo "Installed Chaos Mesh..."
+sleep 5
 
 
 ################################################################################

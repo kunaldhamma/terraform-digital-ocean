@@ -35,9 +35,8 @@ set -o errexit
 ################################################################################
 clear
 echo "Updating the Operating System and installing Python..."
-DEBIAN_FRONTEND=noninteractive 
 sudo apt-get update
-sudo apt-get upgrade -y
+sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 sudo apt install -y python3-pip -y
 sudo apt install -y unzip -y
 clear

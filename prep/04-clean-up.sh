@@ -61,8 +61,10 @@ echo " "
 ################################################################################
 
 # Contour Ingress - Only single Load Balancer 
-doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
-doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
+for i in {0..1}
+do
+   doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
+done
 
 printf "%s\n" "digital-ocean-loadbalancers deleted"
 echo " "
@@ -71,11 +73,11 @@ echo " "
 ################################################################################
 # Volumes
 ################################################################################
-doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
-doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
-doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
-doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
-doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
+for i in {0..2}
+do
+   doctl compute volume list | awk 'FNR == 2 {print $1}' | xargs doctl compute volume delete -f
+done
+
 printf "%s\n" "digital-ocean-droplet volume deleted"
 echo " "
 
