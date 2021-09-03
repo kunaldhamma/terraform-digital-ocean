@@ -93,13 +93,6 @@ sleep 5
 # Regular Contour 
 kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
 
-# helm uninstall contour-release
-# helm upgrade --install contour-release stable/contour \
-# --set service.loadBalancerType=LoadBalancer \
-# --namespace=ns-contour \
-# --create-namespace \
-# --wait
-
 
 ################################################################################
 # Knative - Event Driven
