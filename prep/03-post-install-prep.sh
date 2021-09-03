@@ -33,6 +33,7 @@ set -o errexit
 git clone https://github.com/jamesbuckett/intro-to-k8s.git
 #kubectl apply -f ~/intro-to-k8s/src
 
+
 ################################################################################
 # Contour Ingress - Export the Public IP address of Contour Ingress 
 ################################################################################
@@ -48,6 +49,15 @@ doctl compute domain records create jamesbuckett.com --record-type CNAME --recor
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name loki --record-data www. --record-ttl=43200
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name vpa --record-data www. --record-ttl=43200
 doctl compute domain records create jamesbuckett.com --record-type CNAME --record-name chaos --record-data www. --record-ttl=43200
+
+
+################################################################################
+# Knative Ingress Loadbalancer
+################################################################################
+
+KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
+export KNATIVE_LB
+doctl compute domain records create --record-type A --record-name *.knative --record-data $KNATIVE_LB jamesbuckett.com --record-ttl=43200
 
 
 ################################################################################

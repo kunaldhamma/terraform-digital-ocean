@@ -61,7 +61,7 @@ echo " "
 ################################################################################
 
 # Contour Ingress - Only single Load Balancer 
-for i in {0..1}
+for i in {0..2}
 do
    doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
 done

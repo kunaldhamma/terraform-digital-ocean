@@ -284,7 +284,7 @@ spec:
 cd ~/ && rm -R ~/clean-up
 clear
 cd ~/ && mkdir clean-up && cd clean-up
-wget wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/04-clean-up.sh
+wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/04-clean-up.sh
 chmod +x 04-clean-up.sh
 ./04-clean-up.sh
 ```
