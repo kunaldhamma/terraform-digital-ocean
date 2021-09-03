@@ -41,7 +41,9 @@ git clone https://github.com/jamesbuckett/intro-to-k8s.git
 # The host names, like "demo.jamesbuckett.com" are CNAME records 
 # to the "do.jamesbuckett.com" A record  
 
-INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
+kubectl config set-context --current --namespace=projectcontour
+
+INGRESS_LB=(kubectl get service | grep -i envoy | awk 'FNR == 1 {print $4}')
 export INGRESS_LB
 
 doctl compute domain records create --record-type A --record-name www --record-data $INGRESS_LB jamesbuckett.com --record-ttl=43200
@@ -55,7 +57,7 @@ doctl compute domain records create jamesbuckett.com --record-type CNAME --recor
 # Knative Ingress Loadbalancer
 ################################################################################
 
-KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
+KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
 export KNATIVE_LB
 
 doctl compute domain records create --record-type A --record-name *.knative --record-data $KNATIVE_LB jamesbuckett.com --record-ttl=43200
