@@ -170,6 +170,14 @@ Reference URLs in this tutorial
 **********************************************************************************************
 ```
 
+If websites take awhile to come up try clearing the DNS cache:
+
+- Click Start
+- Enter cmd in the Start menu search text box
+- Right-click Command Prompt and select Run as Administrator
+- Run the following command:
+- ipconfig /flushdns
+
 ## 5. Setup and Testing
 
 ### 5.1 Loki
