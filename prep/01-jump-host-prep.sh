@@ -18,6 +18,7 @@ cd ~/ && rm -R ~/doctl
 cd ~/ && rm -R ~/kubectl
 cd ~/ && rm -R ~/helm-3
 cd ~/ && rm -R ~/octant
+cd ~/ && rm -R ~/knative
 rm -R /opt/kubectx
 rm /usr/local/bin/kubectx
 rm /usr/local/bin/kubens
@@ -177,7 +178,6 @@ sleep 5
 ################################################################################
 clear
 echo "Installing Knative CLI..."
-cd ~/ && rm -R ~/knative
 cd ~/ && mkdir knative && cd knative
 wget https://storage.googleapis.com/knative-nightly/client/latest/kn-linux-amd64
 chmod +x kn-linux-amd64
