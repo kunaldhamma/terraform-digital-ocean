@@ -57,7 +57,10 @@ doctl compute domain records create jamesbuckett.com --record-type CNAME --recor
 
 KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
 export KNATIVE_LB
+
 doctl compute domain records create --record-type A --record-name *.knative --record-data $KNATIVE_LB jamesbuckett.com --record-ttl=43200
+
+kubectl patch configmap/config-domain   --namespace knative-serving   --type merge   --patch '{"data":{"knative.jamesbuckett.com":""}}'
 
 
 ################################################################################
