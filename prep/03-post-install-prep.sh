@@ -48,7 +48,7 @@ git clone https://github.com/jamesbuckett/intro-to-k8s.git
 # Is the same as this IP Addess: doctl compute load-balancer list | awk 'FNR == 3 {print $2}'
 # This is the External IP Address of the Contour Load Balancer
 
-INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
+INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
 export INGRESS_LB
 
 doctl compute domain records create --record-type A --record-name www --record-data $INGRESS_LB jamesbuckett.com --record-ttl=43200
@@ -103,6 +103,7 @@ wget https://raw.githubusercontent.com/jamesbuckett/microservices-metrics-chaos/
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/service/startup-locust.sh
 chmod +x startup-locust.sh
 
+echo "fs.file-max=500000" >> /etc/sysctl.conf
 
 ################################################################################
 # Octant Load Balancer - octant.jamesbuckett.com

@@ -3,18 +3,29 @@ kind: Ingress
 metadata:
   name: ing-demo
   namespace: ns-demo
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true" # To enable the automatic redirect from HTTP to HTTPS
+    kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
 spec:
+  tls:
+    - secretName: ing-demo-secret
+      hosts:
+        - demo.jamesbuckett.com
   rules:
-  - host: demo.jamesbuckett.com
-    http:
-      paths:
-      - backend:
-          serviceName: frontend
-          servicePort: 80
+    - host: demo.jamesbuckett.com
+      http:
+        paths:
+          - backend:
+              serviceName: frontend
+              servicePort: 80
+# Remember that for each HTTPS website you deploy, cert-manager will create a Certificate CRD that provides the domain name and the name of the target Secret.
+# The TLS functionality will be enabled when the HTTPProxy contains the tls: stanza, and the referenced secret contains a valid keypair.
 
-# Ingress and IngressClass resources have graduated to `networking.k8s.io/v1`. 
-# Ingress and IngressClass types in the `extensions/v1beta1` and `networking.k8s.io/v1beta1` API versions are deprecated and will no longer be served in 1.22+. 
-# Persisted objects can be accessed via the `networking.k8s.io/v1` API. 
+# Ingress and IngressClass resources have graduated to `networking.k8s.io/v1`.
+# Ingress and IngressClass types in the `extensions/v1beta1` and `networking.k8s.io/v1beta1` API versions are deprecated and will no longer be served in 1.22+.
+# Persisted objects can be accessed via the `networking.k8s.io/v1` API.
 # Notable changes in v1 Ingress objects (v1beta1 field names are unchanged):
 # * `spec.backend` -> `spec.defaultBackend`
 # * `serviceName` -> `service.name`
@@ -23,4 +34,4 @@ spec:
 # * `pathType` no longer has a default value in v1; "Exact", "Prefix", or "ImplementationSpecific" must be specified
 # Other Ingress API updates:
 # * backends can now be resource or service backends
-# * `path` is no longer required to be a valid regular expression          
+# * `path` is no longer required to be a valid regular expression

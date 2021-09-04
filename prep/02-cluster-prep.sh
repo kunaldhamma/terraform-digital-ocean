@@ -93,6 +93,11 @@ sleep 5
 # Regular Contour 
 kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
 
+# cert-manager for https
+# https://projectcontour.io/guides/cert-manager/
+arkade install cert-manager
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/letsencrypt-prod.yml"
+
 
 ################################################################################
 # Octant Load Balancer - octant.jamesbuckett.com

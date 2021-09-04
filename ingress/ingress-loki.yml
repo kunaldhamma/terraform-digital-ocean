@@ -3,11 +3,20 @@ kind: Ingress
 metadata:
   name: ing-loki
   namespace: ns-loki
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
 spec:
+  tls:
+    - secretName: ing-loki-secret
+      hosts:
+        - loki.jamesbuckett.com
   rules:
-  - host: loki.jamesbuckett.com
-    http:
-      paths:
-      - backend:
-          serviceName: loki-release-grafana
-          servicePort: 80
+    - host: loki.jamesbuckett.com
+      http:
+        paths:
+          - backend:
+              serviceName: loki-release-grafana
+              servicePort: 80

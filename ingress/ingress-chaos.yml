@@ -3,11 +3,20 @@ kind: Ingress
 metadata:
   name: ing-chaos-mesh
   namespace: ns-chaos
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
 spec:
+  tls:
+    - secretName: ing-chaos-secret
+      hosts:
+        - chaos.jamesbuckett.com
   rules:
-  - host: chaos.jamesbuckett.com
-    http:
-      paths:
-      - backend:
-          serviceName: chaos-dashboard
-          servicePort: 2333
+    - host: chaos.jamesbuckett.com
+      http:
+        paths:
+          - backend:
+              serviceName: chaos-dashboard
+              servicePort: 2333
