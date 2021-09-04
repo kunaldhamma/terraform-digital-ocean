@@ -47,6 +47,9 @@ kubectl patch configmap/config-network \
 # Knative Ingress Loadbalancer
 ################################################################################
 
+# This did not work suspect the Load Balancer was not ready yet, try putting in a sleep
+sleep 60
+
 KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
 export KNATIVE_LB
 
@@ -58,6 +61,11 @@ kubectl patch configmap/config-domain   --namespace knative-serving   --type mer
 
 # Check clean slate
 # kn service list
+
+# Create Knative namespace
+kubectl create ns ns-knative
+
+# Deployments
 
 # Deploy first application passing environment variable=TARGET="First"
 # kn service create hello-example --image gcr.io/knative-samples/helloworld-go --env TARGET="First" -n ns-knative
@@ -91,6 +99,17 @@ kubectl patch configmap/config-domain   --namespace knative-serving   --type mer
 # Should be: "Hello Second!" 50%
 # Should be: "Hello world: Second" 50% 
 
+# kn revision describe hello-example-00003
+# Conditions:
+#   OK TYPE                  AGE REASON - OK gives the quick summary about whether the news is good or bad.
+#   ++ Ready                  8h - The Ready condition, for example, surfaces the result of an underlying Kubernetes readiness probe.
+#   ++ ContainerHealthy       8h - 
+#   ++ ResourcesAvailable     8h
+#    I Active                 8h NoTraffic - “As of 8 hours ago, the Active condition has an Informational status due to NoTraffic.”
+
+# When the Active condition gives NoTraffic as a reason, that means there are no active instances of the Revision running.
+# kn route list
+# curl http://hello-example.ns-knative.knative.jamesbuckett.com
 
 else
     echo "You are not on the jump host : digital-ocean-droplet"
