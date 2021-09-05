@@ -111,6 +111,132 @@ kubectl create ns ns-knative
 # kn route list
 # curl http://hello-example.ns-knative.knative.jamesbuckett.com
 
+# kubectl get configuration hello-example -o json | jq '.status'
+# {
+#   "conditions": [
+#     {
+#       "lastTransitionTime": "2021-09-04T00:41:22Z",
+#       "status": "True",
+#       "type": "Ready"
+#     }
+#   ],
+#   "latestCreatedRevisionName": "hello-example-00003",
+#   "latestReadyRevisionName": "hello-example-00003",
+#   "observedGeneration": 3 # Three generations aka deployments
+# }
+
+# Used for debugging 
+# latestCreatedRevisionName and latestReadyRevisionName are the same here, but need not be. 
+# Simply creating the Revision record doesn’t guarantee that some actual software is up and running. 
+# These two fields make the distinction. 
+# In practice, it allows you to spot the process of a Revision being acted on by lower-level controllers.
+# Should be the same if new Revision is created
+
+# kubectl describe configuration hello-example
+
+# Name:         hello-example
+# Namespace:    ns-knative
+# Labels:       serving.knative.dev/service=hello-example
+#               serving.knative.dev/serviceUID=e6c6d7f2-3b23-408d-b538-580f900b1725
+# Annotations:  serving.knative.dev/creator: james.buckett@gmail.com                  # Annotations are key-value metadata attached to the records.
+#               serving.knative.dev/lastModifier: james.buckett@gmail.com
+#               serving.knative.dev/routes: hello-example
+# API Version:  serving.knative.dev/v1
+# Kind:         Configuration
+# Metadata:
+#   Creation Timestamp:  2021-09-04T00:38:42Z
+#   Generation:          3                                                            # The generation is visible here under Metadata.
+#   Managed Fields:
+#     API Version:  serving.knative.dev/v1
+#     Fields Type:  FieldsV1
+#     fieldsV1:
+#       f:metadata:
+#         f:annotations:
+#           .:
+#           f:serving.knative.dev/creator:
+#           f:serving.knative.dev/lastModifier:
+#           f:serving.knative.dev/routes:
+#         f:labels:
+#           .:
+#           f:serving.knative.dev/service:
+#           f:serving.knative.dev/serviceUID:
+#         f:ownerReferences:
+#           .:
+#           k:{"uid":"e6c6d7f2-3b23-408d-b538-580f900b1725"}:
+#             .:
+#             f:apiVersion:
+#             f:blockOwnerDeletion:
+#             f:controller:
+#             f:kind:
+#             f:name:
+#             f:uid:
+#       f:spec:
+#         .:
+#         f:template:
+#           .:
+#           f:metadata:
+#             .:
+#             f:annotations:
+#               .:
+#               f:client.knative.dev/updateTimestamp:
+#               f:client.knative.dev/user-image:
+#             f:creationTimestamp:
+#           f:spec:
+#             .:
+#             f:containerConcurrency:
+#             f:containers:
+#             f:enableServiceLinks:
+#             f:timeoutSeconds:
+#       f:status:
+#         .:
+#         f:conditions:
+#         f:latestCreatedRevisionName:
+#         f:latestReadyRevisionName:
+#         f:observedGeneration:
+#     Manager:    controller
+#     Operation:  Update
+#     Time:       2021-09-04T00:39:13Z
+#   Owner References:
+#     API Version:           serving.knative.dev/v1
+#     Block Owner Deletion:  true
+#     Controller:            true
+#     Kind:                  Service
+#     Name:                  hello-example
+#     UID:                   e6c6d7f2-3b23-408d-b538-580f900b1725
+#   Resource Version:        200808
+#   UID:                     0c75d3dc-1d52-4ad2-972e-60399ac6fc69
+# Spec:
+#   Template:
+#     Metadata:
+#       Annotations:
+#         client.knative.dev/updateTimestamp:  2021-09-04T00:40:40Z
+#         client.knative.dev/user-image:       gcr.io/knative-samples/helloworld-rust
+#       Creation Timestamp:                    <nil>
+#     Spec:                                                                                   # spec.template.spec
+#       Container Concurrency:  0
+#       Containers:
+#         Env:
+#           Name:   TARGET
+#           Value:  Second
+#         Image:    gcr.io/knative-samples/helloworld-rust
+#         Name:     user-container
+#         Readiness Probe:
+#           Success Threshold:  1
+#           Tcp Socket:
+#             Port:  0
+#         Resources:
+#       Enable Service Links:  false
+#       Timeout Seconds:       300
+# Status:                                                                                     # Status
+#   Conditions:
+#     Last Transition Time:        2021-09-04T00:41:22Z
+#     Status:                      True
+#     Type:                        Ready
+#   Latest Created Revision Name:  hello-example-00003
+#   Latest Ready Revision Name:    hello-example-00003
+#   Observed Generation:           3
+# Events:                          <none>                                                     # Events
+
 else
     echo "You are not on the jump host : digital-ocean-droplet"
     exit
