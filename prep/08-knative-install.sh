@@ -67,37 +67,37 @@ kubectl create ns ns-knative
 
 # Deployments
 
-# Deploy first application passing environment variable=TARGET="First"
-# kn service create hello-example --image gcr.io/knative-samples/helloworld-go --env TARGET="First" -n ns-knative
+# Deploy first application passing environment variable=TARGET="Heart Shaped Cookie"
+# kn service create cookie-as-a-service --image gcr.io/knative-samples/helloworld-go --env TARGET="Heart Shaped Cookie" -n ns-knative
 
-# Curl or Browser "First" deployment
-# curl http://hello-example.knative.jamesbuckett.com
-# Should be: "Hello First!"
+# Curl or Browser "Heart Shaped Cookie"
+# curl http://cookie-as-a-service.knative.jamesbuckett.com
+# Should be: "Hello Heart Shaped Cookie!"
 
-# Update Service by passing a new environment variable=TARGET=Second
-# kn service update hello-example --env TARGET=Second -n ns-knative
+# Update Service by passing a new environment variable=TARGET="Dimond Shaped Cookie"
+# kn service update cookie-as-a-service --env TARGET="Dimond Shaped Cookie" -n ns-knative
 
-# Both revsions exist aka "First" and Second
+# Both revsions exist aka "Heart Shaped Cookie" and "Dimond Shaped Cookie"
 # kn revision list
 
-# Curl or Browser Second deployment
-# curl http://hello-example.knative.jamesbuckett.com
+# Curl or Browser "Dimond Shaped Cookie"
+# curl http://cookie-as-a-service.knative.jamesbuckett.com
 # Should be: "Hello Second!" 
 
 # Update to a Rust image 
-# kn service update hello-example --image gcr.io/knative-samples/helloworld-rust
+# kn service update cookie-as-a-service --image gcr.io/knative-samples/helloworld-rust
 
 # Curl or Browser Rust deployment
 # curl http://hello-example.knative.jamesbuckett.com
 # Should be: "Hello world: Second"
 
 # Split Service
-# kn service update hello-example --traffic hello-example-00003=50 --traffic hello-example-00002=50
+# kn service update cookie-as-a-service --traffic cookie-as-a-service-00001=50 --traffic cookie-as-a-service-00002=50
 
 # Curl or Browser Both deployment
-# curl http://hello-example.knative.jamesbuckett.com
-# Should be: "Hello Second!" 50%
-# Should be: "Hello world: Second" 50% 
+# curl http://cookie-as-a-service.ns-knative.knative.jamesbuckett.com
+# Should be: "Hello Dimond Shaped Cookie!" 50%
+# Should be: "Hello Heart Shaped Cookie!" 50% 
 
 # kn revision describe hello-example-00003
 # Conditions:
