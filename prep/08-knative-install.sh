@@ -63,19 +63,19 @@ kubectl patch configmap/config-domain   --namespace knative-serving   --type mer
 # kn service list
 
 # Create Knative namespace
-kubectl create ns ns-knative
+kubectl create ns ns-cookies
 
 # Deployments
 
 # Deploy first application passing environment variable=TARGET="Heart Shaped Cookie"
-# kn service create cookie-as-a-service --image gcr.io/knative-samples/helloworld-go --env TARGET="Heart Shaped Cookie" -n ns-knative
+# kn service create cookie-as-a-service --image gcr.io/knative-samples/helloworld-go --env TARGET="Heart Shaped Cookie" -n ns-cookies
 
 # Curl or Browser "Heart Shaped Cookie"
 # curl http://cookie-as-a-service.knative.jamesbuckett.com
 # Should be: "Hello Heart Shaped Cookie!"
 
 # Update Service by passing a new environment variable=TARGET="Dimond Shaped Cookie"
-# kn service update cookie-as-a-service --env TARGET="Dimond Shaped Cookie" -n ns-knative
+# kn service update cookie-as-a-service --env TARGET="Dimond Shaped Cookie" -n ns-cookies
 
 # Both revsions exist aka "Heart Shaped Cookie" and "Dimond Shaped Cookie"
 # kn revision list
@@ -85,7 +85,7 @@ kubectl create ns ns-knative
 # Should be: "Hello Dimond Shaped Cookie!" 
 
 # Update to a Rust image 
-# kn service update cookie-as-a-service --image gcr.io/knative-samples/helloworld-rust
+# kn service update cookie-as-a-service --image gcr.io/knative-samples/helloworld-rust -n ns-cookies
 
 # Curl or Browser Rust deployment
 # curl http://hello-example.knative.jamesbuckett.com
