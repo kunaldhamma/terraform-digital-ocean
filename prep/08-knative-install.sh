@@ -82,7 +82,7 @@ kubectl create ns ns-knative
 
 # Curl or Browser "Dimond Shaped Cookie"
 # curl http://cookie-as-a-service.knative.jamesbuckett.com
-# Should be: "Hello Second!" 
+# Should be: "Hello Dimond Shaped Cookie!" 
 
 # Update to a Rust image 
 # kn service update cookie-as-a-service --image gcr.io/knative-samples/helloworld-rust
