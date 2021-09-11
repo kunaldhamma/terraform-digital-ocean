@@ -39,6 +39,7 @@ sudo apt-get update
 sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -y
 sudo apt install -y python3-pip -y
 sudo apt install -y unzip -y
+sudo apt install -y jq -y
 clear
 echo "Updated the Operating System and installed Python..."
 sleep 5
