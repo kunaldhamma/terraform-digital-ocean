@@ -49,7 +49,7 @@ Follow the steps on this [website](https://www.digitalocean.com/community/tutori
 
 Install current version of Terraform
 
-```
+```bash
 cd ~/ && rm -R ~/terraform
 cd ~/ && mkdir terraform && cd terraform
 curl -O https://releases.hashicorp.com/terraform/0.14.9/terraform_0.14.9_linux_amd64.zip
@@ -76,7 +76,7 @@ Check the version of Kubernetes
 
 ### 3.1 Build the Infrastructure ~9 minutes
 
-```
+```bash
 terraform plan \
   -var "do_token=${DO_PAT}" \
   -var "pub_key=$HOME/.ssh/id_rsa.pub" \
@@ -84,7 +84,7 @@ terraform plan \
   -var "ssh_fingerprint=${DO_SSH_FINGERPRINT}"
 ```
 
-```
+```bash
 terraform apply \
   -var "do_token=${DO_PAT}" \
   -var "pub_key=$HOME/.ssh/id_rsa.pub" \
@@ -107,7 +107,7 @@ View state of infrastructure
 - This script prepares the jump host and installs some utilities
 - On `digital-ocean-droplet` run the following:
 
-```
+```bash
 cd ~/ && rm -R ~/prep
 clear
 cd ~/ && mkdir prep && cd prep
@@ -124,7 +124,7 @@ chmod +x 01-jump-host-prep.sh
 - This script installs software onto the Kubernetes cluster
 - On `digital-ocean-droplet` run the following:
 
-```
+```bash
 cd prep
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/02-cluster-prep.sh
 chmod +x 02-cluster-prep.sh
@@ -133,7 +133,7 @@ vi 02-cluster-prep.sh
 
 Update this line 'doctl auth init --access-token "xxx"' in `02-cluster-prep.sh` with your own Access Token.
 
-```
+```bash
 ./02-cluster-prep.sh | tee 02-cluster-prep.txt
 ```
 
@@ -145,7 +145,7 @@ Update this line 'doctl auth init --access-token "xxx"' in `02-cluster-prep.sh` 
 - This script applies post install tasks to the jump host
 - On `digital-ocean-droplet` run the following:
 
-```
+```bash
 cd prep
 rm 02-cluster-prep.sh
 wget https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/prep/03-post-install-prep.sh
@@ -188,7 +188,7 @@ Username: `admin`
 
 - Obtain the password:
 
-```
+```bash
 kubectl get secret --namespace ns-loki loki-release-grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
 
@@ -288,7 +288,7 @@ spec:
 - Only run this when you are done with the tutorial and cluster
 - On `digital-ocean-droplet` run the following:
 
-```
+```bash
 cd ~/ && rm -R ~/clean-up
 clear
 cd ~/ && mkdir clean-up && cd clean-up
@@ -304,7 +304,7 @@ Or use the Terraform method to tear down the infrastructure
 - Only use this if you want to use Terraform to tear down the deployment.
 - Alternatively use the
 
-```
+```bash
 terraform plan -destroy -out=terraform.tfplan \
   -var "do_token=${DO_PAT}" \
   -var "pub_key=$HOME/.ssh/id_rsa.pub" \
