@@ -33,33 +33,33 @@ sleep 5
 ################################################################################
 # Knative - Event Driven
 ################################################################################
-```bash
-kubectl apply -f https://github.com/knative/serving/releases/download/v0.25.0/serving-crds.yaml
-kubectl apply -f https://github.com/knative/serving/releases/download/v0.25.0/serving-core.yaml
 
-kubectl apply -f https://github.com/knative/net-kourier/releases/download/v0.25.0/kourier.yaml
+# Check version here: https://github.com/knative/serving/releases
+
+kubectl apply -f https://github.com/knative/serving/releases/download/v0.26.0/serving-crds.yaml
+kubectl apply -f https://github.com/knative/serving/releases/download/v0.26.0/serving-core.yaml
+
+kubectl apply -f https://github.com/knative/net-kourier/releases/download/v0.26.0/kourier.yaml
 
 kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
   --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
-```
 
 ################################################################################
 # Knative Ingress Loadbalancer
 ################################################################################
 
 # This did not work suspect the Load Balancer was not ready yet, try putting in a sleep
-```bash
+
 sleep 60
 
-KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
+KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
 export KNATIVE_LB
 
 doctl compute domain records create --record-type A --record-name *.knative --record-data $KNATIVE_LB jamesbuckett.com --record-ttl=43200
 
 kubectl patch configmap/config-domain   --namespace knative-serving   --type merge   --patch '{"data":{"knative.jamesbuckett.com":""}}'  
-```
 
 else
     echo "You are not on the jump host : digital-ocean-droplet"
