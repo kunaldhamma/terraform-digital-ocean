@@ -33,6 +33,7 @@ sleep 5
 ################################################################################
 # Knative - Event Driven
 ################################################################################
+```bash
 kubectl apply -f https://github.com/knative/serving/releases/download/v0.25.0/serving-crds.yaml
 kubectl apply -f https://github.com/knative/serving/releases/download/v0.25.0/serving-core.yaml
 
@@ -42,12 +43,14 @@ kubectl patch configmap/config-network \
   --namespace knative-serving \
   --type merge \
   --patch '{"data":{"ingress.class":"kourier.ingress.networking.knative.dev"}}'
+```
 
 ################################################################################
 # Knative Ingress Loadbalancer
 ################################################################################
 
 # This did not work suspect the Load Balancer was not ready yet, try putting in a sleep
+```bash
 sleep 60
 
 KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 4 {print $2}')
@@ -56,6 +59,7 @@ export KNATIVE_LB
 doctl compute domain records create --record-type A --record-name *.knative --record-data $KNATIVE_LB jamesbuckett.com --record-ttl=43200
 
 kubectl patch configmap/config-domain   --namespace knative-serving   --type merge   --patch '{"data":{"knative.jamesbuckett.com":""}}'  
+```
 
 ## Hello Example
 
@@ -63,36 +67,48 @@ kubectl patch configmap/config-domain   --namespace knative-serving   --type mer
 # kn service list
 
 # Create Knative namespace
+```bash
 kubectl create ns ns-cookies
+```
 
 # Deployments
 
+```bash
 # Deploy first application passing environment variable=TARGET="Heart Shaped Cookie"
-# kn service create cookie-as-a-service --image gcr.io/knative-samples/helloworld-go --env TARGET="Heart Shaped Cookie" -n ns-cookies
+kn service create cookie-as-a-service --image gcr.io/knative-samples/helloworld-go --env TARGET="Heart Shaped Cookie" -n ns-cookies
+bash
 
 # Curl or Browser "Heart Shaped Cookie"
 # curl http://cookie-as-a-service.knative.jamesbuckett.com
 # Should be: "Hello Heart Shaped Cookie!"
 
+```bash
 # Update Service by passing a new environment variable=TARGET="Dimond Shaped Cookie"
-# kn service update cookie-as-a-service --env TARGET="Dimond Shaped Cookie" -n ns-cookies
+kn service update cookie-as-a-service --env TARGET="Dimond Shaped Cookie" -n ns-cookies
+```
 
 # Both revsions exist aka "Heart Shaped Cookie" and "Dimond Shaped Cookie"
-# kn revision list
+```bash
+kn revision list
+```
 
 # Curl or Browser "Dimond Shaped Cookie"
 # curl http://cookie-as-a-service.knative.jamesbuckett.com
 # Should be: "Hello Dimond Shaped Cookie!" 
 
+```bash
 # Update to a Rust image 
 # kn service update cookie-as-a-service --image gcr.io/knative-samples/helloworld-rust -n ns-cookies
+```
 
 # Curl or Browser Rust deployment
 # curl http://hello-example.knative.jamesbuckett.com
 # Should be: "Hello world: Second"
 
+```bash
 # Split Service
 # kn service update cookie-as-a-service --traffic cookie-as-a-service-00001=50 --traffic cookie-as-a-service-00002=50
+```
 
 # Curl or Browser Both deployment
 # curl http://cookie-as-a-service.ns-knative.knative.jamesbuckett.com
@@ -132,7 +148,9 @@ kubectl create ns ns-cookies
 # In practice, it allows you to spot the process of a Revision being acted on by lower-level controllers.
 # Should be the same if new Revision is created
 
+```bash
 # kubectl describe configuration hello-example
+```
 
 # Name:         hello-example
 # Namespace:    ns-knative
