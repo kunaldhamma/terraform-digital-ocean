@@ -156,7 +156,10 @@ helm upgrade \
 --wait
 
 # Loki Ingress
-kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-loki.yml"
+kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-loki.yml-no-https.yml"
+
+# LetsEncrypt error: Unable to load Secret secrets not found cert-manager
+# kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-loki.yml"
 
 clear
 echo "Installed metrics-server..."
