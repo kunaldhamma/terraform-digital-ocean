@@ -146,19 +146,16 @@ echo "Installing Loki/Prometheus/Grafana..."
 # watch -n 1 kubectl get all -n   ns-loki
 sleep 5
 
-# helm upgrade \
-# --install loki grafana/loki-stack  
-# --set grafana.enabled=true,prometheus.enabled=true,prometheus.alertmanager.persistentVolume.enabled=false,prometheus.server.persistentVolume.enabled=false,loki.persistence.enabled=true,loki.persistence.storageClassName=standard,loki.persistence.size=5Gi
-
 helm upgrade \
 --install loki-release grafana/loki-stack -f  "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/values/loki-values.yml" \
 --namespace=ns-loki \
 --create-namespace \
 --wait
 
-# Loki Ingress
+# Loki Ingress - http
 kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-loki.yml-no-https.yml"
 
+# Loki Ingress - https
 # LetsEncrypt error: Unable to load Secret secrets not found cert-manager
 # kubectl apply -f "https://raw.githubusercontent.com/jamesbuckett/terraform-digital-ocean/master/ingress/ingress-loki.yml"
 
