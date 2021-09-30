@@ -28,13 +28,6 @@ set -o errexit
 
 
 ################################################################################
-# Clone Useful Repositories
-################################################################################
-# git clone https://github.com/jamesbuckett/intro-to-k8s.git
-# kubectl apply -f ~/intro-to-k8s/src
-
-
-################################################################################
 # Contour Ingress - Export the Public IP address of Contour Ingress 
 ################################################################################
 

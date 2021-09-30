@@ -59,8 +59,6 @@ echo " "
 ################################################################################
 # Load Balancers
 ################################################################################
-
-# Contour Ingress - Only single Load Balancer 
 for i in {0..2}
 do
    doctl compute load-balancer list | awk 'FNR == 2 {print $1}' | xargs doctl compute load-balancer delete -f
@@ -90,20 +88,18 @@ echo " "
 ################################################################################
 # DNS Records 
 ################################################################################
+for i in {0..5}
+do
+doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+done
+
 # Demo Microservice
-doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
 # Loki
-doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
 # Chaos
-doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
 # VPA
-doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
-# Istio
-doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
-# Argo
-doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
-# Temporal
-doctl compute domain records list jamesbuckett.com  | awk 'FNR == 6 {print $1}' | xargs doctl compute domain records delete jamesbuckett.com -f
+# Octant
+# Knative
+
 
 ################################################################################
 # Virtual Machine
