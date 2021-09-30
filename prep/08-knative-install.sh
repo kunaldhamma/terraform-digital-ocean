@@ -52,9 +52,9 @@ kubectl patch configmap/config-network \
 
 # This did not work suspect the Load Balancer was not ready yet, try putting in a sleep
 
-sleep 60
+sleep 120
 
-KNATIVE_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $2}')
+KNATIVE_LB=$(kubectl describe service kourier -n kourier-system | awk '/Ingress:/{print $3 }')
 export KNATIVE_LB
 
 doctl compute domain records create --record-type A --record-name *.knative --record-data $KNATIVE_LB jamesbuckett.com --record-ttl=43200

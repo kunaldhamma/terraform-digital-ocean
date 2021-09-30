@@ -48,7 +48,7 @@ set -o errexit
 # Is the same as this IP Addess: doctl compute load-balancer list | awk 'FNR == 3 {print $2}'
 # This is the External IP Address of the Contour Load Balancer
 
-INGRESS_LB=$(doctl compute load-balancer list | awk 'FNR == 3 {print $2}')
+INGRESS_LB=$(kubectl describe ingress ing-demo -n ns-demo | awk '/Address:/{print $2 }')
 export INGRESS_LB
 
 doctl compute domain records create --record-type A --record-name www --record-data $INGRESS_LB jamesbuckett.com --record-ttl=43200
@@ -109,10 +109,10 @@ echo "fs.file-max=500000" >> /etc/sysctl.conf
 # Octant Load Balancer - octant.jamesbuckett.com
 ################################################################################
 
-OCTANT_LB=$(doctl compute load-balancer list | awk 'FNR == 2 {print $1}')
+OCTANT_LB=$(doctl compute load-balancer list | awk '/digitalocean-loadbalancer/{print $2 }')
 export OCTANT_LB
 
-OCTANT_DROPLET=$(doctl compute droplet list | awk 'FNR == 2 {print $1}')
+OCTANT_LB=$(doctl compute droplet list | awk '/digital-ocean-droplet/{print $1 }')
 export OCTANT_DROPLET
 
 doctl compute load-balancer add-droplets $OCTANT_LB --droplet-ids $OCTANT_DROPLET
