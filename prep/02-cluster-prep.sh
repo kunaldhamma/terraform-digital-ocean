@@ -133,6 +133,7 @@ echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 sleep 5
 
+
 ################################################################################
 # Loki -  Distributed Log Aggregation
 ################################################################################
@@ -166,6 +167,7 @@ echo "Installed metrics-server..."
 echo "Installed Micro-services Demo..."
 echo "Installed Loki/Prometheus/Grafana..."
 sleep 5
+
 
 ################################################################################
 # Chaos Mesh - Chaos Engineering Platfom
@@ -259,7 +261,7 @@ sleep 5
 ################################################################################
 # Export the Public IP where Octant can be located
 ################################################################################
-DROPLET_ADDR=$(doctl compute droplet list | awk 'FNR == 2 {print $3}')
+DROPLET_ADDR=$(doctl compute droplet list | awk '/digital-ocean-droplet/{print $1 }')
 export DROPLET_ADDR
 
 
